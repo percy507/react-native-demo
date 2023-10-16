@@ -3,7 +3,8 @@ import { useAtom, useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { atomUserInfo } from './store/user';
+import { storage } from '@/utils/storage';
+import { atomUserInfo } from '~/src/stores/user';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,16 +21,16 @@ export function Child1() {
 
   useEffect(() => {
     setInterval(() => setCount((v) => v + 1), 500);
-    setUserInfo({
-      name: '张三',
-      phone: '13888888888',
-      age: 18,
-    });
     setInterval(
       () => setUserInfo((v) => (v != null ? { ...v, age: v.age + 1 } : null)),
       2000,
     );
   }, [setUserInfo]);
+
+  useEffect(() => {
+    console.log(storage.getString('userInfo'));
+    storage.set('userInfo', JSON.stringify(userInfo));
+  }, [userInfo]);
 
   return (
     <View style={styles.container}>
