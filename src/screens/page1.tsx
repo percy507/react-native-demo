@@ -10,7 +10,7 @@ const NewHeader = {
 };
 
 export function Page1Screen() {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const nav = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute();
   console.log('route_page1', route);
 
@@ -21,37 +21,35 @@ export function Page1Screen() {
         <Text>params: {JSON.stringify(route.params)}</Text>
       </View>
       <View style={{ display: 'flex', gap: 6 }}>
-        <Button title="navigation.goBack()" onPress={() => navigation.goBack()} />
-        <Button title="navigation.popToTop()" onPress={() => navigation.popToTop()} />
+        <Button title="nav.goBack()" onPress={() => nav.goBack()} />
+        <Button title="nav.popToTop()" onPress={() => nav.popToTop()} />
         <Button
-          title="navigation.setParams"
+          title="nav.setParams"
           subTitle="更新路由参数，会重新渲染页面"
-          onPress={() =>
-            navigation.setParams({ id: Math.random().toString(16).slice(4) })
-          }
+          onPress={() => nav.setParams({ id: Math.random().toString(16).slice(4) })}
         />
         <Button
-          title="navigation.setOptions"
+          title="nav.setOptions"
           subTitle="set screen options, 不会重新渲染页面"
           onPress={() =>
-            navigation.setOptions({
+            nav.setOptions({
               title: `新Title${Date.now()}`,
               headerLeft: NewHeader.headerLeft,
               headerRight: NewHeader.headerRight,
             })
           }
         />
-        <Button title="前往首页(默认Tab)" onPress={() => navigation.navigate('home')} />
-        <Button title="前往首页Tab3" onPress={() => navigation.navigate('home_tab3')} />
+        <Button title="前往首页(默认Tab)" onPress={() => nav.navigate('home')} />
+        <Button title="前往首页Tab3" onPress={() => nav.navigate('home_tab3')} />
         <Button
           title="再次前往页面1，参数id变了"
           onPress={() => {
-            navigation.push('route_page1', { id: Math.random().toString(16).slice(4) });
+            nav.push('route_page1', { id: Math.random().toString(16).slice(4) });
           }}
         />
         <Button
           title="前往页面2"
-          onPress={() => navigation.navigate('page2', { userId: 'from_page1' })}
+          onPress={() => nav.navigate('page2', { userId: 'from_page1' })}
         />
       </View>
     </View>

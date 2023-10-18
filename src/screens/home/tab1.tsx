@@ -1,8 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View } from 'react-native';
 
-import { Button } from '@/components';
-import IconFont from '@/iconfont';
+import { Button, IconFont } from '@/components';
 
 export function Tab1Screen() {
   const nav = useNavigation();

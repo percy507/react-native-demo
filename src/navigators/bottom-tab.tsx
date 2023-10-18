@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import IconFont from '@/iconfont';
+import { IconFont } from '@/components';
 import { Tab1Screen } from '@/screens/home/tab1';
 import { Tab2Screen } from '@/screens/home/tab2';
 import { Tab3Screen } from '@/screens/home/tab3';
