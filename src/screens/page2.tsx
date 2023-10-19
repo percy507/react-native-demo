@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import type {
   NativeStackNavigationOptions,
   NativeStackNavigationProp,
@@ -6,13 +6,12 @@ import type {
 import { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-import { Button } from '@/components';
+import { Button, ScreenWrapper } from '@/components';
+
+import { PageInfo } from './part';
 
 export function Page2Screen() {
   const nav = useNavigation<NativeStackNavigationProp<any>>();
-  const route = useRoute();
-  console.log('page2', route);
-
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -22,13 +21,10 @@ export function Page2Screen() {
   }, []);
 
   return (
-    <View style={{ padding: 12 }}>
-      <View style={{ paddingBottom: 20 }}>
-        <Text style={{ fontSize: 20 }}>Page2Screen</Text>
-        <Text>params: {JSON.stringify(route.params)}</Text>
-        <Text>count: {count}</Text>
-      </View>
-      <View style={{ display: 'flex', gap: 6 }}>
+    <ScreenWrapper contentStyle={styles.root}>
+      <PageInfo title="Page2Screen" texts={[`count: ${count}`]} />
+
+      <View style={styles.list}>
         <Button title="返回至上一个路由" onPress={() => nav.goBack()} />
         <Button title="前往首页(默认Tab)" onPress={() => nav.navigate('home')} />
         <Button
@@ -45,7 +41,7 @@ export function Page2Screen() {
           }
         />
       </View>
-    </View>
+    </ScreenWrapper>
   );
 }
 
@@ -64,3 +60,8 @@ const LogoTitle: NonNullable<NativeStackNavigationOptions['headerTitle']> = (pro
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  root: { padding: 12 },
+  list: { display: 'flex', gap: 6 },
+});

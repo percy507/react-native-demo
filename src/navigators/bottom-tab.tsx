@@ -9,7 +9,7 @@ const BottomTab = createBottomTabNavigator<ReactNavigation.RootParamList>();
 
 export function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator>
+    <BottomTab.Navigator screenOptions={{ headerShown: false }}>
       <BottomTab.Screen
         name="home_tab1"
         component={Tab1Screen}

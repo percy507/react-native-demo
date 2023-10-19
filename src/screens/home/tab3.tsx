@@ -1,20 +1,28 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View } from 'react-native';
 
-import { Button } from '@/components';
+import { Button, ScreenWrapper } from '@/components';
+
+import { PageInfo } from '../part';
 
 export function Tab3Screen() {
   const nav = useNavigation();
-  const route = useRoute();
-  console.log('home_tab3', route);
 
   return (
-    <View style={{ padding: 12 }}>
-      <Text style={{ fontSize: 24, paddingBottom: 16 }}>Tab3Screen</Text>
-      <View style={{ display: 'flex', gap: 6 }}>
-        <Button title="nav.goBack()" onPress={() => nav.goBack()} />
-        <Button title="前往首页Tab1" onPress={() => nav.navigate('home_tab1')} />
+    <ScreenWrapper navbar={{ show: false }}>
+      <View style={styles.root}>
+        <PageInfo title="Tab3Screen" />
+
+        <View style={styles.list}>
+          <Button title="nav.goBack()" onPress={() => nav.goBack()} />
+          <Button title="前往首页Tab1" onPress={() => nav.navigate('home_tab1')} />
+        </View>
       </View>
-    </View>
+    </ScreenWrapper>
   );
 }
+
+const styles = StyleSheet.create({
+  root: { padding: 12 },
+  list: { display: 'flex', gap: 6 },
+});
