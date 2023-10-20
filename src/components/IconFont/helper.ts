@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 export const getIconColor = (
   color: string | string[] | undefined,
