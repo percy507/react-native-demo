@@ -5,7 +5,7 @@ import { Tab1Screen } from '@/screens/home/tab1';
 import { Tab2Screen } from '@/screens/home/tab2';
 import { Tab3Screen } from '@/screens/home/tab3';
 
-const BottomTab = createBottomTabNavigator<ReactNavigation.RootParamList>();
+const BottomTab = createBottomTabNavigator<RouteParamList>();
 
 export function BottomTabNavigator() {
   return (
