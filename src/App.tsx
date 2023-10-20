@@ -4,7 +4,7 @@ import { Provider } from 'jotai';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useScreenOrientation } from '@/hooks';
-import { RootNavigator } from '@/navigators';
+import { RootNavigator } from '@/navigators/root';
 
 export default function App(): JSX.Element {
   useScreenOrientation();

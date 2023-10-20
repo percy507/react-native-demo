@@ -24,21 +24,34 @@ src
 ## 库选型
 
 ```bash
-# 键值对数据本地持久化
-# 比RN官方的AsyncStorage更快，更安全，官方目前已弃用AsyncStorage
-https://github.com/mrousavy/react-native-mmkv
-
 # 状态管理
+# jotai，简单易用
 https://github.com/pmndrs/jotai
 
 # 路由管理
+# 暂时使用 react-navigation, 以后可以试试 expo router
+# https://docs.expo.dev/routing/introduction/
 https://github.com/react-navigation/react-navigation
 
-
-react-native-ui-lib
+# 键值对数据本地持久化
+# 比RN官方的AsyncStorage更快，更安全（官方目前已弃用AsyncStorage）
+https://github.com/mrousavy/react-native-mmkv
 
 # 使用iconfont
 https://github.com/iconfont-cli/react-native-iconfont-cli
+
+# webview
+# https://docs.expo.dev/versions/latest/sdk/webview/
+npx expo install react-native-webview
+
+# lottie 动画
+# https://docs.expo.dev/versions/latest/sdk/lottie/
+npx expo install lottie-react-native
+
+
+
+
+react-native-ui-lib
 ```
 
 ## 代码风格
