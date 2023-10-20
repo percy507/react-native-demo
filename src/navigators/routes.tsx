@@ -3,8 +3,11 @@ import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { IconFont } from '@/components';
 import { ForgetPasswordScreen } from '@/screens/auth/forget-password';
 import { LoginScreen } from '@/screens/auth/login';
+import { DemoHttpScreen } from '@/screens/demo/http';
 import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
+import { DemoNavigationScreen } from '@/screens/demo/navigation';
+import { DemoToastScreen } from '@/screens/demo/toast';
 import {
   DemoWebviewLoadHtmlScreen,
   DemoWebviewLoadUriScreen,
@@ -12,27 +15,26 @@ import {
 import { Tab1Screen } from '@/screens/home/tab1';
 import { Tab2Screen } from '@/screens/home/tab2';
 import { Tab3Screen } from '@/screens/home/tab3';
-import { Page1Screen } from '@/screens/page1';
-import { Page2Screen } from '@/screens/page2';
 
 // 定义全局的路由及其参数的键值对
 declare global {
   // 路由 ==> 路由参数
   type RouteParamList = {
-    login: undefined;
-    forget_password: undefined;
     home: undefined;
     home_tab1: undefined;
     home_tab2: undefined;
     home_tab3: undefined;
 
-    page1: { id: string };
-    page2?: { userId: string };
+    login: undefined;
+    forget_password: undefined;
 
+    demo_navigation: { id: string };
     demo_icon: undefined;
     demo_webview_uri: undefined;
     demo_webview_html: undefined;
     demo_lottie: undefined;
+    demo_toast: undefined;
+    demo_http: undefined;
   };
 
   namespace ReactNavigation {
@@ -43,12 +45,14 @@ declare global {
 export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['login', LoginScreen],
   ['forget_password', ForgetPasswordScreen],
+
+  ['demo_navigation', DemoNavigationScreen],
   ['demo_icon', DemoIconScreen],
   ['demo_webview_uri', DemoWebviewLoadUriScreen],
   ['demo_webview_html', DemoWebviewLoadHtmlScreen],
   ['demo_lottie', DemoLottieScreen],
-  ['page1', Page1Screen],
-  ['page2', Page2Screen],
+  ['demo_toast', DemoToastScreen],
+  ['demo_http', DemoHttpScreen],
 ];
 
 export const BottomTabs: {

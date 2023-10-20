@@ -1,11 +1,11 @@
-import Lottie from 'lottie-react-native';
+import LottieView from 'lottie-react-native';
 import { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Button, ScreenWrapper } from '@/components';
 
 export function DemoLottieScreen() {
-  const lottieRef = useRef<Lottie>(null);
+  const lottieRef = useRef<LottieView>(null);
 
   useEffect(() => {
     lottieRef.current?.play();
@@ -19,7 +19,7 @@ export function DemoLottieScreen() {
         <Button title="继续" onPress={() => lottieRef.current?.resume()} />
       </View>
       <View style={styles.single}>
-        <Lottie ref={lottieRef} source={require('@/assets/lottie/welcome.json')} />
+        <LottieView ref={lottieRef} source={require('@/assets/lottie/welcome.json')} />
       </View>
     </ScreenWrapper>
   );

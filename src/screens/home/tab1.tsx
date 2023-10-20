@@ -14,6 +14,10 @@ export function Tab1Screen() {
         <PageInfo title="HomeScreen" />
         <ScrollView>
           <View style={styles.list}>
+            <Button
+              title="测试路由跳转"
+              onPress={() => nav.navigate('demo_navigation', { id: '1122😎' })}
+            />
             <Button title="测试 iconfont" onPress={() => nav.navigate('demo_icon')} />
             <Button
               title="测试 webview (加载url)"
@@ -27,13 +31,8 @@ export function Tab1Screen() {
               title="测试 lottie 动画"
               onPress={() => nav.navigate('demo_lottie')}
             />
-
-            <Button title="前往首页Tab2" onPress={() => nav.navigate('home_tab2')} />
-            <Button
-              title="前往页面1"
-              onPress={() => nav.navigate('page1', { id: 'from_home' })}
-            />
-            <Button title="前往页面2" onPress={() => nav.navigate('page2')} />
+            <Button title="测试 toast" onPress={() => nav.navigate('demo_toast')} />
+            <Button title="测试 http" onPress={() => nav.navigate('demo_http')} />
           </View>
         </ScrollView>
       </View>

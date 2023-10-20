@@ -48,7 +48,11 @@ npx expo install react-native-webview
 # https://docs.expo.dev/versions/latest/sdk/lottie/
 npx expo install lottie-react-native
 
+# toast
+https://github.com/arnnis/react-native-toast-notifications/
 
+# http请求
+基于 Fetch API 封装
 
 
 react-native-ui-lib

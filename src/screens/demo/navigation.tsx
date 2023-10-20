@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Button, ScreenWrapper } from '@/components';
 
-import { PageInfo } from './part';
+import { PageInfo } from '../part';
 
-export function Page1Screen() {
+export function DemoNavigationScreen() {
   const nav = useNavigation();
 
   return (
@@ -29,13 +29,10 @@ export function Page1Screen() {
         <Button
           title="再次前往页面1，参数id变了(nav.navigate)"
           onPress={() => {
-            nav.navigate('page1', { id: Math.random().toString(16).slice(4) });
+            nav.navigate('demo_navigation', { id: Math.random().toString(16).slice(4) });
           }}
         />
-        <Button
-          title="前往页面2"
-          onPress={() => nav.navigate('page2', { userId: 'from_page1' })}
-        />
+        <Button title="前往lottie页面" onPress={() => nav.navigate('demo_lottie')} />
       </View>
     </ScreenWrapper>
   );
