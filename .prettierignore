@@ -4,3 +4,5 @@ coverage/
 ios/
 .expo
 .expo-shared
+
+components/IconFont

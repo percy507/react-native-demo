@@ -4,22 +4,24 @@
 import React, { FunctionComponent } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps } from 'react-native-svg';
+import IconHomeSmileFill from './IconHomeSmileFill';
+import IconHomeSmileLine from './IconHomeSmileLine';
 import IconCheckboxCircleLine from './IconCheckboxCircleLine';
 import IconCloseCircleLine from './IconCloseCircleLine';
 import IconErrorWarningLine from './IconErrorWarningLine';
 import IconBackArrow from './IconBackArrow';
-import IconHome from './IconHome';
 import IconPdf from './IconPdf';
 import IconYasuo from './IconYasuo';
 import IconTupian from './IconTupian';
 import IconHashiqi from './IconHashiqi';
 import IconWode from './IconWode';
 import IconContact from './IconContact';
+export { default as IconHomeSmileFill } from './IconHomeSmileFill';
+export { default as IconHomeSmileLine } from './IconHomeSmileLine';
 export { default as IconCheckboxCircleLine } from './IconCheckboxCircleLine';
 export { default as IconCloseCircleLine } from './IconCloseCircleLine';
 export { default as IconErrorWarningLine } from './IconErrorWarningLine';
 export { default as IconBackArrow } from './IconBackArrow';
-export { default as IconHome } from './IconHome';
 export { default as IconPdf } from './IconPdf';
 export { default as IconYasuo } from './IconYasuo';
 export { default as IconTupian } from './IconTupian';
@@ -28,11 +30,12 @@ export { default as IconWode } from './IconWode';
 export { default as IconContact } from './IconContact';
 
 export type IconNames =
+  | 'icon-home-smile-fill'
+  | 'icon-home-smile-line'
   | 'icon-checkbox-circle-line'
   | 'icon-close-circle-line'
   | 'icon-error-warning-line'
   | 'icon-back-arrow'
-  | 'icon-home'
   | 'icon-pdf'
   | 'icon-yasuo'
   | 'icon-tupian'
@@ -48,28 +51,30 @@ interface Props extends GProps, ViewProps {
 
 let IconFont: FunctionComponent<Props> = ({ name, ...rest }) => {
   switch (name) {
+    case 'icon-home-smile-fill':
+      return <IconHomeSmileFill key="1" {...rest} />;
+    case 'icon-home-smile-line':
+      return <IconHomeSmileLine key="2" {...rest} />;
     case 'icon-checkbox-circle-line':
-      return <IconCheckboxCircleLine key="1" {...rest} />;
+      return <IconCheckboxCircleLine key="3" {...rest} />;
     case 'icon-close-circle-line':
-      return <IconCloseCircleLine key="2" {...rest} />;
+      return <IconCloseCircleLine key="4" {...rest} />;
     case 'icon-error-warning-line':
-      return <IconErrorWarningLine key="3" {...rest} />;
+      return <IconErrorWarningLine key="5" {...rest} />;
     case 'icon-back-arrow':
-      return <IconBackArrow key="4" {...rest} />;
-    case 'icon-home':
-      return <IconHome key="5" {...rest} />;
+      return <IconBackArrow key="6" {...rest} />;
     case 'icon-pdf':
-      return <IconPdf key="6" {...rest} />;
+      return <IconPdf key="7" {...rest} />;
     case 'icon-yasuo':
-      return <IconYasuo key="7" {...rest} />;
+      return <IconYasuo key="8" {...rest} />;
     case 'icon-tupian':
-      return <IconTupian key="8" {...rest} />;
+      return <IconTupian key="9" {...rest} />;
     case 'icon-hashiqi':
-      return <IconHashiqi key="9" {...rest} />;
+      return <IconHashiqi key="10" {...rest} />;
     case 'icon-wode':
-      return <IconWode key="10" {...rest} />;
+      return <IconWode key="11" {...rest} />;
     case 'icon-contact':
-      return <IconContact key="11" {...rest} />;
+      return <IconContact key="12" {...rest} />;
   }
 
   return null;

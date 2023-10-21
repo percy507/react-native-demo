@@ -18,7 +18,8 @@
     "test": "jest",
     "type-check": "tsc",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "buildIconFont": "npx iconfont-rn"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

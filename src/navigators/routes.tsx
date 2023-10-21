@@ -65,8 +65,12 @@ export const BottomTabs: {
     component: Tab1Screen,
     options: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ color, size }) => (
-        <IconFont name="icon-home" color={color} size={size} />
+      tabBarIcon: ({ color, size, focused }) => (
+        <IconFont
+          name={focused ? 'icon-home-smile-fill' : 'icon-home-smile-line'}
+          color={color}
+          size={size}
+        />
       ),
     },
   },
