@@ -9,11 +9,11 @@ import IconFont from '../IconFont';
 export interface NavBarProps {
   /** @defaultValue true */
   show?: boolean;
-  style?: ViewStyle;
+
+  color?: string;
+  bgColor?: string;
 
   title?: React.ReactNode;
-  /** @defaultValue center */
-  titleAlign?: 'left' | 'center' | 'right';
   titleStyle?: ViewStyle;
 
   /** @defaultValue true */
@@ -32,11 +32,11 @@ export interface NavBarProps {
 export function NavBar(props: NavBarProps) {
   const {
     show = true,
-    style = {},
+    color,
+    bgColor,
     showBack = true,
     backIconStyle = {},
     title,
-    titleAlign = 'center',
     titleStyle,
     leftNode,
     rightNode,
@@ -47,18 +47,16 @@ export function NavBar(props: NavBarProps) {
   const back = () => navigation.goBack();
 
   const insets = useSafeAreaInsets();
-  const rootPadding = {
-    paddingTop: insets.top,
-  };
 
   const renderLeft = () => {
     const getContent = () => {
       if (leftNode) return leftNode;
       if (showBack) {
-        const { size = 24, color = '#333' } = backIconStyle;
+        const _size = backIconStyle.size || 24,
+          _color = backIconStyle.color || color || '#333';
         return (
           <Pressable onPress={back} style={styles.backNode}>
-            <IconFont name="icon-back-arrow" size={size} color={color} />
+            <IconFont name="icon-back-arrow" size={_size} color={_color} />
           </Pressable>
         );
       }
@@ -71,21 +69,10 @@ export function NavBar(props: NavBarProps) {
   };
 
   const renderTitle = () => {
-    const style: ViewStyle[] = [
-      styles.title,
-      {
-        justifyContent:
-          titleAlign === 'left'
-            ? 'flex-start'
-            : titleAlign === 'right'
-            ? 'flex-end'
-            : 'center',
-      },
-    ];
     return (
-      <View style={style}>
+      <View style={styles.title}>
         <Text
-          style={[styles.titleText, titleStyle]}
+          style={[styles.titleText, { color, ...titleStyle }]}
           numberOfLines={1}
           ellipsizeMode="tail">
           {title != null ? title : route.name}
@@ -94,15 +81,21 @@ export function NavBar(props: NavBarProps) {
     );
   };
 
+  const rootStyle: ViewStyle = {
+    width: '100%',
+    paddingTop: insets.top,
+    backgroundColor: bgColor || 'transparent',
+  };
+
   return (
-    <View style={[styles.root, rootPadding]}>
+    <View style={rootStyle}>
       <StatusBar
         translucent={true}
         barStyle="dark-content"
         backgroundColor="transparent"
       />
       {show && (
-        <View style={[styles.navbar, style]}>
+        <View style={styles.navbar}>
           {renderLeft()}
           {renderTitle()}
           {renderRight()}
@@ -113,10 +106,6 @@ export function NavBar(props: NavBarProps) {
 }
 
 const styles = StyleSheet.create({
-  root: {
-    width: '100%',
-    backgroundColor: 'transparent',
-  },
   navbar: {
     paddingTop: 10,
     paddingBottom: 6,

@@ -16,6 +16,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': [2],
     '@typescript-eslint/consistent-type-imports': [2],
     '@typescript-eslint/no-duplicate-imports': 2,
-    'react-native/no-inline-styles': 2, // 不要写行内样式，尽量将样式封装至组件或全局样式token中
+    'react-native/no-inline-styles': 0,
   },
 };

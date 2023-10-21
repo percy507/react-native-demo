@@ -17,7 +17,7 @@ export function DemoNavigationScreen() {
         leftNode: <Text>🥹</Text>,
         rightNode: <Button onPress={() => alert('This is a button!')} title="Info" />,
       }}>
-      <PageInfo title="Page1Screen" />
+      <PageInfo title="DemoNavigationScreen" />
 
       <View style={styles.list}>
         <Button title="nav.goBack()" onPress={() => nav.goBack()} />

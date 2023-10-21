@@ -6,6 +6,7 @@ import { LoginScreen } from '@/screens/auth/login';
 import { DemoHttpScreen } from '@/screens/demo/http';
 import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
+import { DemoNavbarScreen } from '@/screens/demo/navbar';
 import { DemoNavigationScreen } from '@/screens/demo/navigation';
 import { DemoToastScreen } from '@/screens/demo/toast';
 import {
@@ -29,6 +30,7 @@ declare global {
     forget_password: undefined;
 
     demo_navigation: { id: string };
+    demo_navbar: undefined;
     demo_icon: undefined;
     demo_webview_uri: undefined;
     demo_webview_html: undefined;
@@ -47,6 +49,7 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['forget_password', ForgetPasswordScreen],
 
   ['demo_navigation', DemoNavigationScreen],
+  ['demo_navbar', DemoNavbarScreen],
   ['demo_icon', DemoIconScreen],
   ['demo_webview_uri', DemoWebviewLoadUriScreen],
   ['demo_webview_html', DemoWebviewLoadHtmlScreen],
