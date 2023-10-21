@@ -88,9 +88,7 @@ export const BottomTabs: {
     name: 'home_tab3',
     component: Tab3Screen,
     options: {
-      title: '我的哈哈哈哈哈哈',
       tabBarLabel: '我的哈哈哈哈哈哈',
-      tabBarBadge: 999,
       tabBarIcon: ({ color, size }) => (
         <IconFont name="icon-wode" color={color} size={size} />
       ),

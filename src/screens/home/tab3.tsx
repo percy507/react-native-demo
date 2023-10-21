@@ -1,12 +1,21 @@
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 
-import { Button, ScreenWrapper } from '@/components';
+import { Button, IconFont, ScreenWrapper } from '@/components';
 
 import { PageInfo } from '../part';
 
 export function Tab3Screen() {
-  const nav = useNavigation();
+  const nav = useNavigation<BottomTabNavigationProp<RouteParamList>>();
+
+  const labels = ['笑里刀', '劐劐', '鬼魅', '我可是超级长的哦', '🤣🥳👻', 'Mr. V'];
+  const iconNames = [
+    'icon-wode',
+    'icon-checkbox-circle-line',
+    'icon-hashiqi',
+    'icon-pdf',
+  ] as const;
 
   return (
     <ScreenWrapper navbar={{ show: false }}>
@@ -14,8 +23,33 @@ export function Tab3Screen() {
         <PageInfo title="Tab3Screen" />
 
         <View style={styles.list}>
-          <Button title="nav.goBack()" onPress={() => nav.goBack()} />
-          <Button title="前往首页Tab1" onPress={() => nav.navigate('home_tab1')} />
+          <Button
+            title="修改底部标题 & Icon"
+            onPress={() => {
+              const label = labels[Math.floor(Math.random() * labels.length)];
+              const name = iconNames[Math.floor(Math.random() * iconNames.length)];
+              nav.setOptions({
+                tabBarLabel: label,
+                tabBarIcon: ({ color, size }) => (
+                  <IconFont name={name} color={color} size={size} />
+                ),
+              });
+            }}
+          />
+          <Button
+            title="修改底部badge"
+            onPress={() =>
+              nav.setOptions({ tabBarBadge: Math.ceil(Math.random() * 200) })
+            }
+          />
+          <Button
+            title="修改label位置 (beside-icon)"
+            onPress={() => nav.setOptions({ tabBarLabelPosition: 'beside-icon' })}
+          />
+          <Button
+            title="修改label位置 (below-icon)"
+            onPress={() => nav.setOptions({ tabBarLabelPosition: 'below-icon' })}
+          />
         </View>
       </View>
     </ScreenWrapper>

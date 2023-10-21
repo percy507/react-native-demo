@@ -49,7 +49,7 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#fff' },
+  root: { flex: 1, backgroundColor: 'rgba(255,255,255,1)' },
   loader: {
     paddingTop: 30,
     alignItems: 'center',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 2,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255,255,255,0.8)',
     display: 'none',
   },
   loading: { display: 'flex' },

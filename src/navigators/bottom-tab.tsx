@@ -1,12 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { color } from '@/theme/color';
+
 import { BottomTabs } from './routes';
 
 const BottomTab = createBottomTabNavigator<RouteParamList>();
 
 export function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator screenOptions={{ headerShown: false }}>
+    <BottomTab.Navigator
+      screenOptions={{ headerShown: false, tabBarActiveTintColor: color.primary }}>
       {BottomTabs.map((el) => {
         return (
           <BottomTab.Screen
