@@ -1,7 +1,7 @@
 import LottieView from 'lottie-react-native';
 import React from 'react';
 import type { ViewProps, ViewStyle } from 'react-native';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import loadingAnimation from '@/assets/lottie/bounce-fruit.json';
@@ -30,8 +30,8 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
     <View style={[styles.root, rootPadding]} {...restProps}>
       <View style={[styles.root]}>
         <NavBar {...navbar} />
-        <View
-          style={[styles.content, contentStyle]}
+        <ScrollView
+          contentContainerStyle={[styles.content, contentStyle]}
           pointerEvents={loading ? 'none' : 'auto'}>
           <View style={[styles.loader, loading ? styles.loading : null]}>
             <LottieView
@@ -42,7 +42,7 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
             />
           </View>
           {children}
-        </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -64,5 +64,5 @@ const styles = StyleSheet.create({
   },
   loading: { display: 'flex' },
   loadingLottie: { height: 60 },
-  content: { flex: 1, width: '100%' },
+  content: { flexGrow: 1, width: '100%' },
 });
