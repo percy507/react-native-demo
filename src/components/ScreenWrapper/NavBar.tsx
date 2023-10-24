@@ -18,12 +18,6 @@ export interface NavBarProps {
 
   /** @defaultValue true */
   showBack?: boolean;
-  backIconStyle?: {
-    /** @defaultValue #333 */
-    color?: string;
-    /** @defaultValue 24 */
-    size?: number;
-  };
 
   leftNode?: React.ReactNode;
   rightNode?: React.ReactNode;
@@ -35,7 +29,6 @@ export function NavBar(props: NavBarProps) {
     color,
     bgColor,
     showBack = true,
-    backIconStyle = {},
     title,
     titleStyle,
     leftNode,
@@ -52,11 +45,9 @@ export function NavBar(props: NavBarProps) {
     const getContent = () => {
       if (leftNode) return leftNode;
       if (showBack) {
-        const _size = backIconStyle.size || 24,
-          _color = backIconStyle.color || color || '#333';
         return (
           <Pressable onPress={back} style={styles.backNode}>
-            <IconFont name="icon-back-arrow" size={_size} color={_color} />
+            <IconFont name="icon-back-arrow" size={24} color={color || '#333'} />
           </Pressable>
         );
       }
@@ -90,6 +81,7 @@ export function NavBar(props: NavBarProps) {
   return (
     <View style={rootStyle}>
       <StatusBar
+        animated
         translucent={true}
         barStyle="dark-content"
         backgroundColor="transparent"

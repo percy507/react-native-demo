@@ -8,6 +8,7 @@ import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
 import { DemoNavbarScreen } from '@/screens/demo/navbar';
 import { DemoNavigationScreen } from '@/screens/demo/navigation';
+import { DemoScreenAdaptation } from '@/screens/demo/screen_adaptation';
 import { DemoToastScreen } from '@/screens/demo/toast';
 import {
   DemoWebviewLoadHtmlScreen,
@@ -31,6 +32,7 @@ declare global {
 
     demo_navigation: { id: string };
     demo_navbar: undefined;
+    demo_screen_adaptation: undefined;
     demo_icon: undefined;
     demo_webview_uri: undefined;
     demo_webview_html: undefined;
@@ -50,6 +52,7 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
 
   ['demo_navigation', DemoNavigationScreen],
   ['demo_navbar', DemoNavbarScreen],
+  ['demo_screen_adaptation', DemoScreenAdaptation],
   ['demo_icon', DemoIconScreen],
   ['demo_webview_uri', DemoWebviewLoadUriScreen],
   ['demo_webview_html', DemoWebviewLoadHtmlScreen],

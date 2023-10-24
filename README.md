@@ -61,3 +61,23 @@ react-native-ui-lib
 ## 代码风格
 
 - 不要写大量的行内样式，如果样式很多，抽离至 StyleSheet，保持代码的可读性
+
+## 屏幕适配
+
+React Native 的默认尺寸单位是密度无关像素（device-independent pixels，简称 dp）。这个单位类似于 Android 中的 dp 或 iOS 中的 points。它是一个相对单位，是基于设备的像素密度来计算的，可以在不同的屏幕上保持一致的视觉外观。
+
+```bash
+# 自定义封装 utils/style 模块 (`px2dp`, `PxStyleSheet`)
+常规样式使用 PxStyleSheet 替代 StyleSheet
+行内样式或逻辑中样式，使用 px2dp 手动转换
+
+顶部导航栏和底部菜单不做适配？
+第三方组件库怎么做适配？
+
+# 未来改进
+调研下如何使用babel插件自动转行StyleSheet和行内样式
+https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation
+
+# 别的单位的转换
+https://github.com/alexfoxy/react-native-units
+```

@@ -11,6 +11,7 @@ export function Tab1Screen() {
   const list: [label: string, route: keyof RouteParamList, params?: object][] = [
     ['测试 navigation (路由跳转)', 'demo_navigation', { id: '1122😎' }],
     ['测试 navbar (导航栏)', 'demo_navbar'],
+    ['测试 屏幕适配', 'demo_screen_adaptation'],
     ['测试 iconfont', 'demo_icon'],
     ['测试 webview (加载url)', 'demo_webview_uri'],
     ['测试 webview (加载html字符串)', 'demo_webview_html'],
