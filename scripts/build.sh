@@ -5,6 +5,9 @@ set -x
 platform=$1
 mode=${2:-"debug"}
 
+# export build mode as env
+export APP_BUILD_MODE=$mode
+
 # To generate all the Android and IOS files
 npx expo prebuild
 

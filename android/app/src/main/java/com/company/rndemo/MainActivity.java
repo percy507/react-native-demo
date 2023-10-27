@@ -1,4 +1,4 @@
-package com.anonymous.reactnativedemo;
+package com.company.rndemo;
 
 import android.os.Build;
 import android.os.Bundle;

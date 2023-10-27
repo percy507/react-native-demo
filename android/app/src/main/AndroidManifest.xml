@@ -25,8 +25,9 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.anonymous.reactnativedemo"/>
-        <data android:scheme="exp+react-native-demo"/>
+        <data android:scheme="com.company.rndemo.debug"/>
+        <data android:scheme="exp+rn-demo"/>
+        <data android:scheme="com.company.rndemo"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

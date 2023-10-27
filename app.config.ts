@@ -1,9 +1,21 @@
 import type { ExpoConfig } from 'expo/config';
 
+const debugConfig = {
+  name: 'RN-demo(debug)',
+  identifier: 'com.company.rndemo.debug',
+};
+
+const releaseConfig = {
+  name: 'RN-demo',
+  identifier: 'com.company.rndemo',
+};
+
 export default (): ExpoConfig => {
+  const isRelease = process.env.APP_BUILD_MODE?.toLowerCase() === 'release';
+
   return {
-    name: 'react-native-demo',
-    slug: 'react-native-demo',
+    name: isRelease ? releaseConfig.name : debugConfig.name,
+    slug: 'RN-demo',
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
@@ -16,14 +28,14 @@ export default (): ExpoConfig => {
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.anonymous.reactnativedemo',
+      bundleIdentifier: isRelease ? releaseConfig.identifier : debugConfig.identifier,
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
-      package: 'com.anonymous.reactnativedemo',
+      package: isRelease ? releaseConfig.identifier : debugConfig.identifier,
     },
     web: {
       favicon: './assets/favicon.png',
@@ -32,7 +44,7 @@ export default (): ExpoConfig => {
       tsconfigPaths: true,
     },
     extra: {
-      isProd: process.env.MY_ENVIRONMENT === 'production',
+      isRelease,
     },
   };
 };
