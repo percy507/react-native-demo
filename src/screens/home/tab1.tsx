@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
 
-import { Button, ScreenWrapper } from '@/components';
+import { ScreenWrapper } from '@/components';
 
 import { PageInfo } from '../part';
 
@@ -24,18 +25,18 @@ export function Tab1Screen() {
     <ScreenWrapper navbar={{ title: '首页', showBack: false }}>
       <View style={styles.root}>
         <PageInfo title="Tab1Screen" />
-        <ScrollView>
-          <View style={styles.list}>
-            {list.map((el) => (
-              <Button
-                key={el[0]}
-                title={el[0]}
-                // @ts-ignore
-                onPress={() => nav.navigate(el[1], el[2])}
-              />
-            ))}
-          </View>
-        </ScrollView>
+
+        <View style={styles.list}>
+          {list.map((el) => (
+            <Button
+              size="small"
+              key={el[0]}
+              label={el[0]}
+              // @ts-ignore
+              onPress={() => nav.navigate(el[1], el[2])}
+            />
+          ))}
+        </View>
       </View>
     </ScreenWrapper>
   );

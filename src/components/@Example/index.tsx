@@ -1,15 +1,15 @@
 import type { PressableProps } from 'react-native';
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-interface ButtonProps extends PressableProps {
+interface ExampleProps extends PressableProps {
   title: React.ReactNode;
   subTitle?: React.ReactNode;
 }
 
-export function Button(props: ButtonProps) {
+export function Example(props: ExampleProps) {
   const { title, subTitle, ...restProps } = props;
   return (
-    <Pressable {...restProps} style={styles.button}>
+    <Pressable {...restProps} style={styles.root}>
       <Text style={styles.text}>{title}</Text>
       {subTitle != null && <Text style={styles.subtext}>{props.subTitle}</Text>}
     </Pressable>
@@ -17,7 +17,7 @@ export function Button(props: ButtonProps) {
 }
 
 const styles = StyleSheet.create({
-  button: {
+  root: {
     alignItems: 'center',
     backgroundColor: '#4169E1',
     padding: 6,

@@ -1,6 +1,6 @@
 import LottieView from 'lottie-react-native';
 import React from 'react';
-import type { ViewProps, ViewStyle } from 'react-native';
+import type { ScrollViewProps, ViewProps, ViewStyle } from 'react-native';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -13,10 +13,11 @@ export interface ScreenWrapperProps extends Omit<ViewProps, 'style'> {
   navbar?: NavBarProps;
   contentStyle?: ViewStyle;
   loading?: boolean;
+  refreshControl?: ScrollViewProps['refreshControl'];
 }
 
 export function ScreenWrapper(props: ScreenWrapperProps) {
-  const { navbar, contentStyle, loading, children, ...restProps } = props;
+  const { navbar, contentStyle, loading, refreshControl, children, ...restProps } = props;
   const insets = useSafeAreaInsets();
 
   const rootPadding = {
@@ -32,6 +33,7 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
         <NavBar {...navbar} />
         <ScrollView
           contentContainerStyle={[styles.content, contentStyle]}
+          refreshControl={refreshControl}
           pointerEvents={loading ? 'none' : 'auto'}>
           <View style={[styles.loader, loading ? styles.loading : null]}>
             <LottieView

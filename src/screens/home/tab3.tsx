@@ -1,8 +1,9 @@
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
 
-import { Button, IconFont, ScreenWrapper } from '@/components';
+import { IconFont, ScreenWrapper } from '@/components';
 
 import { PageInfo } from '../part';
 
@@ -24,7 +25,8 @@ export function Tab3Screen() {
 
         <View style={styles.list}>
           <Button
-            title="修改底部标题 & Icon"
+            size="small"
+            label="修改底部标题 & Icon"
             onPress={() => {
               const label = labels[Math.floor(Math.random() * labels.length)];
               const name = iconNames[Math.floor(Math.random() * iconNames.length)];
@@ -37,17 +39,20 @@ export function Tab3Screen() {
             }}
           />
           <Button
-            title="修改底部badge"
+            size="small"
+            label="修改底部badge"
             onPress={() =>
               nav.setOptions({ tabBarBadge: Math.ceil(Math.random() * 200) })
             }
           />
           <Button
-            title="修改label位置 (beside-icon)"
+            size="small"
+            label="修改label位置 (beside-icon)"
             onPress={() => nav.setOptions({ tabBarLabelPosition: 'beside-icon' })}
           />
           <Button
-            title="修改label位置 (below-icon)"
+            size="small"
+            label="修改label位置 (below-icon)"
             onPress={() => nav.setOptions({ tabBarLabelPosition: 'below-icon' })}
           />
         </View>

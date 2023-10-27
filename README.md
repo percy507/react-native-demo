@@ -24,6 +24,11 @@ src
 ## 库选型
 
 ```bash
+# 组件库
+https://github.com/wix/react-native-ui-lib (选用：组件种类多)
+https://github.com/tamagui/tamagui (弃用：启动demo，感觉有点卡，动画效果过多了，组件偏少)
+https://github.com/ant-design/ant-design-mobile-rn (弃用：2018年，仓库转为个人维护，更新较少)
+
 # 状态管理
 # jotai，简单易用
 https://github.com/pmndrs/jotai
@@ -53,9 +58,6 @@ https://github.com/arnnis/react-native-toast-notifications/
 
 # http请求
 基于 Fetch API 封装
-
-
-react-native-ui-lib
 ```
 
 ## 代码风格

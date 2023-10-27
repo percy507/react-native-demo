@@ -9,7 +9,7 @@
     "prepare": "husky install .husky",
     "preinstall": "npx only-allow pnpm",
     "install-ios-deps": "bundle install && cd ios && bundle exec pod install && cd ..",
-    "start": "expo prebuild && watchman watch-del-all && expo start",
+    "start": "expo prebuild && watchman watch-del-all && expo start -c",
     "build:android:debug": "bash ./scripts/build.sh android debug",
     "build:ios:debug": "bash ./scripts/build.sh ios Debug",
     "build:android:release": "bash ./scripts/build.sh android release",
@@ -55,6 +55,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "^13.14.0",
     "react-native-toast-notifications": "^3.4.0",
+    "react-native-ui-lib": "^7.9.1",
     "react-native-webview": "13.2.2"
   },
   "devDependencies": {

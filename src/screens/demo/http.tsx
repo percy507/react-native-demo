@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
 
-import { Button, ScreenWrapper } from '@/components';
+import { ScreenWrapper } from '@/components';
 import { request404, requestGetQuote } from '@/services/test';
 
 export function DemoHttpScreen() {
@@ -27,8 +28,8 @@ export function DemoHttpScreen() {
       navbar={{ title: '发起 http 请求' }}
       loading={loading}>
       <View style={styles.btns}>
-        <Button title="再次请求一句话" onPress={() => getData()} />
-        <Button title="HTTP 404" onPress={() => request404()} />
+        <Button label="再次请求一句话" onPress={() => getData()} />
+        <Button label="HTTP 404" onPress={() => request404()} />
       </View>
       <View style={styles.result}>
         <Text>{`${data?.creator}: ${data.vhan}`}</Text>

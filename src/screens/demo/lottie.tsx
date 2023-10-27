@@ -1,8 +1,9 @@
 import LottieView from 'lottie-react-native';
 import { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
 
-import { Button, ScreenWrapper } from '@/components';
+import { ScreenWrapper } from '@/components';
 
 export function DemoLottieScreen() {
   const lottieRef = useRef<LottieView>(null);
@@ -14,9 +15,9 @@ export function DemoLottieScreen() {
   return (
     <ScreenWrapper contentStyle={styles.root} navbar={{ title: '使用 lottie 动画' }}>
       <View style={styles.btns}>
-        <Button title="开始" onPress={() => lottieRef.current?.play()} />
-        <Button title="暂停" onPress={() => lottieRef.current?.pause()} />
-        <Button title="继续" onPress={() => lottieRef.current?.resume()} />
+        <Button label="开始" onPress={() => lottieRef.current?.play()} />
+        <Button label="暂停" onPress={() => lottieRef.current?.pause()} />
+        <Button label="继续" onPress={() => lottieRef.current?.resume()} />
       </View>
       <View style={styles.single}>
         <LottieView ref={lottieRef} source={require('@/assets/lottie/welcome.json')} />

@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
 
 import type { ScreenWrapperProps } from '@/components';
-import { Button, ScreenWrapper } from '@/components';
+import { ScreenWrapper } from '@/components';
 
 export function DemoNavbarScreen() {
   const nav = useNavigation();
@@ -13,19 +14,23 @@ export function DemoNavbarScreen() {
     <ScreenWrapper contentStyle={styles.root} navbar={navbarProps}>
       <View style={styles.list}>
         <Button
-          title="显示/隐藏 navbar"
+          size="small"
+          label="显示/隐藏 navbar"
           onPress={() => setNavbarProps({ show: !navbarProps?.show })}
         />
         <Button
-          title="设置标题"
+          size="small"
+          label="设置标题"
           onPress={() => setNavbarProps({ title: `标题${Date.now()}` })}
         />
         <Button
-          title="自定义背景色/字体颜色"
+          size="small"
+          label="自定义背景色/字体颜色"
           onPress={() => setNavbarProps({ color: '#fff', bgColor: '#f89d13' })}
         />
         <Button
-          title="Toggle leftNode"
+          size="small"
+          label="Toggle leftNode"
           onPress={() =>
             setNavbarProps({
               leftNode: navbarProps?.leftNode ? undefined : (
@@ -35,11 +40,16 @@ export function DemoNavbarScreen() {
           }
         />
         <Button
-          title="Toggle rightNode"
+          size="small"
+          label="Toggle rightNode"
           onPress={() =>
             setNavbarProps({
               rightNode: navbarProps?.rightNode ? undefined : (
-                <Button onPress={() => alert('This is a button!')} title="Info" />
+                <Button
+                  size="small"
+                  label="点我"
+                  onPress={() => alert('This is a button!')}
+                />
               ),
             })
           }

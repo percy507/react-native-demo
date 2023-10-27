@@ -1,21 +1,48 @@
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
 
-import { Button, ScreenWrapper } from '@/components';
+import { ScreenWrapper } from '@/components';
 
 import { PageInfo } from '../part';
 
 export function Tab2Screen() {
   const nav = useNavigation();
 
+  const [data, setData] = useState(new Date().toISOString());
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setData(new Date().toISOString());
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
-    <ScreenWrapper navbar={{ show: false }}>
+    <ScreenWrapper
+      navbar={{ show: false }}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <View style={styles.root}>
         <PageInfo title="Tab2Screen" />
 
+        <View style={{ marginBottom: 16 }}>
+          <Text style={{ color: 'red' }}>
+            上次渲染时间: {data}
+            {'\n'}
+          </Text>
+          <Text>* 本页面已启用RefreshControl（即顶部下拉刷新）</Text>
+        </View>
+
         <View style={styles.list}>
-          <Button title="nav.goBack()" onPress={() => nav.goBack()} />
-          <Button title="前往首页Tab1" onPress={() => nav.navigate('home_tab1')} />
+          <Button size="small" label="nav.goBack()" onPress={() => nav.goBack()} />
+          <Button
+            size="small"
+            label="前往首页Tab1"
+            onPress={() => nav.navigate('home_tab1')}
+          />
         </View>
       </View>
     </ScreenWrapper>
