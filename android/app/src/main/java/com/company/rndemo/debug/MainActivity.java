@@ -1,4 +1,4 @@
-package com.company.rndemo;
+package com.company.rndemo.debug;
 
 import android.os.Build;
 import android.os.Bundle;

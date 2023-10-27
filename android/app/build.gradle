@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.company.rndemo'
+    namespace 'com.company.rndemo.debug'
     defaultConfig {
-        applicationId 'com.company.rndemo'
+        applicationId 'com.company.rndemo.debug'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

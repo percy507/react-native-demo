@@ -37,6 +37,7 @@ specifiers:
   react-native-gesture-handler: ~2.12.0
   react-native-iconfont-cli: ^2.2.4
   react-native-mmkv: ^2.10.2
+  react-native-reanimated: ~3.3.0
   react-native-safe-area-context: 4.6.3
   react-native-screens: ~3.22.0
   react-native-svg: ^13.14.0
@@ -47,7 +48,7 @@ specifiers:
 
 dependencies:
   '@react-navigation/bottom-tabs': 6.5.9_dx2kalmjirzizf4gnby5emabiy
-  '@react-navigation/drawer': 6.6.4_zdik53hrs2kofa3u7vhe5ntwmi
+  '@react-navigation/drawer': 6.6.4_lo7v4s3wvrnzvco47tvvhfz2qi
   '@react-navigation/native': 6.1.8_3vcvnrf7libeci574xklu6s5tm
   '@react-navigation/native-stack': 6.9.14_dx2kalmjirzizf4gnby5emabiy
   '@react-navigation/stack': 6.3.18_muda3zxmysqhzffpmxlyniwl5y
@@ -63,6 +64,7 @@ dependencies:
   react-native: 0.72.5_uqrlezdiwyxp44v3j7m32maumu
   react-native-gesture-handler: 2.12.1_3vcvnrf7libeci574xklu6s5tm
   react-native-mmkv: 2.10.2_3vcvnrf7libeci574xklu6s5tm
+  react-native-reanimated: 3.3.0_fa6vpp5v4kt2tpyaorzyzdv2eu
   react-native-safe-area-context: 4.6.3_3vcvnrf7libeci574xklu6s5tm
   react-native-screens: 3.22.1_3vcvnrf7libeci574xklu6s5tm
   react-native-svg: 13.14.0_3vcvnrf7libeci574xklu6s5tm
@@ -2685,7 +2687,7 @@ packages:
       use-latest-callback: 0.1.6_react@18.2.0
     dev: false
 
-  /@react-navigation/drawer/6.6.4_zdik53hrs2kofa3u7vhe5ntwmi:
+  /@react-navigation/drawer/6.6.4_lo7v4s3wvrnzvco47tvvhfz2qi:
     resolution: {integrity: sha512-MqEFDSkOdKowbtACcfGQeG185gV2V9burT/EgYxU9w9ivRrT1DEqCSwS7MpU1LjKbVuNqUVPBVE83rVWHbowuw==}
     peerDependencies:
       '@react-navigation/native': ^6.0.0
@@ -2702,7 +2704,7 @@ packages:
       react: 18.2.0
       react-native: 0.72.5_uqrlezdiwyxp44v3j7m32maumu
       react-native-gesture-handler: 2.12.1_3vcvnrf7libeci574xklu6s5tm
-      react-native-reanimated: 3.5.4_fa6vpp5v4kt2tpyaorzyzdv2eu
+      react-native-reanimated: 3.3.0_fa6vpp5v4kt2tpyaorzyzdv2eu
       react-native-safe-area-context: 4.6.3_3vcvnrf7libeci574xklu6s5tm
       react-native-screens: 3.22.1_3vcvnrf7libeci574xklu6s5tm
       warn-once: 0.1.1
@@ -8278,8 +8280,8 @@ packages:
       react-native: 0.72.5_uqrlezdiwyxp44v3j7m32maumu
     dev: false
 
-  /react-native-reanimated/3.5.4_fa6vpp5v4kt2tpyaorzyzdv2eu:
-    resolution: {integrity: sha512-8we9LLDO1o4Oj9/DICeEJ2K1tjfqkJagqQUglxeUAkol/HcEJ6PGxIrpBcNryLqCDYEcu6FZWld/FzizBIw6bg==}
+  /react-native-reanimated/3.3.0_fa6vpp5v4kt2tpyaorzyzdv2eu:
+    resolution: {integrity: sha512-LzfpPZ1qXBGy5BcUHqw3pBC0qSd22qXS3t8hWSbozXNrBkzMhhOrcILE/nEg/PHpNNp1xvGOW8NwpAMF006roQ==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
       '@babel/plugin-proposal-nullish-coalescing-operator': ^7.0.0-0
