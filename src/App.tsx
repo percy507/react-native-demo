@@ -1,32 +1,34 @@
 import 'react-native-gesture-handler';
 
+import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'jotai';
+import { useCallback, useRef } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications';
 
-import { IconFont } from '@/components';
 import { useScreenOrientation } from '@/hooks';
 import { RootNavigator } from '@/navigators/root';
+import { toastProps } from '@/utils/config';
 
-const toastProps: Omit<React.ComponentProps<typeof ToastProvider>, 'children'> = {
-  duration: 1200,
-  animationDuration: 100,
-  animationType: 'slide-in',
-  textStyle: { fontSize: 15 },
-  normalColor: 'rgba(0,0,0,0.7)',
-  successColor: 'rgba(9,184,62,1)',
-  successIcon: <IconFont name="icon-checkbox-circle-line" color="#fff" size={20} />,
-  dangerColor: 'rgba(224,49,49,1)',
-  dangerIcon: <IconFont name="icon-close-circle-line" color="#fff" size={20} />,
-  warningColor: 'rgba(230,119,0,1)',
-  warningIcon: <IconFont name="icon-error-warning-line" color="#fff" size={20} />,
-};
+// Keep the splash screen visible while the app is not ready
+SplashScreen.preventAutoHideAsync();
 
-export default function App(): JSX.Element {
+export default function App() {
   useScreenOrientation();
 
+  const appIsReadyRef = useRef(false);
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReadyRef.current) return;
+
+    // 如果需要获取异步资源，可以在此控制splash screen的消失时机
+    await new Promise((r) => setTimeout(r, 1000));
+
+    await SplashScreen.hideAsync();
+    appIsReadyRef.current = true;
+  }, []);
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider onLayout={onLayoutRootView}>
       <Provider>
         <ToastProvider {...toastProps}>
           <RootNavigator />

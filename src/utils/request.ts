@@ -1,7 +1,7 @@
 import * as qs from 'qss';
 import { Toast } from 'react-native-toast-notifications';
 
-import config from './config';
+import { api } from './config';
 // import { getAuthToken } from './storage';
 
 declare global {
@@ -46,7 +46,7 @@ enum RequestErrType {
 }
 
 class Request {
-  serverUrl = config.BASE_API;
+  serverUrl = api.BASE_API;
   timeout = 60000; // 60 * 1000ms
 
   fetch = (url: string, options: RequestInit = {}) => {
