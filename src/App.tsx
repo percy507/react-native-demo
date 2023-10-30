@@ -23,7 +23,7 @@ export default function App() {
     // 如果需要获取异步资源，可以在此控制splash screen的消失时机
     await new Promise((r) => setTimeout(r, 1000));
 
-    await SplashScreen.hideAsync();
+    // await SplashScreen.hideAsync();
     appIsReadyRef.current = true;
   }, []);
 
