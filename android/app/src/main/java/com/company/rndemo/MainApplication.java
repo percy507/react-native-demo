@@ -1,4 +1,4 @@
-package com.company.rndemo.debug;
+package com.company.rndemo;
 
 import android.app.Application;
 import android.content.res.Configuration;
