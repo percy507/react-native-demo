@@ -21,6 +21,7 @@ specifiers:
   eslint-plugin-simple-import-sort: ^10.0.0
   expo: ~49.0.13
   expo-dev-client: ~2.4.11
+  expo-navigation-bar: ~2.3.0
   expo-screen-orientation: ~6.0.5
   expo-splash-screen: ~0.20.5
   expo-status-bar: ~1.6.0
@@ -55,6 +56,7 @@ dependencies:
   '@react-navigation/stack': 6.3.20_db2rcr5dveobtqzos4pucixlgi
   expo: 49.0.16_@babel+core@7.23.2
   expo-dev-client: 2.4.11_expo@49.0.16
+  expo-navigation-bar: 2.3.0_expo@49.0.16
   expo-screen-orientation: 6.0.6_expo@49.0.16
   expo-splash-screen: 0.20.5_g2lrj5lxqjs6ry2potogbinpgy
   expo-status-bar: 1.6.0
@@ -5156,6 +5158,18 @@ packages:
     dependencies:
       compare-versions: 3.6.0
       invariant: 2.2.4
+    dev: false
+
+  /expo-navigation-bar/2.3.0_expo@49.0.16:
+    resolution: {integrity: sha512-5C9iR+rrj0EUgCPIIxSHEPwj18IOL4zQPYKLbyV9KVeXSBqPspu+vRvF5pxgbyefWfoQDHKfOz56W/gZ3qRiTQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@react-native/normalize-color': 2.1.0
+      debug: 4.3.4
+      expo: 49.0.16_@babel+core@7.23.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /expo-screen-orientation/6.0.6_expo@49.0.16:

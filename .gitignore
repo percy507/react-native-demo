@@ -33,3 +33,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# 除非必须要修改原生代码，否则不提交 android 和 ios 目录至远程仓库，因为其由 expo prebuild 时自动生成
+android/
+ios/

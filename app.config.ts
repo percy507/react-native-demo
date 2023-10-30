@@ -10,6 +10,8 @@ const releaseConfig = {
   identifier: 'com.company.rndemo',
 };
 
+const splashScreenBG = '#2e3c4b';
+
 export default (): ExpoConfig => {
   const isRelease = process.env.APP_BUILD_MODE?.toLowerCase() === 'release';
 
@@ -23,7 +25,7 @@ export default (): ExpoConfig => {
     splash: {
       image: './assets/splash.png',
       resizeMode: 'contain',
-      backgroundColor: '#ffffff',
+      backgroundColor: splashScreenBG,
     },
     assetBundlePatterns: ['**/*'],
     ios: {
@@ -36,6 +38,9 @@ export default (): ExpoConfig => {
         backgroundColor: '#ffffff',
       },
       package: isRelease ? releaseConfig.identifier : debugConfig.identifier,
+    },
+    androidNavigationBar: {
+      backgroundColor: splashScreenBG,
     },
     web: {
       favicon: './assets/favicon.png',

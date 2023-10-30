@@ -40,6 +40,7 @@
     "@react-navigation/stack": "^6.3.18",
     "expo": "~49.0.13",
     "expo-dev-client": "~2.4.11",
+    "expo-navigation-bar": "~2.3.0",
     "expo-screen-orientation": "~6.0.5",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",

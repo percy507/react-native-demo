@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 
+import * as NavigationBar from 'expo-navigation-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'jotai';
 import { useCallback, useRef } from 'react';
@@ -23,8 +24,9 @@ export default function App() {
     // 如果需要获取异步资源，可以在此控制splash screen的消失时机
     await new Promise((r) => setTimeout(r, 1000));
 
-    // await SplashScreen.hideAsync();
     appIsReadyRef.current = true;
+    await SplashScreen.hideAsync();
+    await NavigationBar.setBackgroundColorAsync('#fff');
   }, []);
 
   return (
