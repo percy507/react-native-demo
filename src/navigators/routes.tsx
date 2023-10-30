@@ -6,6 +6,7 @@ import { LoginScreen } from '@/screens/auth/login';
 import { DemoHttpScreen } from '@/screens/demo/http';
 import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
+import { DemoMMKVScreen } from '@/screens/demo/mmkv';
 import { DemoNavbarScreen } from '@/screens/demo/navbar';
 import { DemoNavigationScreen } from '@/screens/demo/navigation';
 import { DemoScreenAdaptation } from '@/screens/demo/screen_adaptation';
@@ -39,6 +40,7 @@ declare global {
     demo_lottie: undefined;
     demo_toast: undefined;
     demo_http: undefined;
+    demo_mmkv: undefined;
   };
 
   namespace ReactNavigation {
@@ -59,6 +61,7 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['demo_lottie', DemoLottieScreen],
   ['demo_toast', DemoToastScreen],
   ['demo_http', DemoHttpScreen],
+  ['demo_mmkv', DemoMMKVScreen],
 ];
 
 export const BottomTabs: {
@@ -71,13 +74,10 @@ export const BottomTabs: {
     component: Tab1Screen,
     options: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ color, size, focused }) => (
-        <IconFont
-          name={focused ? 'icon-home-smile-fill' : 'icon-home-smile-line'}
-          color={color}
-          size={size}
-        />
-      ),
+      tabBarIcon: ({ color, size, focused }) => {
+        const icon = focused ? 'icon-home-smile-fill' : 'icon-home-smile-line';
+        return <IconFont name={icon} color={color} size={size} />;
+      },
     },
   },
   {

@@ -84,3 +84,11 @@ https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation
 # 别的单位的转换
 https://github.com/alexfoxy/react-native-units
 ```
+
+## 调试相关
+
+```bash
+# 安卓
+https://adbshell.com/
+[Adb useful commands list](https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8)
+```
