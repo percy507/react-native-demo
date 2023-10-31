@@ -1,14 +1,17 @@
-import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-ui-lib';
 
-import { IconFont, ScreenWrapper } from '@/components';
+import { AModal, IconFont, ScreenWrapper } from '@/components';
+import type { BottomTabNav, StackNav } from '@/navigators/routes';
+import { requestLogout } from '@/services/auth';
+import { clearStorage } from '@/stores/user';
 
 import { PageInfo } from '../part';
 
 export function Tab3Screen() {
-  const nav = useNavigation<BottomTabNavigationProp<RouteParamList>>();
+  const nav = useNavigation<BottomTabNav>();
 
   const labels = ['笑里刀', '劐劐', '鬼魅', '我可是超级长的哦', '🤣🥳👻', 'Mr. V'];
   const iconNames = [
@@ -56,6 +59,10 @@ export function Tab3Screen() {
             onPress={() => nav.setOptions({ tabBarLabelPosition: 'below-icon' })}
           />
         </View>
+
+        <View style={{ marginTop: 60 }}>
+          <LogoutButton />
+        </View>
       </View>
     </ScreenWrapper>
   );
@@ -65,3 +72,31 @@ const styles = StyleSheet.create({
   root: { padding: 12 },
   list: { display: 'flex', gap: 6 },
 });
+
+function LogoutButton() {
+  const nav = useNavigation<StackNav>();
+  const [visible, setVisible] = useState(false);
+
+  const logout = () => {
+    setVisible(false);
+    requestLogout();
+    clearStorage();
+    setTimeout(() => {
+      // 退出登录时，需要清除历史路由栈，否则在登录页，利用手势返回时，可以返回到上一页
+      nav.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'login' }] }));
+    }, 200);
+  };
+
+  return (
+    <>
+      <AModal
+        visible={visible}
+        setVisible={setVisible}
+        title="确认退出登录？"
+        description="退出登录将清除本地所有的session数据。"
+        onOk={logout}
+      />
+      <Button label="退出登录" onPress={() => setVisible(true)} />
+    </>
+  );
+}

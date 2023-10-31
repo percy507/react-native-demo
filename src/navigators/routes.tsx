@@ -1,8 +1,13 @@
-import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import type {
+  BottomTabNavigationOptions,
+  BottomTabNavigationProp,
+} from '@react-navigation/bottom-tabs';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 import { IconFont } from '@/components';
 import { ForgetPasswordScreen } from '@/screens/auth/forget-password';
 import { LoginScreen } from '@/screens/auth/login';
+import { PrivacyPolicyScreen, UserProtocolScreen } from '@/screens/auth/protocols';
 import { DemoHttpScreen } from '@/screens/demo/http';
 import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
@@ -30,6 +35,8 @@ declare global {
 
     login: undefined;
     forget_password: undefined;
+    user_protocol: undefined;
+    privacy_policy: undefined;
 
     demo_navigation: { id: string };
     demo_navbar: undefined;
@@ -51,6 +58,8 @@ declare global {
 export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['login', LoginScreen],
   ['forget_password', ForgetPasswordScreen],
+  ['user_protocol', UserProtocolScreen],
+  ['privacy_policy', PrivacyPolicyScreen],
 
   ['demo_navigation', DemoNavigationScreen],
   ['demo_navbar', DemoNavbarScreen],
@@ -63,6 +72,9 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['demo_http', DemoHttpScreen],
   ['demo_mmkv', DemoMMKVScreen],
 ];
+
+export type BottomTabNav = BottomTabNavigationProp<RouteParamList>;
+export type StackNav = StackNavigationProp<RouteParamList>;
 
 export const BottomTabs: {
   name: keyof RouteParamList;

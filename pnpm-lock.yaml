@@ -29,11 +29,13 @@ specifiers:
   jest: ^29.2.1
   jotai: ^2.4.3
   lint-staged: ^12.3.4
+  lodash: ^4.17.21
   lottie-react-native: 5.1.6
   metro-react-native-babel-preset: 0.76.8
   prettier: ^2.4.1
   qss: ^3.0.0
   react: 18.2.0
+  react-hook-form: ^7.47.0
   react-native: 0.72.5
   react-native-gesture-handler: ~2.12.0
   react-native-iconfont-cli: ^2.2.4
@@ -61,9 +63,11 @@ dependencies:
   expo-splash-screen: 0.20.5_g2lrj5lxqjs6ry2potogbinpgy
   expo-status-bar: 1.6.0
   jotai: 2.5.0_o5ysialsahsznabqayk7pree4e
+  lodash: 4.17.21
   lottie-react-native: 5.1.6_fzqeangpbcsyef6kkb2ybpmrxe
   qss: 3.0.0
   react: 18.2.0
+  react-hook-form: 7.47.0_react@18.2.0
   react-native: 0.72.5_mt4cu4wky2rw7ldifcl2274rpy
   react-native-gesture-handler: 2.12.1_3vcvnrf7libeci574xklu6s5tm
   react-native-mmkv: 2.10.2_3vcvnrf7libeci574xklu6s5tm
@@ -8373,6 +8377,15 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       react: '>=17.0.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-hook-form/7.47.0_react@18.2.0:
+    resolution: {integrity: sha512-F/TroLjTICipmHeFlMrLtNLceO2xr1jU3CyiNla5zdwsGUGu2UOxxR4UyJgLlhMwLW/Wzp4cpJ7CPfgJIeKdSg==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
     dependencies:
       react: 18.2.0
     dev: false

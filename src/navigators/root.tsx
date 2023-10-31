@@ -1,16 +1,20 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 
+import { getAuthToken } from '@/stores/user';
+
 import { BottomTabNavigator } from './bottom-tab';
 import { RootRoutes } from './routes';
 
 const RootStack = createStackNavigator<RouteParamList>();
 
 export function RootNavigator() {
+  const isLogin = getAuthToken();
+
   return (
     <NavigationContainer>
       <RootStack.Navigator
-        initialRouteName="home"
+        initialRouteName={isLogin ? 'home' : 'login'}
         screenOptions={{
           headerShown: false,
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import './theme';
 
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -9,7 +10,8 @@ import { ToastProvider } from 'react-native-toast-notifications';
 
 import { useScreenOrientation } from '@/hooks';
 import { RootNavigator } from '@/navigators/root';
-import { toastProps } from '@/utils/config';
+
+import { toastProps } from './config';
 
 // Keep the splash screen visible while the app is not ready
 SplashScreen.preventAutoHideAsync();

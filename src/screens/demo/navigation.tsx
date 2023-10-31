@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import type { StackNavigationProp } from '@react-navigation/stack';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-ui-lib';
 
 import { ScreenWrapper } from '@/components';
+import type { StackNav } from '@/navigators/routes';
 
 import { PageInfo } from '../part';
 
 export function DemoNavigationScreen() {
   // const nav = useNavigation();
-  const nav = useNavigation<StackNavigationProp<RouteParamList>>();
+  const nav = useNavigation<StackNav>();
 
   return (
     <ScreenWrapper

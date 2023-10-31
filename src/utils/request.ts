@@ -1,7 +1,7 @@
 import * as qs from 'qss';
 import { Toast } from 'react-native-toast-notifications';
 
-import { api } from './config';
+import { api } from '@/config';
 // import { getAuthToken } from './storage';
 
 declare global {
