@@ -1,5 +1,6 @@
-import 'react-native-gesture-handler';
+import './global';
 import './theme';
+import 'react-native-gesture-handler';
 
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,7 +9,7 @@ import { useCallback, useRef } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications';
 
-import { useScreenOrientation } from '@/hooks';
+import { OrientationLock, useScreenOrientation } from '@/hooks';
 import { RootNavigator } from '@/navigators/root';
 
 import { toastProps } from './config';
@@ -17,7 +18,7 @@ import { toastProps } from './config';
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  useScreenOrientation();
+  useScreenOrientation({ initialOrientationLock: OrientationLock.PORTRAIT });
 
   const appIsReadyRef = useRef(false);
   const onLayoutRootView = useCallback(async () => {
