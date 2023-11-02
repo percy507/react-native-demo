@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { color } from '@/theme/color';
+import { colors } from '@/theme/color';
 
 import { BottomTabs } from './routes';
 
@@ -9,7 +9,10 @@ const BottomTab = createBottomTabNavigator<RouteParamList>();
 export function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      screenOptions={{ headerShown: false, tabBarActiveTintColor: color.primary }}>
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: colors.primary,
+      }}>
       {BottomTabs.map((el) => {
         return (
           <BottomTab.Screen

@@ -86,7 +86,7 @@ module.exports = function (babel, options) {
       CallExpression(path) {
         if (
           path.node.callee.object?.name === 'StyleSheet' &&
-          path.node.callee.property?.name === 'create'
+          ['create', 'compose', 'flatten'].includes(path.node.callee.property?.name)
         ) {
           traverseWrap(path);
         }

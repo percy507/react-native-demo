@@ -92,3 +92,11 @@ https://github.com/alexfoxy/react-native-units
 https://adbshell.com/
 [Adb useful commands list](https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8)
 ```
+
+## 待做事项
+
+```bash
+# 思考如何设置基础主题(先这样凑乎吧，开发多了再优化)
+https://github.com/efstathiosntonas/react-native-style-libraries-benchmark
+https://github.com/jpudysz/react-native-unistyles
+```
