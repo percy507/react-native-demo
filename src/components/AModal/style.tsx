@@ -1,6 +1,6 @@
-import { PxStyleSheet } from '@/utils/style';
+import { StyleSheet } from 'react-native';
 
-export const styles = PxStyleSheet.create({
+export const styles = StyleSheet.create({
   root: {
     flex: 1,
     justifyContent: 'center',

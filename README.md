@@ -30,6 +30,9 @@ https://github.com/wix/react-native-ui-lib (选用：组件种类多)
 https://github.com/tamagui/tamagui (弃用：启动demo，感觉有点卡，动画效果过多了，组件偏少)
 https://github.com/ant-design/ant-design-mobile-rn (弃用：2018年，仓库转为个人维护，更新较少)
 
+# 表单管理
+https://github.com/react-hook-form/react-hook-form
+
 # 状态管理
 # jotai，简单易用
 https://github.com/pmndrs/jotai
@@ -70,18 +73,15 @@ https://github.com/arnnis/react-native-toast-notifications/
 React Native 的默认尺寸单位是密度无关像素（device-independent pixels，简称 dp）。这个单位类似于 Android 中的 dp 或 iOS 中的 points。它是一个相对单位，是基于设备的像素密度来计算的，可以在不同的屏幕上保持一致的视觉外观。
 
 ```bash
-# 自定义封装 utils/style 模块 (`px2dp`, `PxStyleSheet`)
-常规样式使用 PxStyleSheet 替代 StyleSheet
-行内样式或逻辑中样式，使用 px2dp 手动转换
+# 屏幕适配方案
+1. 基于设计稿宽度与屏幕宽度的比例，封装 `px2dp` 方法
+2. 编写babel插件，自动为指定的长度类样式属性的值包裹 `px2dp` 方法，从而适配当前屏幕
+3. babel插件会转换当前项目以及所有第三方库的行内样式以及StyleSheet.create中定义的样式
 
-顶部导航栏和底部菜单不做适配？
-第三方组件库怎么做适配？
+# babel插件
+./plugins/babel-plugin-rn-wrap-px2dp/index.js
 
-# 未来改进
-调研下如何使用babel插件自动转行StyleSheet和行内样式
-https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation
-
-# 别的单位的转换
+# 别的样式单位
 https://github.com/alexfoxy/react-native-units
 ```
 

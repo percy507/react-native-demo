@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { StyleSheet } from 'react-native';
 import { Toast } from 'react-native-toast-notifications';
 import { Button, Checkbox, Text, TextField, View } from 'react-native-ui-lib';
 
@@ -10,7 +11,6 @@ import { requestSMSLogin } from '@/services/auth';
 import { setAuthToken } from '@/stores/user';
 import { debounce } from '@/utils';
 import { REG_Phone } from '@/utils/regex';
-import { PxStyleSheet } from '@/utils/style';
 
 interface FormValue {
   phone?: string;
@@ -158,7 +158,7 @@ export function LoginScreen() {
   );
 }
 
-const styles = PxStyleSheet.create({
+const styles = StyleSheet.create({
   root: {
     flex: 1,
     paddingTop: 150,

@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import type { ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button, View } from 'react-native-ui-lib';
 
 import { requestSendSMSCode } from '@/services/auth';
 import { REG_Phone } from '@/utils/regex';
-import { PxStyleSheet } from '@/utils/style';
 
 import { Loader } from '../Loader';
 
@@ -57,7 +57,7 @@ export function SMSCode(props: SMSCodeProps) {
   );
 }
 
-const styles = PxStyleSheet.create({
+const styles = StyleSheet.create({
   root: {
     minWidth: 100,
     alignItems: 'center',

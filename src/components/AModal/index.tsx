@@ -2,8 +2,6 @@ import type { ModalProps } from 'react-native';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { Button } from 'react-native-ui-lib';
 
-import { px2dp } from '@/utils/style';
-
 import { styles } from './style';
 
 interface AModalProps extends ModalProps {
@@ -41,7 +39,7 @@ export function AModal(props: AModalProps) {
         style={styles.root}
         onPress={() => closeOnMaskClick && setVisible(false)}>
         <Pressable
-          style={[styles.modalView, { width: px2dp(width) }]}
+          style={[styles.modalView, { width }]}
           onPress={(e) => e.stopPropagation()}>
           {children ? (
             children
