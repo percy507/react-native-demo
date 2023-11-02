@@ -15,7 +15,7 @@ export const toastProps: Omit<React.ComponentProps<typeof ToastProvider>, 'child
   duration: 1200,
   animationDuration: 100,
   animationType: 'slide-in',
-  textStyle: { fontSize: 13 },
+  textStyle: { fontSize: px2dp(13) },
   normalColor: 'rgba(0,0,0,0.7)',
   successColor: 'rgba(9,184,62,1)',
   successIcon: <IconFont name="icon-checkbox-circle-line" color="#fff" size={20} />,

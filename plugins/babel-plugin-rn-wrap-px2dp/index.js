@@ -18,6 +18,10 @@ module.exports = function (babel, options) {
   // fs.writeFileSync('./log.txt', '');
   // const appendLog = (val) => fs.appendFileSync('./log.txt', val);
 
+  const wrapPx2dp = (value) => {
+    return t.callExpression(t.identifier('px2dp'), [value]);
+  };
+
   /**
    * @param {import('@babel/core').NodePath} path
    * @returns {void}
@@ -32,7 +36,7 @@ module.exports = function (babel, options) {
           // if already wrapped, then do nothing
           if (t.isCallExpression(value) && value.callee.name === 'px2dp') return;
           if (value.value === 0 || typeof value.value === 'string') return;
-          path.node.value = t.callExpression(t.identifier('px2dp'), [value]);
+          path.node.value = wrapPx2dp(value);
         } else if (path.isReferencedIdentifier()) {
           // check referenced variable
           let bindingPath = path.scope.getBinding(path.node.name)?.path;
@@ -88,8 +92,13 @@ module.exports = function (babel, options) {
         }
       },
       JSXAttribute(path) {
-        if (t.isJSXIdentifier(path.node.name) && path.node.name?.name === 'style') {
-          traverseWrap(path);
+        const nodeName = path.node.name?.name;
+        if (nodeName === 'style') traverseWrap(path);
+        else if (
+          (nodeName === 'width' || nodeName === 'height') &&
+          path.parentPath.node.name?.name === 'Svg'
+        ) {
+          path.node.value.expression = wrapPx2dp(path.node.value.expression);
         }
       },
     },

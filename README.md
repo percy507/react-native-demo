@@ -78,7 +78,7 @@ React Native 的默认尺寸单位是密度无关像素（device-independent pix
 2. 编写babel插件，自动为指定的长度类样式属性的值包裹 `px2dp` 方法，从而适配当前屏幕
 3. babel插件会转换当前项目以及所有第三方库的行内样式以及StyleSheet.create中定义的样式
 
-# babel插件
+# babel插件，插件的局限性等信息请查看插件根目录的 README.md
 ./plugins/babel-plugin-rn-wrap-px2dp/index.js
 
 # 别的样式单位
