@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-ui-lib';
 
-import { AModal, IconFont, ScreenWrapper } from '@/components';
+import { AModal, EnvSwitcher, IconFont, ScreenWrapper } from '@/components';
 import type { BottomTabNav, StackNav } from '@/navigators/routes';
 import { requestLogout } from '@/services/auth';
 import { clearStorage } from '@/stores/user';
@@ -62,6 +62,10 @@ export function Tab3Screen() {
 
         <View style={{ marginTop: 60 }}>
           <LogoutButton />
+        </View>
+
+        <View style={{ marginTop: 60 }}>
+          <EnvSwitcher />
         </View>
       </View>
     </ScreenWrapper>

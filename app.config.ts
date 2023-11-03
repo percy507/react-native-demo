@@ -1,55 +1,67 @@
 import type { ExpoConfig } from 'expo/config';
 
-const debugConfig = {
-  name: 'RN-demo(debug)',
-  identifier: 'com.company.rndemo.debug',
-};
-
-const releaseConfig = {
-  name: 'RN-demo',
-  identifier: 'com.company.rndemo',
-};
+import type { BUILD_ENV_TYPE } from './src/env';
 
 const splashScreenBG = '#2e3c4b';
 
 export default (): ExpoConfig => {
-  const isRelease = process.env.APP_BUILD_MODE?.toLowerCase() === 'release';
+  const buildEnv = (process.env.RN_APP_BUILD_ENV || 'debug') as BUILD_ENV_TYPE;
+  const buildVersion = '1.0.0';
+
+  const getIdentifier = () => {
+    let str = 'com.company.rndemo';
+    if (buildEnv === 'release') return str;
+    return `${str}.${buildEnv}`;
+  };
 
   return {
-    name: isRelease ? releaseConfig.name : debugConfig.name,
+    name: 'RN-demo',
     slug: 'RN-demo',
-    version: '1.0.0',
+    version: buildVersion,
     orientation: 'portrait',
-    icon: './assets/icon.png',
+    icon: './src/assets/app_icon.png',
     userInterfaceStyle: 'light',
     splash: {
-      image: './assets/splash.png',
+      image: './src/assets/app_splash.png',
       resizeMode: 'contain',
       backgroundColor: splashScreenBG,
     },
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: isRelease ? releaseConfig.identifier : debugConfig.identifier,
+      bundleIdentifier: getIdentifier(),
     },
     android: {
+      package: getIdentifier(),
       adaptiveIcon: {
-        foregroundImage: './assets/adaptive-icon.png',
+        foregroundImage: './src/assets/app_adaptive_icon.png',
         backgroundColor: '#ffffff',
       },
-      package: isRelease ? releaseConfig.identifier : debugConfig.identifier,
     },
     androidNavigationBar: {
       backgroundColor: splashScreenBG,
-    },
-    web: {
-      favicon: './assets/favicon.png',
     },
     experiments: {
       tsconfigPaths: true,
     },
     extra: {
-      isRelease,
+      buildEnv,
     },
+    updates: {
+      enabled: true,
+      useClassicUpdates: true,
+    },
+    plugins: [
+      [
+        'app-icon-badge',
+        {
+          enabled: buildEnv !== 'release',
+          badges: [
+            { text: buildEnv, type: 'banner', color: 'white' },
+            { text: buildVersion, type: 'ribbon', color: 'white' },
+          ],
+        },
+      ],
+    ],
   };
 };

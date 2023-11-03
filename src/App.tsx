@@ -9,13 +9,27 @@ import { useCallback, useRef } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications';
 
+import { IconFont } from '@/components';
 import { OrientationLock, useScreenOrientation } from '@/hooks';
 import { RootNavigator } from '@/navigators/root';
-
-import { toastProps } from './config';
+import { colors } from '@/theme/color';
 
 // Keep the splash screen visible while the app is not ready
 SplashScreen.preventAutoHideAsync();
+
+const toastProps: Omit<React.ComponentProps<typeof ToastProvider>, 'children'> = {
+  duration: 1200,
+  animationDuration: 100,
+  animationType: 'slide-in',
+  textStyle: { fontSize: px2dp(13) },
+  normalColor: 'rgba(0,0,0,0.7)',
+  successColor: colors.success,
+  successIcon: <IconFont name="icon-checkbox-circle-line" color="#fff" size={20} />,
+  dangerColor: colors.error,
+  dangerIcon: <IconFont name="icon-close-circle-line" color="#fff" size={20} />,
+  warningColor: colors.warn,
+  warningIcon: <IconFont name="icon-error-warning-line" color="#fff" size={20} />,
+};
 
 export default function App() {
   useScreenOrientation({ initialOrientationLock: OrientationLock.PORTRAIT });

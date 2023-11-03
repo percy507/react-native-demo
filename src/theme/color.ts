@@ -16,4 +16,7 @@ export const indigo = {
 
 export const colors = {
   primary: indigo.indigo6,
+  success: '#52c41a',
+  warn: '#faad14',
+  error: '#ff4d4f',
 };
