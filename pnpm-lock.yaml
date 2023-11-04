@@ -18,10 +18,12 @@ specifiers:
   '@types/react-test-renderer': ^18.0.0
   app-icon-badge: ^0.0.15
   babel-jest: ^29.2.1
+  dayjs: ^1.11.10
   eslint: ^8.19.0
   eslint-plugin-simple-import-sort: ^10.0.0
   expo: ~49.0.13
   expo-dev-client: ~2.4.11
+  expo-file-system: ~15.4.4
   expo-navigation-bar: ~2.3.0
   expo-screen-orientation: ~6.0.5
   expo-splash-screen: ~0.20.5
@@ -34,6 +36,7 @@ specifiers:
   lodash: ^4.17.21
   lottie-react-native: 5.1.6
   metro-react-native-babel-preset: 0.76.8
+  nanoid: ^5.0.2
   prettier: ^2.4.1
   qss: ^3.0.0
   react: 18.2.0
@@ -60,8 +63,10 @@ dependencies:
   '@react-navigation/native-stack': 6.9.16_4nd3vja6qmd3w6mhxrgipxuvim
   '@react-navigation/stack': 6.3.20_db2rcr5dveobtqzos4pucixlgi
   app-icon-badge: 0.0.15
+  dayjs: 1.11.10
   expo: 49.0.16_@babel+core@7.23.2
   expo-dev-client: 2.4.11_expo@49.0.16
+  expo-file-system: 15.4.4_expo@49.0.16
   expo-navigation-bar: 2.3.0_expo@49.0.16
   expo-screen-orientation: 6.0.6_expo@49.0.16
   expo-splash-screen: 0.20.5_g2lrj5lxqjs6ry2potogbinpgy
@@ -70,6 +75,7 @@ dependencies:
   jotai: 2.5.0_o5ysialsahsznabqayk7pree4e
   lodash: 4.17.21
   lottie-react-native: 5.1.6_fzqeangpbcsyef6kkb2ybpmrxe
+  nanoid: 5.0.2
   qss: 3.0.0
   react: 18.2.0
   react-hook-form: 7.47.0_react@18.2.0
@@ -8204,6 +8210,12 @@ packages:
   /nanoid/3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+    dev: false
+
+  /nanoid/5.0.2:
+    resolution: {integrity: sha512-2ustYUX1R2rL/Br5B/FMhi8d5/QzvkJ912rBYxskcpu0myTHzSZfTr1LAS2Sm7jxRUObRrSBFoyzwAhL49aVSg==}
+    engines: {node: ^18 || >=20}
     hasBin: true
     dev: false
 

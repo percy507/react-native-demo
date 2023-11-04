@@ -62,6 +62,10 @@ https://github.com/arnnis/react-native-toast-notifications/
 
 # http请求
 基于 Fetch API 封装
+
+# 工具类库
+https://github.com/iamkun/dayjs/ 日期格式化
+https://github.com/onubo/react-native-logs 记录日志
 ```
 
 ## 代码风格
@@ -91,6 +95,13 @@ https://github.com/alexfoxy/react-native-units
 # 安卓
 https://adbshell.com/
 [Adb useful commands list](https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8)
+
+# 以root用户进入shell
+adb root
+adb shell
+
+# app 私有文件目录，比如mmkv和logs文件就存储在这里
+/data/data/[包名]/files
 ```
 
 ## 待做事项

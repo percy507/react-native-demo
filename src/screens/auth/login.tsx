@@ -9,6 +9,7 @@ import { IconFont, Loader, ScreenWrapper, SMSCode } from '@/components';
 import type { StackNav } from '@/navigators/routes';
 import { requestSMSLogin } from '@/services/auth';
 import { setAuthToken } from '@/stores/user';
+import { colors } from '@/theme/color';
 import { debounce } from '@/utils';
 import { REG_Phone } from '@/utils/regex';
 
@@ -124,14 +125,14 @@ export function LoginScreen() {
         <View style={styles.footer}>
           <Button onPress={onSubmit} disabled={!isValid}>
             {submitting && <Loader size={14} color="#fff" style={{ marginRight: 8 }} />}
-            <Text>登录</Text>
+            <Text color="#fff">登录</Text>
           </Button>
           <View style={styles.agree}>
             <Checkbox
               size={16}
               borderRadius={4}
               style={{ marginRight: 6 }}
-              color="grey"
+              color={colors.primary}
               value={agreed}
               onValueChange={(v) => setAgreed(v)}
             />

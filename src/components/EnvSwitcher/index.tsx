@@ -1,12 +1,22 @@
+import dayjs from 'dayjs';
 import Constants from 'expo-constants';
+import * as FileSystem from 'expo-file-system';
 import * as Updates from 'expo-updates';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native';
 import type { ViewProps } from 'react-native-ui-lib';
-import { Button, RadioButton, RadioGroup, Text, View } from 'react-native-ui-lib';
+import {
+  Button,
+  Checkbox,
+  RadioButton,
+  RadioGroup,
+  Text,
+  View,
+} from 'react-native-ui-lib';
 
 import { getConfig } from '@/config';
 import { getAppEnv, getBuildEnv, setPersistentEnv } from '@/env';
+import { colors } from '@/theme/color';
 
 import { AModal } from '../AModal';
 import { styles } from './style';
@@ -62,7 +72,7 @@ function ViewAppConfig() {
         </Text>
         <ScrollView style={{ maxHeight: 500 }}>
           <TouchableWithoutFeedback>
-            <Text>{JSON.stringify(getConfig(), null, 2)}</Text>
+            <Text style={{ fontSize: 12 }}>{JSON.stringify(getConfig(), null, 2)}</Text>
           </TouchableWithoutFeedback>
         </ScrollView>
       </AModal>
@@ -81,7 +91,9 @@ function ViewExpoConfig() {
         </Text>
         <ScrollView style={{ maxHeight: 500 }}>
           <TouchableWithoutFeedback>
-            <Text>{JSON.stringify(Constants.expoConfig || 'null', null, 2)}</Text>
+            <Text style={{ fontSize: 12 }}>
+              {JSON.stringify(Constants.expoConfig || 'null', null, 2)}
+            </Text>
           </TouchableWithoutFeedback>
         </ScrollView>
       </AModal>
@@ -90,18 +102,56 @@ function ViewExpoConfig() {
   );
 }
 
-// TODO
 function ViewLog() {
   const [visible, setVisible] = useState(false);
+  const [fullLog, setFullLog] = useState('');
+  const [log, setLog] = useState('');
+
+  const [onlyToday, setOnlyToday] = useState(true);
+
+  useEffect(() => {
+    if (!visible) return setFullLog('');
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'main.log')
+      .then((data = '') => setFullLog(data))
+      .catch((err) => setFullLog(`读取日志失败\n${err?.toString()}`));
+  }, [visible]);
+
+  useEffect(() => {
+    if (!fullLog) return setLog('');
+    if (!onlyToday) return setLog(fullLog);
+    setLog(
+      fullLog
+        .split(/\n\[#/)
+        .filter((el) => new RegExp(`^(\\[#)?${dayjs().format('YYYY-MM-DD')}`).test(el))
+        .join('\n[#'),
+    );
+  }, [fullLog, onlyToday]);
+
   return (
     <>
       <AModal visible={visible} setVisible={setVisible}>
-        <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 6, marginTop: -6 }}>
-          查看本地日志
-        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 6,
+            marginTop: -6,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <Text style={{ fontSize: 15, fontWeight: '500' }}>查看本地日志</Text>
+          <Checkbox
+            size={16}
+            borderRadius={4}
+            label="仅展示今天的日志"
+            labelStyle={{ marginLeft: 6, textAlignVertical: 'center' }}
+            color={colors.primary}
+            value={onlyToday}
+            onValueChange={(v) => setOnlyToday(v)}
+          />
+        </View>
         <ScrollView style={{ maxHeight: 500 }}>
           <TouchableWithoutFeedback>
-            <Text>{JSON.stringify(Constants.expoConfig || 'null', null, 2)}</Text>
+            <Text style={{ fontSize: 12 }}>{log}</Text>
           </TouchableWithoutFeedback>
         </ScrollView>
       </AModal>
