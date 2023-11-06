@@ -110,16 +110,22 @@ function ViewLog() {
   useEffect(() => {
     if (!visible) return setLogs([]);
     FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'main.log')
-      .then((data = '') =>
+      .then((data = '') => {
+        if (!data) return;
         setLogs(
           data
             .split(/\n\[#/)
             .reverse()
             .map((el) => (el.startsWith('[#') ? el : `[#${el}`)),
-        ),
-      )
+        );
+      })
       .catch((err) => setLogs(['读取日志失败', err?.toString()]));
   }, [visible]);
+
+  const clearLog = async () => {
+    await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + 'main.log', '');
+    setLogs([]);
+  };
 
   return (
     <>
@@ -136,22 +142,29 @@ function ViewLog() {
           <Checkbox
             size={16}
             borderRadius={4}
-            label="仅展示今天的日志"
+            label="仅今天"
             labelStyle={{ marginLeft: 6, textAlignVertical: 'center' }}
             color={colors.primary}
             value={onlyToday}
             onValueChange={(v) => setOnlyToday(v)}
           />
+          <Button label="清空日志" size="xSmall" onPress={() => clearLog()} />
         </View>
         <ScrollView style={{ maxHeight: 500 }}>
           <TouchableWithoutFeedback>
-            <Text style={{ fontSize: 12 }}>
-              {logs.filter((el) => {
-                return onlyToday
-                  ? new RegExp(`^(\\[#)?${dayjs().format('YYYY-MM-DD')}`).test(el)
-                  : true;
-              })}
-            </Text>
+            {logs.length ? (
+              <Text style={{ fontSize: 12 }}>
+                {logs.filter((el) => {
+                  return onlyToday
+                    ? new RegExp(`^(\\[#)?${dayjs().format('YYYY-MM-DD')}`).test(el)
+                    : true;
+                })}
+              </Text>
+            ) : (
+              <Text style={{ padding: 20, paddingTop: 32, textAlign: 'center' }}>
+                暂无日志
+              </Text>
+            )}
           </TouchableWithoutFeedback>
         </ScrollView>
       </AModal>
