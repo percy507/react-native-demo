@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import Constants from 'expo-constants';
 import * as FileSystem from 'expo-file-system';
-import * as Updates from 'expo-updates';
 import { useEffect, useState } from 'react';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native';
 import type { ViewProps } from 'react-native-ui-lib';
@@ -17,6 +16,7 @@ import {
 import { getConfig } from '@/config';
 import { getAppEnv, getBuildEnv, setPersistentEnv } from '@/env';
 import { colors } from '@/theme/color';
+import { reloadApp } from '@/utils';
 
 import { AModal } from '../AModal';
 import { styles } from './style';
@@ -32,7 +32,7 @@ export function EnvSwitcher(props: EnvSwitcherProps) {
 
   const onEnvChange = async (value: string) => {
     setPersistentEnv(value);
-    await Updates.reloadAsync();
+    await reloadApp();
   };
 
   return (
@@ -104,28 +104,22 @@ function ViewExpoConfig() {
 
 function ViewLog() {
   const [visible, setVisible] = useState(false);
-  const [fullLog, setFullLog] = useState('');
-  const [log, setLog] = useState('');
-
+  const [logs, setLogs] = useState<string[]>([]);
   const [onlyToday, setOnlyToday] = useState(true);
 
   useEffect(() => {
-    if (!visible) return setFullLog('');
+    if (!visible) return setLogs([]);
     FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'main.log')
-      .then((data = '') => setFullLog(data))
-      .catch((err) => setFullLog(`读取日志失败\n${err?.toString()}`));
+      .then((data = '') =>
+        setLogs(
+          data
+            .split(/\n\[#/)
+            .reverse()
+            .map((el) => (el.startsWith('[#') ? el : `[#${el}`)),
+        ),
+      )
+      .catch((err) => setLogs(['读取日志失败', err?.toString()]));
   }, [visible]);
-
-  useEffect(() => {
-    if (!fullLog) return setLog('');
-    if (!onlyToday) return setLog(fullLog);
-    setLog(
-      fullLog
-        .split(/\n\[#/)
-        .filter((el) => new RegExp(`^(\\[#)?${dayjs().format('YYYY-MM-DD')}`).test(el))
-        .join('\n[#'),
-    );
-  }, [fullLog, onlyToday]);
 
   return (
     <>
@@ -151,7 +145,13 @@ function ViewLog() {
         </View>
         <ScrollView style={{ maxHeight: 500 }}>
           <TouchableWithoutFeedback>
-            <Text style={{ fontSize: 12 }}>{log}</Text>
+            <Text style={{ fontSize: 12 }}>
+              {logs.filter((el) => {
+                return onlyToday
+                  ? new RegExp(`^(\\[#)?${dayjs().format('YYYY-MM-DD')}`).test(el)
+                  : true;
+              })}
+            </Text>
           </TouchableWithoutFeedback>
         </ScrollView>
       </AModal>

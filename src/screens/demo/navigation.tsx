@@ -58,6 +58,12 @@ export function DemoNavigationScreen() {
           label="前往lottie页面"
           onPress={() => nav.navigate('demo_lottie')}
         />
+        <Button
+          size="small"
+          label="前往一个不存在的页面"
+          // @ts-ignore
+          onPress={() => nav.navigate('demo_2222')}
+        />
       </View>
     </ScreenWrapper>
   );

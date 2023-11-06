@@ -36,7 +36,6 @@ specifiers:
   lodash: ^4.17.21
   lottie-react-native: 5.1.6
   metro-react-native-babel-preset: 0.76.8
-  nanoid: ^5.0.2
   prettier: ^2.4.1
   qss: ^3.0.0
   react: 18.2.0
@@ -75,7 +74,6 @@ dependencies:
   jotai: 2.5.0_o5ysialsahsznabqayk7pree4e
   lodash: 4.17.21
   lottie-react-native: 5.1.6_fzqeangpbcsyef6kkb2ybpmrxe
-  nanoid: 5.0.2
   qss: 3.0.0
   react: 18.2.0
   react-hook-form: 7.47.0_react@18.2.0
@@ -8210,12 +8208,6 @@ packages:
   /nanoid/3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-    dev: false
-
-  /nanoid/5.0.2:
-    resolution: {integrity: sha512-2ustYUX1R2rL/Br5B/FMhi8d5/QzvkJ912rBYxskcpu0myTHzSZfTr1LAS2Sm7jxRUObRrSBFoyzwAhL49aVSg==}
-    engines: {node: ^18 || >=20}
     hasBin: true
     dev: false
 

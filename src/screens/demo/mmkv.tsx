@@ -8,7 +8,9 @@ export function DemoMMKVScreen() {
   const [json, setJSON] = useMMKV<{ [key: string]: any }>('xx-json');
 
   return (
-    <ScreenWrapper contentStyle={styles.root} navbar={{ title: '键值对存储' }}>
+    <ScreenWrapper
+      contentStyle={styles.root}
+      navbar={{ title: '测试键值对本地持久化（mmkv）' }}>
       <Text style={{ marginBottom: 24 }}>
         mmkv是微信团队开发的高效、轻量、易用的跨平台键值对存储库。{'\n'}
         默认情况下，本地数据以明文存储在各个应用的私有目录下。在安卓系统中，mmkv默认存储位置为

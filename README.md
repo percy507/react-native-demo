@@ -89,6 +89,15 @@ React Native 的默认尺寸单位是密度无关像素（device-independent pix
 https://github.com/alexfoxy/react-native-units
 ```
 
+## 异常捕获
+
+```bash
+组件树中的异常: 用 ErrorBoundary 组件
+普通js的异常: 用 ErrorUtils.setGlobalHandler
+未捕获的Promise错误: 用 global.HermesInternal?.enablePromiseRejectionTracker
+Native异常捕获: ???
+```
+
 ## 调试相关
 
 ```bash

@@ -8,6 +8,7 @@ import { IconFont } from '@/components';
 import { ForgetPasswordScreen } from '@/screens/auth/forget-password';
 import { LoginScreen } from '@/screens/auth/login';
 import { PrivacyPolicyScreen, UserProtocolScreen } from '@/screens/auth/protocols';
+import { DemoExceptionScreen } from '@/screens/demo/exception';
 import { DemoHttpScreen } from '@/screens/demo/http';
 import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
@@ -48,6 +49,7 @@ declare global {
     demo_toast: undefined;
     demo_http: undefined;
     demo_mmkv: undefined;
+    demo_exception: undefined;
   };
 
   namespace ReactNavigation {
@@ -71,6 +73,7 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['demo_toast', DemoToastScreen],
   ['demo_http', DemoHttpScreen],
   ['demo_mmkv', DemoMMKVScreen],
+  ['demo_exception', DemoExceptionScreen],
 ];
 
 export type BottomTabNav = BottomTabNavigationProp<RouteParamList>;

@@ -35,7 +35,7 @@ export function LoginScreen() {
 
   const onSubmit = debounce(
     handleSubmit((data) => {
-      if (!agreed) return Toast.show('请同意用户协议');
+      if (!agreed) return Toast.show('请同意用户协议', { placement: 'center' });
       if (submitting) return;
 
       setSubmitting(true);

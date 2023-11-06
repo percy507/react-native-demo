@@ -9,7 +9,7 @@ import { useCallback, useRef } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications';
 
-import { IconFont } from '@/components';
+import { ErrorBoundary, IconFont } from '@/components';
 import { OrientationLock, useScreenOrientation } from '@/hooks';
 import { RootNavigator } from '@/navigators/root';
 import { colors } from '@/theme/color';
@@ -48,11 +48,13 @@ export default function App() {
 
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
-      <Provider>
-        <ToastProvider {...toastProps}>
-          <RootNavigator />
-        </ToastProvider>
-      </Provider>
+      <ErrorBoundary>
+        <Provider>
+          <ToastProvider {...toastProps}>
+            <RootNavigator />
+          </ToastProvider>
+        </Provider>
+      </ErrorBoundary>
     </SafeAreaProvider>
   );
 }
