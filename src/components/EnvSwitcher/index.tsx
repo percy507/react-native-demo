@@ -112,9 +112,10 @@ function ViewLog() {
     FileSystem.readAsStringAsync(FileSystem.documentDirectory + 'main.log')
       .then((data = '') => {
         if (!data) return;
+
         setLogs(
           data
-            .split(/\n\[#/)
+            .split(/(^|\n)\[#/)
             .reverse()
             .map((el) => (el.startsWith('[#') ? el : `[#${el}`)),
         );

@@ -1,3 +1,11 @@
+function stackFilter(stack?: string | null, num = 10) {
+  if (!stack) return undefined;
+  return stack
+    .split('\n')
+    .filter((_, index) => index < num)
+    .map((el) => el.trim());
+}
+
 export function reactRenderErrorHandler(
   id: string,
   err: Error,
@@ -9,8 +17,8 @@ export function reactRenderErrorHandler(
     msg: err.message, // 这里的key不能设置为 `message`, 否则log不会记录整个对象
     filename: (err as any).sourceURL,
     position: ((err as any).line || 0) + ':' + ((err as any).column || 0),
-    stack: err.stack?.split('\n'),
-    componentStack: errInfo.componentStack?.split('\n'),
+    stack: stackFilter(err.stack),
+    componentStack: stackFilter(errInfo.componentStack, 100),
   };
   log.error(obj);
 }
@@ -18,16 +26,16 @@ export function reactRenderErrorHandler(
 const defaultHandler = ErrorUtils.getGlobalHandler?.();
 
 export function errorHandler() {
-  ErrorUtils.setGlobalHandler((error: Error, isFatal?: boolean) => {
+  ErrorUtils.setGlobalHandler((err: Error, isFatal?: boolean) => {
     let obj = {
       type: 'jsError',
       isFatal,
-      errorName: error.name,
-      msg: error.message,
-      stack: error.stack,
+      errorName: err.name,
+      msg: err.message,
+      stack: stackFilter(err.stack),
     };
     log.error(obj);
-    defaultHandler?.(error, isFatal);
+    defaultHandler?.(err, isFatal);
   });
 }
 
@@ -42,12 +50,12 @@ export function unhandledrejectionHandler() {
 
     const options = {
       allRejections: true,
-      onUnhandled: (id: string, error: Error) => {
+      onUnhandled: (id: string, err: Error) => {
         let obj = {
           type: 'promiseError',
-          errorName: error.name,
-          msg: error.message,
-          stack: error.stack,
+          errorName: err.name,
+          msg: err.message,
+          stack: stackFilter(err.stack),
         };
         log.error(obj);
       },
