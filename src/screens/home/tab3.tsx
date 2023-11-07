@@ -4,9 +4,9 @@ import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-ui-lib';
 
 import { AModal, EnvSwitcher, IconFont, ScreenWrapper } from '@/components';
+import { storage } from '@/hooks';
 import type { BottomTabNav, StackNav } from '@/navigators/routes';
 import { requestLogout } from '@/services/auth';
-import { clearStorage } from '@/stores/user';
 
 import { PageInfo } from '../part';
 
@@ -84,7 +84,7 @@ function LogoutButton() {
   const logout = () => {
     setVisible(false);
     requestLogout();
-    clearStorage();
+    storage.clearAll();
     setTimeout(() => {
       // 退出登录时，需要清除历史路由栈，否则在登录页，利用手势返回时，可以返回到上一页
       nav.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'login' }] }));
