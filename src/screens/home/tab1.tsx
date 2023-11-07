@@ -21,6 +21,7 @@ export function Tab1Screen() {
     ['测试 http', 'demo_http'],
     ['测试键值对数据本地存储(mmkv)', 'demo_mmkv'],
     ['测试异常捕获', 'demo_exception'],
+    ['测试打开外部链接', 'demo_open_external'],
   ];
 
   return (

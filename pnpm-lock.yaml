@@ -24,6 +24,7 @@ specifiers:
   expo: ~49.0.13
   expo-dev-client: ~2.4.11
   expo-file-system: ~15.4.4
+  expo-linking: ~5.0.2
   expo-navigation-bar: ~2.3.0
   expo-screen-orientation: ~6.0.5
   expo-splash-screen: ~0.20.5
@@ -66,6 +67,7 @@ dependencies:
   expo: 49.0.16_@babel+core@7.23.2
   expo-dev-client: 2.4.11_expo@49.0.16
   expo-file-system: 15.4.4_expo@49.0.16
+  expo-linking: 5.0.2_expo@49.0.16
   expo-navigation-bar: 2.3.0_expo@49.0.16
   expo-screen-orientation: 6.0.6_expo@49.0.16
   expo-splash-screen: 0.20.5_g2lrj5lxqjs6ry2potogbinpgy
@@ -3275,6 +3277,10 @@ packages:
   /@types/prop-types/15.7.9:
     resolution: {integrity: sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==}
 
+  /@types/qs/6.9.9:
+    resolution: {integrity: sha512-wYLxw35euwqGvTDx6zfY1vokBFnsK0HNrzc6xNHchxfO2hpuRg74GbkEW7e3sSmPvj0TjCDT1VCa6OtHXnubsg==}
+    dev: false
+
   /@types/react-test-renderer/18.0.5:
     resolution: {integrity: sha512-PsnmF4Hpi61PTRX+dTxkjgDdtZ09kFFgPXczoF+yBfOVxn7xBLPvKP1BUrSasYHmerj33rhoJuvpIMsJuyRqHw==}
     dependencies:
@@ -5545,6 +5551,19 @@ packages:
       expo: '*'
     dependencies:
       expo: 49.0.16_@babel+core@7.23.2
+    dev: false
+
+  /expo-linking/5.0.2_expo@49.0.16:
+    resolution: {integrity: sha512-SPQus0+tYGx9c69Uw4wmdo3rkKX8vRT1vyJz/mvkpSlZN986s0NmP/V0M5vDv5Zv2qZzVdqJyuITFe0Pg5aI+A==}
+    dependencies:
+      '@types/qs': 6.9.9
+      expo-constants: 14.4.2_expo@49.0.16
+      invariant: 2.2.4
+      qs: 6.11.0
+      url-parse: 1.5.10
+    transitivePeerDependencies:
+      - expo
+      - supports-color
     dev: false
 
   /expo-manifests/0.7.2:

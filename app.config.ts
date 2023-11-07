@@ -52,6 +52,7 @@ export default (): ExpoConfig => {
       useClassicUpdates: true,
     },
     plugins: [
+      ['./plugins/expo-withAndroidQueries.js'],
       [
         'app-icon-badge',
         {

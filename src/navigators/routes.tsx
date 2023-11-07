@@ -15,6 +15,7 @@ import { DemoLottieScreen } from '@/screens/demo/lottie';
 import { DemoMMKVScreen } from '@/screens/demo/mmkv';
 import { DemoNavbarScreen } from '@/screens/demo/navbar';
 import { DemoNavigationScreen } from '@/screens/demo/navigation';
+import { DemoOpenExternalScreen } from '@/screens/demo/open_external';
 import { DemoScreenAdaptation } from '@/screens/demo/screen_adaptation';
 import { DemoToastScreen } from '@/screens/demo/toast';
 import {
@@ -50,6 +51,7 @@ declare global {
     demo_http: undefined;
     demo_mmkv: undefined;
     demo_exception: undefined;
+    demo_open_external: undefined;
   };
 
   namespace ReactNavigation {
@@ -74,6 +76,7 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['demo_http', DemoHttpScreen],
   ['demo_mmkv', DemoMMKVScreen],
   ['demo_exception', DemoExceptionScreen],
+  ['demo_open_external', DemoOpenExternalScreen],
 ];
 
 export type BottomTabNav = BottomTabNavigationProp<RouteParamList>;
