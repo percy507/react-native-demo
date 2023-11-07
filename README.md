@@ -1,5 +1,26 @@
 # react-native-demo
 
+## 环境配置
+
+### ios 相关
+
+```bash
+# 安装ruby版本管理工具
+brew install rbenv
+
+# 安装ruby
+rbenv install 3.2.2
+
+# 修改终端配置文件 .zshrc 或 .bashrc，优先使用rbenv的ruby，而不是系统的ruby
+export PATH="$HOME/.rbenv/shims:$PATH"
+
+# gem使用国内源
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+
+# 安装ios相关依赖 (一般不需要手动安装，在构建开发版app时，脚本中会自动安装)
+pnpm install-ios-deps
+```
+
 ## 注意事项
 
 - 每次安装涉及原生代码的新依赖后，都需要重新构建开发版，否则应用会有报错并且无法正常打开

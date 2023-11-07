@@ -13,11 +13,13 @@ else
   echo "build_version is not valid"
 fi
 
-# export as env
+# export as env, 这个环境变量在 expo 配置文件中用 (app.config.ts)
 export RN_APP_BUILD_ENV=$build_env
 
-# To generate all the Android and IOS files
-npx expo prebuild --clean
+# 使用 expo prebuild 命令自动生成 android 和 ios 目录，项目依赖由用户安装
+npx expo prebuild --clean --no-install --platform $platform
+
+pnpm install
 
 if [[ $platform == "ios" ]]; then
   pnpm install-ios-deps

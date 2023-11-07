@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://gems.ruby-china.com/
   specs:
     CFPropertyList (3.0.6)
       rexml
@@ -89,8 +89,8 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
-  activesupport (~> 7.0, <= 7.0.8)
-  cocoapods (~> 1.12)
+  activesupport (>= 6.1.7.3, < 7.1.0)
+  cocoapods (~> 1.13)
 
 RUBY VERSION
    ruby 3.2.2p53
