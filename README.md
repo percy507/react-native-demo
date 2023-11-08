@@ -1,20 +1,46 @@
 # react-native-demo
 
-## 注意事项
+## 介绍
 
-- 每次安装涉及原生代码的新依赖后，都需要重新构建开发版，否则应用会有报错并且无法正常打开
-- 尽量不要手动修改原生代码，可尝试通过 expo 的 SDK 或编写 expo 插件实现
-- 本脚手架不提交 android 和 ios 目录至远程仓库，因为这两个目录由 expo prebuild 时自动生成，即原生代码由 expo 控制生成。
-- 如果因为某些特殊需求，必须要手动修改原生代码，则 android 和 ios 目录需要提交至远程仓库，且需要去掉构建时 `expo prebuild` 命令的 `--clean` 参数
-- 之所以为`expo prebuild` 命令加 `--clean` 参数，是因为修改 expo 配置文件后，缓存可能会导致 build 的应用还是用的旧的 expo 配置（玄学）
+该 react-native 脚手架集成了 expo、pnpm、typescript、eslint 等工具，有多种常用功能的测试性页面。
 
-## 代码风格
+```bash
+# 使用 expo 的优势
+- 安装兼容 expo 的第三方库时，如果涉及修改原生代码，expo 会自动帮我们处理
+- 使用 `npx expo install` 安装依赖时，会自动根据当前项目情况，选择最佳的依赖版本
+```
 
-- 不要写大量的行内样式，如果样式很多，抽离至 StyleSheet，保持代码的可读性
+## 开始使用
 
-## 环境配置
+### 环境配置
 
-### ios 相关
+```bash
+brew install watchman   # for watching changes in the filesystem
+```
+
+#### android 相关
+
+```bash
+# install the JDK(Java Development Kit)
+brew tap homebrew/cask-versions
+brew install zulu11
+
+# install Android Studio，并安装文档里相关的android sdk及其tools
+# https://reactnative.dev/docs/environment-setup?package-manager=npm&guide=native&platform=android
+brew install android-studio
+
+# 设置环境变量
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH" # prefer to use ruby which installed by brew
+export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+```
+
+#### ios 相关
 
 ```bash
 # 安装ruby版本管理工具
@@ -32,6 +58,46 @@ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 # 安装ios相关依赖 (一般不需要手动安装，在构建开发版app时，脚本中会自动安装)
 pnpm install-ios-deps
 ```
+
+### 相关命令
+
+```bash
+git clone <repo>
+
+# 安装依赖
+pnpm i
+
+# 构建开发版
+pnpm build:android:debug
+pnpm build:ios:debug
+
+# 启动本地服务
+pnpm start
+
+# 构建测试版
+pnpm build:android:staging
+pnpm build:ios:staging
+
+# 构建生产版
+pnpm build:android:release
+pnpm build:ios:release
+
+# 更新 iconfont
+# 修改 iconfont.json 里的 symbol_url 为最新的 url，然后执行下面的目录
+pnpm buildIconFont
+```
+
+### 注意事项
+
+- 每次安装涉及原生代码的新依赖后，都需要重新构建开发版，否则应用会有报错并且无法正常打开
+- 尽量不要手动修改原生代码，可尝试通过 expo 的 SDK 或编写 expo 插件实现
+- 本脚手架不提交 android 和 ios 目录至远程仓库，因为这两个目录由 expo prebuild 时自动生成，即原生代码由 expo 控制生成。
+- 如果因为某些特殊需求，必须要手动修改原生代码，则 android 和 ios 目录需要提交至远程仓库，且需要去掉构建时 `expo prebuild` 命令的 `--clean` 参数
+- 之所以为`expo prebuild` 命令加 `--clean` 参数，是因为修改 expo 配置文件后，缓存可能会导致 build 的应用还是用的旧的 expo 配置（玄学 🫣）
+
+## 代码风格
+
+- 不要写大量的行内样式，如果样式很多，抽离至 StyleSheet，保持代码的可读性
 
 ## 目录结构
 
@@ -64,31 +130,31 @@ src
 └── global.tsx                # 定义全局的变量 (比如用于屏幕适配的 px2dp 函数、用于日志记录的 log 函数等)
 ```
 
-## 库选型
+## 常见功能的相关方案
+
+### 库选型
 
 ```bash
 # 组件库
-https://github.com/wix/react-native-ui-lib (选用：组件种类多)
-https://github.com/tamagui/tamagui (弃用：启动demo，感觉有点卡，动画效果过多了，组件偏少)
-https://github.com/ant-design/ant-design-mobile-rn (弃用：2018年，仓库转为个人维护，更新较少)
+https://github.com/wix/react-native-ui-lib (选用: 组件种类多)
+https://github.com/tamagui/tamagui (弃用: 启动demo，感觉有点卡，动画效果过多了，组件偏少)
+https://github.com/ant-design/ant-design-mobile-rn (弃用: 2018年，仓库转为个人维护，更新较少)
+https://github.com/callstack/react-native-paper
 
 # 表单管理
 https://github.com/react-hook-form/react-hook-form
 
-# 状态管理
-# jotai，简单易用
+# 状态管理: jotai，简单易用
 https://github.com/pmndrs/jotai
 
-# 路由管理
-# 暂时使用 react-navigation, 以后可以试试 expo router
-# https://docs.expo.dev/routing/introduction/
+# 路由管理: 使用 react-navigation, 以后可以试试 [expo router](https://docs.expo.dev/routing/introduction/)
 https://github.com/react-navigation/react-navigation
 
 # 键值对数据本地持久化
 # 比RN官方的AsyncStorage更快，更安全（官方目前已弃用AsyncStorage）
 https://github.com/mrousavy/react-native-mmkv
 
-# 使用iconfont
+# 使用 iconfont
 https://github.com/iconfont-cli/react-native-iconfont-cli
 
 # webview
@@ -110,7 +176,21 @@ https://github.com/iamkun/dayjs/ 日期格式化
 https://github.com/onubo/react-native-logs 记录日志
 ```
 
-## 屏幕适配
+### 其他第三方库
+
+```bash
+# 社区库搜索
+https://reactnative.directory/
+
+# swipe left and right through pages of data
+https://github.com/callstack/react-native-pager-view
+
+https://github.com/wuba/react-native-echarts
+
+https://github.com/gorhom/react-native-bottom-sheet
+```
+
+### 屏幕适配
 
 React Native 的默认尺寸单位是密度无关像素（device-independent pixels，简称 dp）。这个单位类似于 Android 中的 dp 或 iOS 中的 points。它是一个相对单位，是基于设备的像素密度来计算的，可以在不同的屏幕上保持一致的视觉外观。
 
@@ -127,7 +207,7 @@ React Native 的默认尺寸单位是密度无关像素（device-independent pix
 https://github.com/alexfoxy/react-native-units
 ```
 
-## 异常捕获
+### 异常捕获
 
 ```bash
 # 以下的逻辑统一封装在了 src/components/ErrorBoundary 组件中
@@ -139,6 +219,8 @@ Native异常捕获: ???
 
 ## 调试相关
 
+### 安卓
+
 ```bash
 # 安卓
 https://adbshell.com/
@@ -148,8 +230,15 @@ https://adbshell.com/
 adb root
 adb shell
 
+# 列出当前连接的设备
+adb devices
+
 # app 私有文件目录，比如mmkv和logs文件就存储在这里
 /data/data/[包名]/files
+
+# 改变安卓模拟器的屏幕尺寸
+mac: 按住 command + 上/下箭头 进行改变
+windows: 按住 ctrl + 上/下箭头 进行改变
 ```
 
 ## 待做事项
@@ -158,4 +247,43 @@ adb shell
 # 思考如何设置基础主题(先这样凑乎吧，开发多了再优化)
 https://github.com/efstathiosntonas/react-native-style-libraries-benchmark
 https://github.com/jpudysz/react-native-unistyles
+```
+
+## 乱七八糟的资料
+
+```bash
+# ios上架
+https://www.v2ex.com/t/344112
+[iOS 使用fastlane实现自动化打包](https://juejin.cn/post/7009172244253540383)
+
+# Android系统文件目录结构
+https://www.jianshu.com/p/05c0691f4d73
+https://www.cnblogs.com/pixy/p/4744501.html
+https://blog.smallraw.com/archives/276/
+
+# iOS文件系统目录结构
+https://kanchuan.com/blog/127-ios-filesystem
+
+# CocoaPods
+CocoaPods的本地缓存目录是 ~/Library/Caches/CocoaPods/
+
+# Putting the Expo vs React Native debate to rest
+https://retool.com/blog/expo-cli-vs-react-native-cli/
+
+# 没 2 年 React Native 开发经验，你都遇不到这些坑
+https://supercodepower.com/react-native-tweet
+https://supercodepower.com/docs/react-native-upgrade/index
+
+# React Native APIs turned into React Hooks for use in functional React components Resources
+https://github.com/react-native-community/hooks
+
+# List of Android Actions
+https://gist.github.com/zr0n/dfa1afadf7e785e25d53fc2af7c4eee2
+
+# 版本管理工具及 Ruby 工具链环境
+https://www.desgard.com/2020/06/11/cocoapods-story-1.html
+
+# 拆包?
+[Metro拆包工作原理与实战](https://segmentfault.com/a/1190000041944570)
+[React Native 拆包原理和实践](https://cloud.tencent.com/developer/article/1782216)
 ```
