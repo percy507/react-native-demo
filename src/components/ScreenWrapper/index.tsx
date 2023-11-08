@@ -1,11 +1,10 @@
-import LottieView from 'lottie-react-native';
 import React from 'react';
 import type { ScrollViewProps, ViewProps, ViewStyle } from 'react-native';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Text } from 'react-native-ui-lib';
 
-import loadingAnimation from '@/assets/lottie/bounce-fruit.json';
-
+import { Loader } from '../Loader';
 import type { NavBarProps } from './NavBar';
 import { NavBar } from './NavBar';
 
@@ -13,11 +12,21 @@ export interface ScreenWrapperProps extends Omit<ViewProps, 'style'> {
   navbar?: NavBarProps;
   contentStyle?: ViewStyle;
   loading?: boolean;
+  /** @defaultValue `加载中...` */
+  loadingText?: string;
   refreshControl?: ScrollViewProps['refreshControl'];
 }
 
 export function ScreenWrapper(props: ScreenWrapperProps) {
-  const { navbar, contentStyle, loading, refreshControl, children, ...restProps } = props;
+  const {
+    navbar,
+    contentStyle,
+    loading,
+    loadingText = '加载中...',
+    refreshControl,
+    children,
+    ...restProps
+  } = props;
   const insets = useSafeAreaInsets();
 
   const rootPadding = {
@@ -36,12 +45,8 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
           refreshControl={refreshControl}
           pointerEvents={loading ? 'none' : 'auto'}>
           <View style={[styles.loader, loading ? styles.loading : null]}>
-            <LottieView
-              style={styles.loadingLottie}
-              autoPlay
-              loop
-              source={loadingAnimation}
-            />
+            <Loader color="#fff" size={44} />
+            <Text style={styles.loaderText}>{loadingText}</Text>
           </View>
           {children}
         </ScrollView>
@@ -53,7 +58,7 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: 'rgba(255,255,255,1)' },
   loader: {
-    paddingTop: 30,
+    paddingTop: 200,
     alignItems: 'center',
     position: 'absolute',
     top: 0,
@@ -61,10 +66,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 2,
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: 'rgba(0,0,0,0.6)',
     display: 'none',
   },
   loading: { display: 'flex' },
-  loadingLottie: { height: 60 },
+  loaderText: { color: '#fff', marginTop: 10 },
   content: { flexGrow: 1, width: '100%' },
 });

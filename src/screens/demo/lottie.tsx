@@ -22,6 +22,10 @@ export function DemoLottieScreen() {
       <View style={styles.single}>
         <LottieView ref={lottieRef} source={require('@/assets/lottie/welcome.json')} />
       </View>
+
+      <View style={styles.single}>
+        <LottieView autoPlay source={require('@/assets/lottie/bounce-fruit.json')} />
+      </View>
     </ScreenWrapper>
   );
 }

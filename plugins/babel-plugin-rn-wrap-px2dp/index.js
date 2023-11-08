@@ -1,8 +1,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
-const properties = require('./properties');
 // const fs = require('fs');
+const properties = require('./properties');
 
 /**
  * A Babel plugin that auto add `px2dp` for specific style attributes. It only handle the styles
@@ -33,9 +33,21 @@ module.exports = function (babel, options) {
 
         if (t.isProperty(path.node) && properties.includes(path.node.key.name)) {
           const value = path.node.value;
-          // if already wrapped, then do nothing
+
           if (t.isCallExpression(value) && value.callee.name === 'px2dp') return;
-          if (value.value === 0 || typeof value.value === 'string') return;
+          if (value.value === 0) return;
+          if (typeof value.value === 'string') return;
+          if (value.type === 'ObjectExpression') return;
+          if (value.type === 'Identifier' && value.name === 'undefined') return;
+
+          // 不知道为什么？开发环境下，这里的样式被 px2dp 包裹后，在ios上会报错: px2dp is undefined
+          // 所以不包裹这里的样式
+          // https://github.com/facebook/react-native/blob/v0.72.6/packages/react-native/Libraries/Components/UnimplementedViews/UnimplementedView.js#L36
+          const gp = path.parentPath.parentPath;
+          if (gp && gp.isConditionalExpression() && gp.node.test?.name === '__DEV__') {
+            return;
+          }
+
           path.node.value = wrapPx2dp(value);
         } else if (path.isReferencedIdentifier()) {
           // check referenced variable

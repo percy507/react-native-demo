@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  titleText: { fontSize: 18, fontWeight: '500' },
+  titleText: { fontSize: 15, fontWeight: '400' },
   leftNode: { minWidth: 40, paddingLeft: 10 },
   rightNode: { minWidth: 40, paddingRight: 12, alignItems: 'flex-end' },
 });
