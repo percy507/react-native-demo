@@ -1,5 +1,17 @@
 # react-native-demo
 
+## 注意事项
+
+- 每次安装涉及原生代码的新依赖后，都需要重新构建开发版，否则应用会有报错并且无法正常打开
+- 尽量不要手动修改原生代码，可尝试通过 expo 的 SDK 或编写 expo 插件实现
+- 本脚手架不提交 android 和 ios 目录至远程仓库，因为这两个目录由 expo prebuild 时自动生成，即原生代码由 expo 控制生成。
+- 如果因为某些特殊需求，必须要手动修改原生代码，则 android 和 ios 目录需要提交至远程仓库，且需要去掉构建时 `expo prebuild` 命令的 `--clean` 参数
+- 之所以为`expo prebuild` 命令加 `--clean` 参数，是因为修改 expo 配置文件后，缓存可能会导致 build 的应用还是用的旧的 expo 配置（玄学）
+
+## 代码风格
+
+- 不要写大量的行内样式，如果样式很多，抽离至 StyleSheet，保持代码的可读性
+
 ## 环境配置
 
 ### ios 相关
@@ -21,29 +33,35 @@ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 pnpm install-ios-deps
 ```
 
-## 注意事项
-
-- 每次安装涉及原生代码的新依赖后，都需要重新构建开发版，否则应用会有报错并且无法正常打开
-- 尽量不要手动修改原生代码，可尝试通过 expo 的 SDK 或编写 expo 插件实现
-- 本脚手架不提交 android 和 ios 目录至远程仓库，因为这两个目录由 expo prebuild 时自动生成，即原生代码由 expo 控制生成。
-- 如果因为某些特殊需求，必须要手动修改原生代码，则 android 和 ios 目录需要提交至远程仓库，且需要去掉构建时 `expo prebuild` 命令的 `--clean` 参数
-- 之所以为`expo prebuild` 命令加 `--clean` 参数，是因为修改 expo 配置文件后，缓存可能会导致 build 的应用还是用的旧的 expo 配置（玄学）
-
 ## 目录结构
 
 ```bash
 src
-├── App.tsx                   # App root
-├── components                # 自定义组件
+├── assets                    # 本地静态资源
+├── components                # 业务通用组件
+│   ├── EnvSwitcher             # 切换后端环境组件，也可查看appConfig、expoConfig、本地日志等。（主要用于调试）
+│   ├── ErrorBoundary           # 异常处理组件，里面封装了处理前端异常的逻辑
+│   ├── IconFont                # 基于iconfont的图标组件，由react-native-iconfont-cli自动生成
+│   ├── ScreenWrapper           # 页面通用根容器，它封装了自定义的navbar
+│   └── ...
 ├── hooks                     # 自定义hooks
 ├── i18n                      # 国际化、多语言
-├── navigators                # react-navigation navigators, 类似web的layout
+├── navigators                # react-navigation navigators, 路由导航
+│   ├── bottom-tab.tsx          # 主页面底部tab菜单 (createBottomTabNavigator)
+│   ├── root.tsx                # 根路由导航 (createStackNavigator)
+│   └── routes.tsx              # 定义全局的路由配置信息 (路由名称与入参映射类型、路由名称与screen映射，底部tab菜单配置)
 ├── screens                   # react-navigation screens, 类似web的pages
 ├── services                  # api服务
 ├── stores                    # 全局状态
-│   └── user.ts
-├── theme                     # base styles for the application
-└── utils
+│   └── user.ts                 # 存储用户信息，以及设置或获取api token
+├── theme                     # 基础主题样式
+├── utils                     # 工具函数
+│   ├── env.tsx                 # 主要是定义 getBuildEnv 和 getAppEnv 的逻辑
+│   ├── request.ts              # 基于 fetch api 封装的 http 请求函数
+│   └── ...
+├── App.tsx                   # App 入口
+├── config.tsx                # 定义各个环境的配置信息 (比如 api 地址)
+└── global.tsx                # 定义全局的变量 (比如用于屏幕适配的 px2dp 函数、用于日志记录的 log 函数等)
 ```
 
 ## 库选型
@@ -92,10 +110,6 @@ https://github.com/iamkun/dayjs/ 日期格式化
 https://github.com/onubo/react-native-logs 记录日志
 ```
 
-## 代码风格
-
-- 不要写大量的行内样式，如果样式很多，抽离至 StyleSheet，保持代码的可读性
-
 ## 屏幕适配
 
 React Native 的默认尺寸单位是密度无关像素（device-independent pixels，简称 dp）。这个单位类似于 Android 中的 dp 或 iOS 中的 points。它是一个相对单位，是基于设备的像素密度来计算的，可以在不同的屏幕上保持一致的视觉外观。
@@ -116,6 +130,7 @@ https://github.com/alexfoxy/react-native-units
 ## 异常捕获
 
 ```bash
+# 以下的逻辑统一封装在了 src/components/ErrorBoundary 组件中
 组件树中的异常: 用 ErrorBoundary 组件
 普通js的异常: 用 ErrorUtils.setGlobalHandler
 未捕获的Promise错误: 用 global.HermesInternal?.enablePromiseRejectionTracker

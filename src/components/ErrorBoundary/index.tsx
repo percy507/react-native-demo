@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Text, View } from 'react-native-ui-lib';
 
-import { getBuildEnv } from '@/env';
 import { reloadApp } from '@/utils';
+import { getBuildEnv } from '@/utils/env';
 import { generateErrId } from '@/utils/id';
 
 import {

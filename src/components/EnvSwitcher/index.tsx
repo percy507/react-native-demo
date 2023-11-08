@@ -14,9 +14,9 @@ import {
 } from 'react-native-ui-lib';
 
 import { getConfig } from '@/config';
-import { getAppEnv, getBuildEnv, setPersistentEnv } from '@/env';
 import { colors } from '@/theme/color';
 import { reloadApp } from '@/utils';
+import { getAppEnv, getBuildEnv, setPersistentEnv } from '@/utils/env';
 
 import { AModal } from '../AModal';
 import { styles } from './style';

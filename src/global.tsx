@@ -5,7 +5,7 @@ import * as FileSystem from 'expo-file-system';
 import { Dimensions } from 'react-native';
 import { consoleTransport, fileAsyncTransport, logger } from 'react-native-logs';
 
-import { getBuildEnv } from './env';
+import { getBuildEnv } from '@/utils/env';
 
 type LogType = 'debug' | 'info' | 'warn' | 'error';
 

@@ -1,4 +1,11 @@
-import { getAppEnv } from './env';
+import { getAppEnv } from '@/utils/env';
+
+const commonConfig = {
+  urls: {
+    userProtocol: 'https://pro.meitu.com/xiuxiu/agreements/common/service.html?lang=zh',
+    privacyPolicy: 'https://pro.meitu.com/xiuxiu/agreements/common/policy.html?lang=zh',
+  },
+};
 
 export const getConfig = () => {
   const APP_ENV = getAppEnv();
@@ -18,11 +25,5 @@ export const getConfig = () => {
     },
   }[APP_ENV];
 
-  return {
-    ...config,
-    urls: {
-      userProtocol: 'https://pro.meitu.com/xiuxiu/agreements/common/service.html?lang=zh',
-      privacyPolicy: 'https://pro.meitu.com/xiuxiu/agreements/common/policy.html?lang=zh',
-    },
-  };
+  return { ...config, ...commonConfig };
 };

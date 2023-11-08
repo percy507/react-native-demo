@@ -13,13 +13,14 @@ export const getPersistentEnv = () => {
 export const setPersistentEnv = (env: string) => envStorage.set('app_env', env);
 
 /**
+ * app的构建环境
  * - `debug`: debug build (development build), 本地开发用，不支持页面中切换后端环境，如需切换后端环境，自行改代码
  * - `staging`: release build, 测试专用（产品走查、测试走查、演示），支持在页面中切换所有后端环境，默认为测试环境
  * - `release`: release build, 生产环境，不支持在页面中切换后端环境
  */
 export type BUILD_ENV_TYPE = 'debug' | 'staging' | 'release';
 
-/** 不同于 BUILD_ENV_TYPE, APP_ENV_TYPE 主要是区分app各个后端环境 */
+/** app的后端环境。不同于 BUILD_ENV_TYPE */
 export type APP_ENV_TYPE = 'local' | 'dev' | 'test' | 'prod';
 
 const buildEnvMap = {
@@ -28,10 +29,12 @@ const buildEnvMap = {
   release: 'prod',
 } as const;
 
+/** 获取app的构建环境 */
 export const getBuildEnv = () => {
   return Constants.expoConfig?.extra?.buildEnv as BUILD_ENV_TYPE;
 };
 
+/** 获取app的后端环境 */
 export const getAppEnv = () => {
   const buildEnv = getBuildEnv();
   if (buildEnv === 'staging') return getPersistentEnv() || buildEnvMap.staging;

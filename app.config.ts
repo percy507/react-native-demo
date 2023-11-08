@@ -1,6 +1,6 @@
 import type { ExpoConfig } from 'expo/config';
 
-import type { BUILD_ENV_TYPE } from './src/env';
+import type { BUILD_ENV_TYPE } from './src/utils/env';
 
 const splashScreenBG = '#2e3c4b';
 
