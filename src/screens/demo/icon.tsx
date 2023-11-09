@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { IconFont, ScreenWrapper } from '@/components';
+import { IconFont, ScreenWrapper, Text, View } from '@/components';
 
 export function DemoIconScreen() {
   return (

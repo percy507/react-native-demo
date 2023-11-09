@@ -1,15 +1,13 @@
-import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
+import { Button, ScreenWrapper, Text, View } from '@/components';
 import type { StackNav } from '@/navigators/routes';
-
-import { PageInfo } from '../part';
 
 export function DemoNavigationScreen() {
   // const nav = useNavigation();
   const nav = useNavigation<StackNav>();
+  const route = useRoute();
 
   return (
     <ScreenWrapper
@@ -20,7 +18,9 @@ export function DemoNavigationScreen() {
           <Button size="small" label="Info" onPress={() => alert('This is a button!')} />
         ),
       }}>
-      <PageInfo title="DemoNavigationScreen" />
+      <View style={{ marginBottom: 24 }}>
+        <Text>route_params: {JSON.stringify(route.params)}</Text>
+      </View>
 
       <View style={styles.list}>
         <Button size="small" label="nav.goBack()" onPress={() => nav.goBack()} />

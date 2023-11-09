@@ -3,9 +3,17 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
 import { Toast } from 'react-native-toast-notifications';
-import { Button, Checkbox, Text, TextField, View } from 'react-native-ui-lib';
+import { Checkbox, TextField } from 'react-native-ui-lib';
 
-import { IconFont, Loader, ScreenWrapper, SMSCode } from '@/components';
+import {
+  Button,
+  IconFont,
+  Loader,
+  ScreenWrapper,
+  SMSCode,
+  Text,
+  View,
+} from '@/components';
 import type { StackNav } from '@/navigators/routes';
 import { requestSMSLogin } from '@/services/auth';
 import { setAuthToken } from '@/stores/user';
@@ -72,9 +80,7 @@ export function LoginScreen() {
               maxLength={11}
               keyboardType="number-pad"
               bottomAccessory={
-                <Text text14 red20>
-                  {(errors.phone?.message as string) || ''}
-                </Text>
+                <Text type="form_error">{(errors.phone?.message as string) || ''}</Text>
               }
               leadingAccessory={
                 <IconFont
@@ -105,9 +111,7 @@ export function LoginScreen() {
               maxLength={6}
               keyboardType="number-pad"
               bottomAccessory={
-                <Text text14 red20>
-                  {(errors.code?.message as string) || ''}
-                </Text>
+                <Text type="form_error">{(errors.code?.message as string) || ''}</Text>
               }
               leadingAccessory={
                 <IconFont
@@ -125,7 +129,7 @@ export function LoginScreen() {
         <View style={styles.footer}>
           <Button onPress={onSubmit} disabled={!isValid}>
             {submitting && <Loader size={14} color="#fff" style={{ marginRight: 8 }} />}
-            <Text color="#fff">登录</Text>
+            <Text style={{ color: '#fff' }}>登录</Text>
           </Button>
           <View style={styles.agree}>
             <Checkbox
@@ -136,7 +140,7 @@ export function LoginScreen() {
               value={agreed}
               onValueChange={(v) => setAgreed(v)}
             />
-            <Text text12 onPress={() => setAgreed((v) => !v)}>
+            <Text style={{ fontSize: 12 }} onPress={() => setAgreed((v) => !v)}>
               已阅读并同意
             </Text>
             <Button
@@ -145,7 +149,7 @@ export function LoginScreen() {
               label="《用户协议》"
               onPress={() => nav.navigate('user_protocol')}
             />
-            <Text text12>与</Text>
+            <Text style={{ fontSize: 12 }}>与</Text>
             <Button
               link
               labelStyle={{ fontSize: 13 }}

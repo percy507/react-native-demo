@@ -1,14 +1,11 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
 
-import { AModal, EnvSwitcher, IconFont, ScreenWrapper } from '@/components';
+import { Button, IconFont, Modal, ScreenWrapper, Text, View } from '@/components';
 import { storage } from '@/hooks';
 import type { BottomTabNav, StackNav } from '@/navigators/routes';
 import { requestLogout } from '@/services/auth';
-
-import { PageInfo } from '../part';
 
 export function Tab3Screen() {
   const nav = useNavigation<BottomTabNav>();
@@ -24,7 +21,9 @@ export function Tab3Screen() {
   return (
     <ScreenWrapper navbar={{ show: false }}>
       <View style={styles.root}>
-        <PageInfo title="Tab3Screen" />
+        <View style={{ padding: 20 }}>
+          <Text style={{ fontSize: 24, textAlign: 'center' }}>Tab3</Text>
+        </View>
 
         <View style={styles.list}>
           <Button
@@ -63,10 +62,6 @@ export function Tab3Screen() {
         <View style={{ marginTop: 60 }}>
           <LogoutButton />
         </View>
-
-        <View style={{ marginTop: 60 }}>
-          <EnvSwitcher />
-        </View>
       </View>
     </ScreenWrapper>
   );
@@ -93,7 +88,7 @@ function LogoutButton() {
 
   return (
     <>
-      <AModal
+      <Modal
         visible={visible}
         setVisible={setVisible}
         title="确认退出登录？"

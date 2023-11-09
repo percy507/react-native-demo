@@ -1,17 +1,17 @@
 import type { PressableProps } from 'react-native';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
+
+import { Text } from '../Base/Text';
 
 interface ExampleProps extends PressableProps {
   title: React.ReactNode;
-  subTitle?: React.ReactNode;
 }
 
 export function Example(props: ExampleProps) {
-  const { title, subTitle, ...restProps } = props;
+  const { title, ...restProps } = props;
   return (
     <Pressable {...restProps} style={styles.root}>
       <Text style={styles.text}>{title}</Text>
-      {subTitle != null && <Text style={styles.subtext}>{props.subTitle}</Text>}
     </Pressable>
   );
 }
@@ -26,9 +26,5 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 16,
-  },
-  subtext: {
-    color: '#fff',
-    fontSize: 12,
   },
 });

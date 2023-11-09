@@ -1,15 +1,16 @@
 import './global';
 import './theme';
-import 'react-native-gesture-handler';
 
+import { PortalProvider } from '@gorhom/portal';
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'jotai';
 import { useCallback, useRef } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-toast-notifications';
 
-import { ErrorBoundary, IconFont } from '@/components';
+import { DebugTool, ErrorBoundary, IconFont } from '@/components';
 import { OrientationLock, useScreenOrientation } from '@/hooks';
 import { RootNavigator } from '@/navigators/root';
 import { colors } from '@/theme/color';
@@ -49,11 +50,16 @@ export default function App() {
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
       <ErrorBoundary>
-        <Provider>
-          <ToastProvider {...toastProps}>
-            <RootNavigator />
-          </ToastProvider>
-        </Provider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <PortalProvider>
+            <Provider>
+              <ToastProvider {...toastProps}>
+                <RootNavigator />
+                <DebugTool />
+              </ToastProvider>
+            </Provider>
+          </PortalProvider>
+        </GestureHandlerRootView>
       </ErrorBoundary>
     </SafeAreaProvider>
   );

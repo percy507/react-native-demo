@@ -6,7 +6,7 @@
 
 ```bash
 # 使用 expo 的优势
-- 安装兼容 expo 的第三方库时，如果涉及修改原生代码，expo 会自动帮我们处理
+- 安装兼容 expo 的第三方库时，如果涉及修改原生代码，expo 会自动帮我们处理，从而开发者无需手动修改原生代码
 - 使用 `npx expo install` 安装依赖时，会自动根据当前项目情况，选择最佳的依赖版本
 ```
 
@@ -59,6 +59,21 @@ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 pnpm install-ios-deps
 ```
 
+### 环境介绍(构建环境 & 后端环境)
+
+- 构建环境: 即打包 app 时的环境
+
+  - `debug`: debug build，即 expo 的 development build，仅限本地开发用；不支持页面中切换后端环境，如需切换后端环境，自行改代码
+  - `staging`: release build，测试时用(产品走查、测试走查、演示环境等)；此时的 app 与生产环境一模一样，除过默认后端环境不一样；支持在页面中切换所有后端环境，默认为后端测试环境
+  - `release`: release build, 生产环境；不支持在页面中切换后端环境
+
+- 后端环境: 即后端服务器的环境，可按需自己设置所需的环境，以下为默认的环境
+
+  - `local`: 本地开发用
+  - `dev`: 开发环境
+  - `test`: 测试环境
+  - `prod`: 生产环境
+
 ### 相关命令
 
 ```bash
@@ -98,6 +113,7 @@ pnpm buildIconFont
 ## 代码风格
 
 - 不要写大量的行内样式，如果样式很多，抽离至 StyleSheet，保持代码的可读性
+- 诸如 `Text`、 `View` 等基础组件尽量从 `@/components` 引入，而不要直接使用 react-native 的，因为我们进行了二次封装，可以给其增加一些更易使用的功能
 
 ## 目录结构
 
@@ -105,7 +121,7 @@ pnpm buildIconFont
 src
 ├── assets                    # 本地静态资源
 ├── components                # 业务通用组件
-│   ├── EnvSwitcher             # 切换后端环境组件，也可查看appConfig、expoConfig、本地日志等。（主要用于调试）
+│   ├── DebugTool               # 调试工具。可切换后端环境组件，也可查看appConfig、expoConfig、本地日志等
 │   ├── ErrorBoundary           # 异常处理组件，里面封装了处理前端异常的逻辑
 │   ├── IconFont                # 基于iconfont的图标组件，由react-native-iconfont-cli自动生成
 │   ├── ScreenWrapper           # 页面通用根容器，它封装了自定义的navbar
@@ -171,6 +187,9 @@ https://github.com/arnnis/react-native-toast-notifications/
 # http请求
 基于 Fetch API 封装
 
+# portal
+https://github.com/gorhom/react-native-portal
+
 # 工具类库
 https://github.com/iamkun/dayjs/ 日期格式化
 https://github.com/onubo/react-native-logs 记录日志
@@ -232,6 +251,12 @@ adb shell
 
 # 列出当前连接的设备
 adb devices
+
+# 查看app的日志
+adb logcat -e "com.company.rndemo.debug"
+
+# 安装 apk 到设备
+adb -s "<device-id>" install "<path-to-apk>"
 
 # app 私有文件目录，比如mmkv和logs文件就存储在这里
 /data/data/[包名]/files

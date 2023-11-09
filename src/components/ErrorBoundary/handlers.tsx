@@ -18,7 +18,7 @@ export function reactRenderErrorHandler(
     filename: (err as any).sourceURL,
     position: ((err as any).line || 0) + ':' + ((err as any).column || 0),
     stack: stackFilter(err.stack),
-    componentStack: stackFilter(errInfo.componentStack, 100),
+    componentStack: stackFilter(errInfo.componentStack, 30),
   };
   log.error(obj);
 }

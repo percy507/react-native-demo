@@ -1,9 +1,11 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import type { ViewStyle } from 'react-native';
-import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StatusBar, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { Text } from '../Base/Text';
+import { View } from '../Base/View';
 import IconFont from '../IconFont';
 
 export interface NavBarProps {

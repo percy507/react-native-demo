@@ -1,11 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { RefreshControl, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { RefreshControl, StyleSheet } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
-
-import { PageInfo } from '../part';
+import { Button, ScreenWrapper, Text, View } from '@/components';
 
 export function Tab2Screen() {
   const nav = useNavigation();
@@ -26,8 +23,9 @@ export function Tab2Screen() {
       navbar={{ show: false }}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <View style={styles.root}>
-        <PageInfo title="Tab2Screen" />
-
+        <View style={{ padding: 20 }}>
+          <Text style={{ fontSize: 24, textAlign: 'center' }}>Tab2</Text>
+        </View>
         <View style={{ marginBottom: 16 }}>
           <Text style={{ color: 'red' }}>
             上次渲染时间: {data}

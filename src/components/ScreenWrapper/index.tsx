@@ -1,9 +1,10 @@
 import React from 'react';
 import type { ScrollViewProps, ViewProps, ViewStyle } from 'react-native';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Text } from 'react-native-ui-lib';
 
+import { Text } from '../Base/Text';
+import { View } from '../Base/View';
 import { Loader } from '../Loader';
 import type { NavBarProps } from './NavBar';
 import { NavBar } from './NavBar';

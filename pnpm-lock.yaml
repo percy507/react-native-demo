@@ -6,6 +6,7 @@ specifiers:
   '@babel/runtime': ^7.20.0
   '@commitlint/cli': ^16.2.1
   '@commitlint/config-conventional': ^16.2.1
+  '@gorhom/portal': ^1.0.14
   '@react-native/eslint-config': ^0.72.2
   '@react-native/metro-config': ^0.72.11
   '@react-navigation/bottom-tabs': ^6.5.9
@@ -24,6 +25,7 @@ specifiers:
   expo: ~49.0.13
   expo-dev-client: ~2.4.11
   expo-file-system: ~15.4.4
+  expo-image: ~1.3.4
   expo-linking: ~5.0.2
   expo-navigation-bar: ~2.3.0
   expo-screen-orientation: ~6.0.5
@@ -57,6 +59,7 @@ specifiers:
   typescript: 5.1.3
 
 dependencies:
+  '@gorhom/portal': 1.0.14_3vcvnrf7libeci574xklu6s5tm
   '@react-navigation/bottom-tabs': 6.5.11_4nd3vja6qmd3w6mhxrgipxuvim
   '@react-navigation/drawer': 6.6.6_sfp6kg6czj6uzfzm2r2terrgf4
   '@react-navigation/native': 6.1.9_3vcvnrf7libeci574xklu6s5tm
@@ -67,6 +70,7 @@ dependencies:
   expo: 49.0.16_@babel+core@7.23.2
   expo-dev-client: 2.4.11_expo@49.0.16
   expo-file-system: 15.4.4_expo@49.0.16
+  expo-image: 1.3.5_expo@49.0.16
   expo-linking: 5.0.2_expo@49.0.16
   expo-navigation-bar: 2.3.0_expo@49.0.16
   expo-screen-orientation: 6.0.6_expo@49.0.16
@@ -2040,6 +2044,17 @@ packages:
 
   /@gar/promisify/1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
+    dev: false
+
+  /@gorhom/portal/1.0.14_3vcvnrf7libeci574xklu6s5tm:
+    resolution: {integrity: sha512-MXyL4xvCjmgaORr/rtryDNFy3kU4qUbKlwtQqqsygd0xX3mhKjOLn6mQK8wfu0RkoE0pBE0nAasRoHua+/QZ7A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      nanoid: 3.3.6
+      react: 18.2.0
+      react-native: 0.72.5_mt4cu4wky2rw7ldifcl2274rpy
     dev: false
 
   /@graphql-typed-document-node/core/3.2.0_graphql@15.8.0:
@@ -5539,6 +5554,14 @@ packages:
     dependencies:
       expo: 49.0.16_@babel+core@7.23.2
       fontfaceobserver: 2.3.0
+    dev: false
+
+  /expo-image/1.3.5_expo@49.0.16:
+    resolution: {integrity: sha512-yrIR2mnfIKbKcguoqWK3U5m3zvLPnonvSCabB2ErVGhws8zQs7ILYf+7T08j8U6eFcohjw0CoAFJ6RWNsX2EhA==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 49.0.16_@babel+core@7.23.2
     dev: false
 
   /expo-json-utils/0.7.1:

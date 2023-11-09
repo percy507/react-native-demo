@@ -3,28 +3,22 @@ import Constants from 'expo-constants';
 import * as FileSystem from 'expo-file-system';
 import { useEffect, useState } from 'react';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native';
-import type { ViewProps } from 'react-native-ui-lib';
-import {
-  Button,
-  Checkbox,
-  RadioButton,
-  RadioGroup,
-  Text,
-  View,
-} from 'react-native-ui-lib';
+import { Checkbox, RadioButton, RadioGroup } from 'react-native-ui-lib';
 
 import { getConfig } from '@/config';
 import { colors } from '@/theme/color';
 import { reloadApp } from '@/utils';
 import { getAppEnv, getBuildEnv, setPersistentEnv } from '@/utils/env';
 
-import { AModal } from '../AModal';
+import { Button } from '../Base/Button';
+import { Modal } from '../Base/Modal';
+import { Text } from '../Base/Text';
+import { View } from '../Base/View';
+import { FloatingBubble } from '../FloatingBubble';
 import { styles } from './style';
 
-interface EnvSwitcherProps extends ViewProps {}
-
-export function EnvSwitcher(props: EnvSwitcherProps) {
-  const { style, ...restProps } = props;
+export function DebugTool() {
+  const [visible, setVisible] = useState(false);
 
   const initEnv = getAppEnv();
   const buildEnv = getBuildEnv();
@@ -36,29 +30,44 @@ export function EnvSwitcher(props: EnvSwitcherProps) {
   };
 
   return (
-    <View style={[styles.root, style]} {...restProps}>
-      <Text style={styles.title}>当前环境: {initEnv}</Text>
-      {buildEnv === 'debug' ? (
-        <Text style={{ marginBottom: 10, color: 'red' }}>
-          buildEnv 为 local 时，不允许页面中切换环境，请通过改代码切换
-        </Text>
-      ) : (
-        <RadioGroup
-          style={styles.envGroup}
-          initialValue={initEnv}
-          onValueChange={onEnvChange}>
-          <RadioButton size={20} value="local" label="local" />
-          <RadioButton size={20} value="dev" label="dev" />
-          <RadioButton size={20} value="test" label="test" />
-          <RadioButton size={20} value="prod" label="prod" />
-        </RadioGroup>
-      )}
-      <View style={{ gap: 6 }}>
-        <ViewAppConfig />
-        <ViewExpoConfig />
-        <ViewLog />
-      </View>
-    </View>
+    <>
+      <FloatingBubble
+        style={{ bottom: 100, right: 20 }}
+        content={
+          <>
+            <Text style={{ fontSize: 8, color: '#fff' }}>当前环境</Text>
+            <Text style={{ fontSize: 12, color: '#fff' }}>{initEnv}</Text>
+          </>
+        }
+        onPress={() => setVisible(true)}
+      />
+
+      <Modal visible={visible} setVisible={setVisible}>
+        <View style={[styles.root]}>
+          <Text style={styles.title}>当前环境: {initEnv}</Text>
+          {buildEnv === 'debug' ? (
+            <Text style={{ fontSize: 12, marginBottom: 10, color: 'red' }}>
+              buildEnv 为 debug 时，不允许页面中切换后端环境，请通过改代码切换
+            </Text>
+          ) : (
+            <RadioGroup
+              style={styles.envGroup}
+              initialValue={initEnv}
+              onValueChange={onEnvChange}>
+              <RadioButton size={20} value="local" label="local" />
+              <RadioButton size={20} value="dev" label="dev" />
+              <RadioButton size={20} value="test" label="test" />
+              <RadioButton size={20} value="prod" label="prod" />
+            </RadioGroup>
+          )}
+          <View style={{ gap: 6 }}>
+            <ViewAppConfig />
+            <ViewExpoConfig />
+            <ViewLog />
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 }
 
@@ -66,7 +75,7 @@ function ViewAppConfig() {
   const [visible, setVisible] = useState(false);
   return (
     <>
-      <AModal visible={visible} setVisible={setVisible}>
+      <Modal visible={visible} setVisible={setVisible}>
         <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 6, marginTop: -6 }}>
           查看 AppConfig
         </Text>
@@ -75,7 +84,7 @@ function ViewAppConfig() {
             <Text style={{ fontSize: 12 }}>{JSON.stringify(getConfig(), null, 2)}</Text>
           </TouchableWithoutFeedback>
         </ScrollView>
-      </AModal>
+      </Modal>
       <Button size="small" label="查看 AppConfig" onPress={() => setVisible(true)} />
     </>
   );
@@ -85,7 +94,7 @@ function ViewExpoConfig() {
   const [visible, setVisible] = useState(false);
   return (
     <>
-      <AModal visible={visible} setVisible={setVisible}>
+      <Modal visible={visible} setVisible={setVisible}>
         <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 6, marginTop: -6 }}>
           查看 ExpoConfig
         </Text>
@@ -96,7 +105,7 @@ function ViewExpoConfig() {
             </Text>
           </TouchableWithoutFeedback>
         </ScrollView>
-      </AModal>
+      </Modal>
       <Button size="small" label="查看 ExpoConfig" onPress={() => setVisible(true)} />
     </>
   );
@@ -130,7 +139,7 @@ function ViewLog() {
 
   return (
     <>
-      <AModal visible={visible} setVisible={setVisible}>
+      <Modal visible={visible} setVisible={setVisible}>
         <View
           style={{
             flexDirection: 'row',
@@ -168,7 +177,7 @@ function ViewLog() {
             )}
           </TouchableWithoutFeedback>
         </ScrollView>
-      </AModal>
+      </Modal>
       <Button size="small" label="查看本地日志" onPress={() => setVisible(true)} />
     </>
   );

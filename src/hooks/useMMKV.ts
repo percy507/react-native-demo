@@ -35,7 +35,7 @@ export function useMMKV<T extends JSONValue>(key: string) {
   const [value, setValue] = useState<T | undefined>(storage.getItem<T>(key));
   const set = (val: T) => {
     setValue(val);
-    storage.setItem(key, JSON.stringify(val));
+    storage.setItem(key, val);
   };
   return [value, set] as const;
 }

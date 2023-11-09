@@ -1,10 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
-
-import { PageInfo } from '../part';
+import { Button, ScreenWrapper, View } from '@/components';
 
 export function Tab1Screen() {
   const nav = useNavigation();
@@ -27,8 +24,6 @@ export function Tab1Screen() {
   return (
     <ScreenWrapper navbar={{ title: '首页', showBack: false }}>
       <View style={styles.root}>
-        <PageInfo title="Tab1Screen" />
-
         <View style={styles.list}>
           {list.map((el) => (
             <Button

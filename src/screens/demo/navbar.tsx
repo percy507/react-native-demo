@@ -1,10 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
 
 import type { ScreenWrapperProps } from '@/components';
-import { ScreenWrapper } from '@/components';
+import { Button, ScreenWrapper, Text, View } from '@/components';
 
 export function DemoNavbarScreen() {
   const nav = useNavigation();

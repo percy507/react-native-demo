@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Toast, useToast } from 'react-native-toast-notifications';
-import { Button } from 'react-native-ui-lib';
 
-import { IconFont, ScreenWrapper } from '@/components';
+import { Button, IconFont, ScreenWrapper, Text, View } from '@/components';
 
 export function DemoToastScreen() {
   const toast = useToast();

@@ -1,9 +1,8 @@
 import LottieView from 'lottie-react-native';
 import { useEffect, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
+import { Button, ScreenWrapper, View } from '@/components';
 
 export function DemoLottieScreen() {
   const lottieRef = useRef<LottieView>(null);

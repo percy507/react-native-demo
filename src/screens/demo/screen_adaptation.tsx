@@ -1,6 +1,6 @@
-import { Platform, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
+import { ScreenWrapper, Text, View } from '@/components';
 
 export function DemoScreenAdaptation() {
   const sizes = useWindowDimensions();
@@ -11,12 +11,14 @@ export function DemoScreenAdaptation() {
           Window Dimension Data{' '}
           <Text style={{ fontSize: 12 }}>(useWindowDimensions)</Text>
         </Text>
-        <Text>width(页面窗口宽度, 单位为px): {sizes.width}</Text>
-        <Text>height(页面窗口高度, 单位为px): {sizes.height}</Text>
-        <Text>fontScale(字体缩放比): {sizes.fontScale}</Text>
-        <Text style={{ lineHeight: 15 }}>
-          scale(dpr, 即 device pixel ratio): {sizes.scale}
+        <Text numberOfLines={1} ellipsizeMode="tail">
+          width(页面窗口宽度, 单位为px): {sizes.width}
         </Text>
+        <Text numberOfLines={1} ellipsizeMode="tail">
+          height(页面窗口高度, 单位为px): {sizes.height}
+        </Text>
+        <Text>fontScale(字体缩放比): {sizes.fontScale}</Text>
+        <Text>scale(dpr, 即 device pixel ratio): {sizes.scale}</Text>
         <Text>设计稿宽度(px): {UI_WIDTH}</Text>
         <Text style={{ textAlign: 'right', color: 'red', marginTop: 20 }}>
           {'12px的右边框 ==>'}

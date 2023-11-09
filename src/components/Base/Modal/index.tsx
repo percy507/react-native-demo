@@ -1,10 +1,12 @@
-import type { ModalProps } from 'react-native';
-import { Modal, Pressable, Text, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import type { ModalProps as RNModalProps } from 'react-native';
+import { Modal as RNModal, Pressable } from 'react-native';
 
+import { Button } from '../Button';
+import { Text } from '../Text';
+import { View } from '../View';
 import { styles } from './style';
 
-interface AModalProps extends ModalProps {
+export interface ModalProps extends RNModalProps {
   setVisible: (visible: boolean) => void;
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -15,7 +17,7 @@ interface AModalProps extends ModalProps {
   closeOnMaskClick?: boolean;
 }
 
-export function AModal(props: AModalProps) {
+export function Modal(props: ModalProps) {
   const {
     title,
     description,
@@ -28,7 +30,7 @@ export function AModal(props: AModalProps) {
     ...restProps
   } = props;
   return (
-    <Modal
+    <RNModal
       transparent
       statusBarTranslucent
       animationType="fade"
@@ -60,6 +62,6 @@ export function AModal(props: AModalProps) {
           )}
         </Pressable>
       </Pressable>
-    </Modal>
+    </RNModal>
   );
 }

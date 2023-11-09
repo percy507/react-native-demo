@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
+import { Button, ScreenWrapper, Text, View } from '@/components';
 
 export function DemoExceptionScreen() {
   const [obj, setObj] = useState<any>({});

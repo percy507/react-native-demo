@@ -1,8 +1,7 @@
 import * as Linking from 'expo-linking';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
 
-import { ScreenWrapper } from '@/components';
+import { Button, ScreenWrapper, View } from '@/components';
 import { openExternalLink } from '@/utils';
 
 export function DemoOpenExternalScreen() {
