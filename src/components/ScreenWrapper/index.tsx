@@ -11,6 +11,8 @@ import { NavBar } from './NavBar';
 
 export interface ScreenWrapperProps extends Omit<ViewProps, 'style'> {
   navbar?: NavBarProps;
+  /** @defaultValue `true` */
+  contentIsScrollView?: boolean;
   contentStyle?: ViewStyle;
   loading?: boolean;
   /** @defaultValue `加载中...` */
@@ -21,6 +23,7 @@ export interface ScreenWrapperProps extends Omit<ViewProps, 'style'> {
 export function ScreenWrapper(props: ScreenWrapperProps) {
   const {
     navbar,
+    contentIsScrollView = true,
     contentStyle,
     loading,
     loadingText = '加载中...',
@@ -37,20 +40,25 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
     // paddingTop: insets.top, // this is managed by navbar
   };
 
+  const ContentView = contentIsScrollView ? ScrollView : View;
+  const contentViewProps = contentIsScrollView
+    ? {
+        contentContainerStyle: [styles.content, contentStyle],
+        refreshControl,
+      }
+    : { style: [styles.content, contentStyle] };
+
   return (
     <View style={[styles.root, rootPadding]} {...restProps}>
       <View style={[styles.root]}>
         <NavBar {...navbar} />
-        <ScrollView
-          contentContainerStyle={[styles.content, contentStyle]}
-          refreshControl={refreshControl}
-          pointerEvents={loading ? 'none' : 'auto'}>
+        <ContentView {...contentViewProps} pointerEvents={loading ? 'none' : 'auto'}>
           <View style={[styles.loader, loading ? styles.loading : null]}>
             <Loader color="#fff" size={44} />
             <Text style={styles.loaderText}>{loadingText}</Text>
           </View>
           {children}
-        </ScrollView>
+        </ContentView>
       </View>
     </View>
   );
@@ -59,14 +67,10 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: 'rgba(255,255,255,1)' },
   loader: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2,
     paddingTop: 200,
     alignItems: 'center',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 2,
     backgroundColor: 'rgba(0,0,0,0.6)',
     display: 'none',
   },

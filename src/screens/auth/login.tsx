@@ -5,15 +5,7 @@ import { StyleSheet } from 'react-native';
 import { Toast } from 'react-native-toast-notifications';
 import { Checkbox, TextField } from 'react-native-ui-lib';
 
-import {
-  Button,
-  IconFont,
-  Loader,
-  ScreenWrapper,
-  SMSCode,
-  Text,
-  View,
-} from '@/components';
+import { Button, IconFont, ScreenWrapper, SMSCode, Text, View } from '@/components';
 import type { StackNav } from '@/navigators/routes';
 import { requestSMSLogin } from '@/services/auth';
 import { setAuthToken } from '@/stores/user';
@@ -80,7 +72,7 @@ export function LoginScreen() {
               maxLength={11}
               keyboardType="number-pad"
               bottomAccessory={
-                <Text type="form_error">{(errors.phone?.message as string) || ''}</Text>
+                <Text type="formError">{(errors.phone?.message as string) || ''}</Text>
               }
               leadingAccessory={
                 <IconFont
@@ -111,7 +103,7 @@ export function LoginScreen() {
               maxLength={6}
               keyboardType="number-pad"
               bottomAccessory={
-                <Text type="form_error">{(errors.code?.message as string) || ''}</Text>
+                <Text type="formError">{(errors.code?.message as string) || ''}</Text>
               }
               leadingAccessory={
                 <IconFont
@@ -127,10 +119,12 @@ export function LoginScreen() {
         />
 
         <View style={styles.footer}>
-          <Button onPress={onSubmit} disabled={!isValid}>
-            {submitting && <Loader size={14} color="#fff" style={{ marginRight: 8 }} />}
-            <Text style={{ color: '#fff' }}>登录</Text>
-          </Button>
+          <Button
+            label="登录"
+            loading={submitting}
+            onPress={onSubmit}
+            disabled={!isValid}
+          />
           <View style={styles.agree}>
             <Checkbox
               size={16}

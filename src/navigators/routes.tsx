@@ -10,13 +10,13 @@ import { LoginScreen } from '@/screens/auth/login';
 import { PrivacyPolicyScreen, UserProtocolScreen } from '@/screens/auth/protocols';
 import { DemoExceptionScreen } from '@/screens/demo/exception';
 import { DemoHttpScreen } from '@/screens/demo/http';
-import { DemoIconScreen } from '@/screens/demo/icon';
 import { DemoLottieScreen } from '@/screens/demo/lottie';
 import { DemoMMKVScreen } from '@/screens/demo/mmkv';
 import { DemoNavbarScreen } from '@/screens/demo/navbar';
 import { DemoNavigationScreen } from '@/screens/demo/navigation';
 import { DemoOpenExternalScreen } from '@/screens/demo/open_external';
 import { DemoScreenAdaptation } from '@/screens/demo/screen_adaptation';
+import { DemoTestComponentsScreen } from '@/screens/demo/test_components';
 import { DemoToastScreen } from '@/screens/demo/toast';
 import {
   DemoWebviewLoadHtmlScreen,
@@ -40,10 +40,10 @@ declare global {
     user_protocol: undefined;
     privacy_policy: undefined;
 
+    demo_test_components: undefined;
     demo_navigation: { id: string };
     demo_navbar: undefined;
     demo_screen_adaptation: undefined;
-    demo_icon: undefined;
     demo_webview_uri: undefined;
     demo_webview_html: undefined;
     demo_lottie: undefined;
@@ -65,10 +65,10 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['user_protocol', UserProtocolScreen],
   ['privacy_policy', PrivacyPolicyScreen],
 
+  ['demo_test_components', DemoTestComponentsScreen],
   ['demo_navigation', DemoNavigationScreen],
   ['demo_navbar', DemoNavbarScreen],
   ['demo_screen_adaptation', DemoScreenAdaptation],
-  ['demo_icon', DemoIconScreen],
   ['demo_webview_uri', DemoWebviewLoadUriScreen],
   ['demo_webview_html', DemoWebviewLoadHtmlScreen],
   ['demo_lottie', DemoLottieScreen],

@@ -15,7 +15,10 @@ export const indigo = {
 };
 
 export const colors = {
+  white: '#fff',
   primary: indigo.indigo6,
+  primaryMedium: indigo.indigo1,
+  primaryLight: indigo.indigo0,
   success: '#52c41a',
   warn: '#faad14',
   error: '#ff4d4f',

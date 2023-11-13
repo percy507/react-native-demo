@@ -4,12 +4,12 @@ import { StyleSheet, Text as RNText } from 'react-native';
 import { colors } from '@/theme/color';
 
 export interface TextProps extends RNTextProps {
-  type?: 'form_error';
+  type?: 'formError';
 }
 
 export function Text(props: TextProps) {
   const { type, style, ...restProps } = props;
-  const rootStyle = [styles.root, type === 'form_error' ? styles.formError : null, style];
+  const rootStyle = [styles.root, type && styles[type], style];
 
   return <RNText style={rootStyle} {...restProps} />;
 }
