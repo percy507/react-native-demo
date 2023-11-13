@@ -72,7 +72,9 @@ export function LoginScreen() {
               maxLength={11}
               keyboardType="number-pad"
               bottomAccessory={
-                <Text type="formError">{(errors.phone?.message as string) || ''}</Text>
+                <Text variant="form_error">
+                  {(errors.phone?.message as string) || ''}
+                </Text>
               }
               leadingAccessory={
                 <IconFont
@@ -103,7 +105,7 @@ export function LoginScreen() {
               maxLength={6}
               keyboardType="number-pad"
               bottomAccessory={
-                <Text type="formError">{(errors.code?.message as string) || ''}</Text>
+                <Text variant="form_error">{(errors.code?.message as string) || ''}</Text>
               }
               leadingAccessory={
                 <IconFont

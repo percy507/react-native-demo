@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Image } from '@/components';
 
 export default function Demo() {
   return (
     <View style={styles.root}>
+      <Text>点击图片进行预览</Text>
       <Image
         style={{ width: '100%', height: 200 }}
         source="https://img.zcool.cn/community/012d0861825f9d11013e894384250f.jpg"

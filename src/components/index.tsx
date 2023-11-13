@@ -1,4 +1,5 @@
 export * from './Base/Button';
+export * from './Base/Divider';
 export * from './Base/Image';
 export * from './Base/Modal';
 export * from './Base/Text';

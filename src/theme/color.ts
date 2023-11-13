@@ -22,5 +22,6 @@ export const colors = {
   success: '#52c41a',
   warn: '#faad14',
   error: '#ff4d4f',
-  font100: '#333',
+  fontColor: '#333',
+  fontColorTint: '#888',
 };

@@ -5,6 +5,7 @@ import { ExpandableSection } from 'react-native-ui-lib';
 import { IconFont, ScreenWrapper, Text, View } from '@/components';
 
 import ButtonDemo from './Button';
+import DividerDemo from './Divider';
 import IconFontDemo from './IconFont';
 import ImageDemo from './Image';
 import ModalDemo from './Modal';
@@ -18,6 +19,7 @@ const list = [
   { title: 'Button', demo: ButtonDemo },
   { title: 'Modal', demo: ModalDemo },
   { title: 'IconFont', demo: IconFontDemo },
+  { title: 'Divider', demo: DividerDemo },
 ];
 
 function Item({ data }) {

@@ -39,6 +39,14 @@ module.exports = function (babel, options) {
           if (typeof value.value === 'string') return;
           if (value.type === 'ObjectExpression') return;
           if (value.type === 'Identifier' && value.name === 'undefined') return;
+          if (
+            value.type === 'MemberExpression' &&
+            value.object.name === 'StyleSheet' &&
+            value.property.name === 'hairlineWidth'
+          ) {
+            // 跳过包裹 `StyleSheet.hairlineWidth`
+            return;
+          }
 
           // 不知道为什么？开发环境下，这里的样式被 px2dp 包裹后，在ios上会报错: px2dp is undefined
           // 所以不包裹这里的样式
@@ -108,7 +116,8 @@ module.exports = function (babel, options) {
         if (nodeName === 'style') traverseWrap(path);
         else if (
           (nodeName === 'width' || nodeName === 'height') &&
-          path.parentPath.node.name?.name === 'Svg'
+          path.parentPath.node.name?.name === 'Svg' &&
+          path.node.value.expression != null
         ) {
           path.node.value.expression = wrapPx2dp(path.node.value.expression);
         }
