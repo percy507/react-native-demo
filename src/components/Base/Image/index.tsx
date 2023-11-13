@@ -6,10 +6,13 @@ import { StyleSheet } from 'react-native';
 
 import { PinchableBox } from './PinchableBox';
 
-export interface ImageProps extends ExpoImageProps {}
+export interface ImageProps extends ExpoImageProps {
+  /** @defaultValue `true` */
+  previewable?: boolean;
+}
 
 export function Image(props: ImageProps) {
-  const { style, source, ...restProps } = props;
+  const { previewable = true, style, source, ...restProps } = props;
   const [preview, setPreview] = useState(false);
   const natvieSource = resolveSources(source);
 
@@ -21,7 +24,7 @@ export function Image(props: ImageProps) {
         {...restProps}
         onTouchEnd={() => setPreview(true)}
       />
-      {preview && natvieSource && (
+      {previewable && preview && natvieSource && (
         <PinchableBox source={natvieSource} onClose={() => setPreview(false)} />
       )}
     </>
