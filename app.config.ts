@@ -21,6 +21,7 @@ export default (): ExpoConfig => {
     orientation: 'portrait',
     icon: './src/assets/app_icon.png',
     userInterfaceStyle: 'light',
+    backgroundColor: splashScreenBG,
     splash: {
       image: './src/assets/app_splash.png',
       resizeMode: 'contain',
