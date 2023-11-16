@@ -1,0 +1,90 @@
+# ios 相关配置
+scheme = 'RNdemo'
+
+desc '构建 ios Debug 版本'
+lane :iosDebug do
+  date = Time.new.strftime('%Y%m%d-%h%M')
+
+  # get_push_certificate(
+  #   website_push: true
+  # )
+
+  # http://docs.fastlane.tools/actions/build_ios_app/#build_ios_app
+  build_ios_app(
+    workspace: "ios/#{scheme}.xcworkspace",
+    scheme:,
+    configuration: 'Debug',
+    # clean: true,
+    export_method: 'development',
+    buildlog_path: './fastlane/build/ios',
+    output_directory: './fastlane/build/ios',
+    output_name: "#{scheme}-#{date}-Debug.ipa"
+    # 签名
+    # export_options:{
+    #   provisioningProfiles:{
+    #     "包名" => "证书"
+    #   }
+    # },
+  )
+
+  # 打包成功后，自动上传蒲公英
+  # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
+end
+
+desc '构建 ios Release 版本, 测试用'
+lane :iosReleaseTest do
+  date = Time.new.strftime('%Y%m%d-%h%M')
+
+  get_push_certificate(
+    website_push: true
+  )
+
+  build_ios_app(
+    workspace: "ios/#{scheme}.xcworkspace",
+    scheme:,
+    configuration: 'Release',
+    clean: true,
+    export_method: 'ad-hoc',
+    buildlog_path: './fastlane/build/ios',
+    output_directory: './fastlane/build/ios',
+    output_name: "#{scheme}-#{date}-ReleaseTest.ipa"
+    # 签名
+    # export_options:{
+    #   provisioningProfiles:{
+    #     "包名" => "证书"
+    #   }
+    # },
+  )
+
+  # 打包成功后，自动上传蒲公英
+  # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
+end
+
+desc '构建 ios Release 版本, 正式环境, 上架 apple store'
+lane :iosRelease do
+  date = Time.new.strftime('%Y%m%d-%h%M')
+
+  get_push_certificate(
+    website_push: true
+  )
+
+  build_ios_app(
+    workspace: "ios/#{scheme}.xcworkspace",
+    scheme:,
+    configuration: 'Release',
+    clean: true,
+    export_method: 'app-store',
+    buildlog_path: './fastlane/build/ios',
+    output_directory: './fastlane/build/ios',
+    output_name: "#{scheme}-#{date}-Release.ipa"
+    # 签名
+    # export_options:{
+    #   provisioningProfiles:{
+    #     "包名" => "证书"
+    #   }
+    # },
+  )
+
+  # 打包成功后，自动上传蒲公英
+  # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
+end

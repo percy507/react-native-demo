@@ -1,0 +1,51 @@
+# android 相关配置
+sign_store_file = "#{Dir.pwd}/z.keystore"
+sign_store_password = 'qwe123123'
+sign_key_alias = 'my-key-alias'
+sign_key_password = 'qwe123123'
+
+desc '构建 android Debug 版本 apk'
+lane :androidDebug do
+  gradle(
+    # assemble 表示构建 apk
+    task: 'assembleDebug',
+    project_dir: './android/',
+    print_command: true,
+    print_command_output: true,
+    properties: {
+      'android.injected.signing.store.file' => sign_store_file,
+      'android.injected.signing.store.password' => sign_store_password,
+      'android.injected.signing.key.alias' => sign_key_alias,
+      'android.injected.signing.key.password' => sign_key_password
+    }
+  )
+
+  # 打包成功后，自动上传蒲公英
+  # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
+
+  apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+  echo(message: "Apk path: #{apk_path}")
+end
+
+desc '构建 android Release 版本 apk'
+lane :androidRelease do
+  gradle(
+    # assemble 表示构建 apk
+    task: 'assembleRelease',
+    project_dir: './android/',
+    print_command: true,
+    print_command_output: true,
+    properties: {
+      'android.injected.signing.store.file' => sign_store_file,
+      'android.injected.signing.store.password' => sign_store_password,
+      'android.injected.signing.key.alias' => sign_key_alias,
+      'android.injected.signing.key.password' => sign_key_password
+    }
+  )
+
+  # 打包成功后，自动上传蒲公英
+  # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
+
+  apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+  echo(message: "Apk path: #{apk_path}")
+end

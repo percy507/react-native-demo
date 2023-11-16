@@ -14,5 +14,11 @@
   "stylelint.validate": ["css", "less"],
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "lldb.showDisassembly": "auto",
+  "lldb.dereferencePointers": true,
+  "lldb.consoleMode": "commands",
+  "[ruby]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop"
   }
 }

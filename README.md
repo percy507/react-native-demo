@@ -12,6 +12,33 @@
 
 ## 开始使用
 
+### 相关替换
+
+```bash
+# 替换app的Icon以及启动页图片，并且在app.config.ts中设置相关背景色 (splashScreenBG)
+# [expo相关说明] https://docs.expo.dev/develop/user-interface/splash-screen/#make-a-splash-image
+# [figma模板] https://www.figma.com/community/file/1155362909441341285/expo-app-icon-splash
+src/assets/app_icon.png
+src/assets/app_adaptive_icon.png
+src/assets/app_splash.png
+
+# 替换app的名称
+app.config.ts (name和slug字段)
+
+# 修改iconfont的链接
+iconfont.json (symbol_url字段)
+pnpm buildIconFont # 重新生成图标组件
+
+# 生成自己的 android 签名
+# https://reactnative.dev/docs/signed-apk-android
+# [Java's keytool doesn't prompt for key password](https://stackoverflow.com/questions/66492058/javas-keytool-doesnt-prompt-for-key-password)
+sudo keytool -genkey -v -keystore z.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
+# 打包时 fastlane 目录下的相关配置
+fastlane/BuildAndroid
+fastlane/BuildIOS
+```
+
 ### 环境配置
 
 ```bash
@@ -53,6 +80,8 @@ rbenv install 3.2.2
 export PATH="$HOME/.rbenv/shims:$PATH"
 
 # gem使用国内源
+# 问题: 即使gem使用国内源，但是有些依赖是以git的形式clone到本地的，而git clone的地址
+# 有 github 的，也有 googlesource 的，所以还是使用代理比较靠谱
 gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 
 # 安装ios相关依赖 (一般不需要手动安装，在构建开发版app时，脚本中会自动安装)
@@ -265,6 +294,16 @@ adb -s "<device-id>" install "<path-to-apk>"
 # 改变安卓模拟器的屏幕尺寸
 mac: 按住 command + 上/下箭头 进行改变
 windows: 按住 ctrl + 上/下箭头 进行改变
+
+# 查看 apk 的签名
+keytool -printcert -jarfile ./app-release.apk
+```
+
+## 踩坑
+
+```bash
+# "androidNavigationBar" ignored when Modal is visible
+https://github.com/expo/expo/issues/7799
 ```
 
 ## 待做事项
@@ -281,6 +320,7 @@ https://github.com/jpudysz/react-native-unistyles
 # ios上架
 https://www.v2ex.com/t/344112
 [iOS 使用fastlane实现自动化打包](https://juejin.cn/post/7009172244253540383)
+[详解iOS打包、发布与证书体系（推荐）](https://insights.thoughtworks.cn/ios-package-release/)
 
 # Android系统文件目录结构
 https://www.jianshu.com/p/05c0691f4d73
@@ -312,4 +352,9 @@ https://www.desgard.com/2020/06/11/cocoapods-story-1.html
 # 拆包?
 [Metro拆包工作原理与实战](https://segmentfault.com/a/1190000041944570)
 [React Native 拆包原理和实践](https://cloud.tencent.com/developer/article/1782216)
+
+[Gradle多渠道打包(动态设定App名称，应用图标，替换常量，更改包名，变更渠道)](https://www.jianshu.com/p/533240d222d3)
+[assembleRelease 和 bundleRelease 的区别](https://stackoverflow.com/questions/57072558/whats-the-difference-between-gradlewassemblerelease-gradlewinstallrelease-and)
+
+[使用 Fastlane 上传 App 到蒲公英](https://www.pgyer.com/doc/view/fastlane)
 ```

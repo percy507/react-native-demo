@@ -3,8 +3,16 @@
 set -ex
 
 platform=$1   # android | ios
-build_mode=$2 # debug | release | Debug | Release
+build_mode=$2 # Debug | Release
 build_env=$3  # debug | staging | release
+
+echo_success() {
+  echo -e "\033[32m${1}\033[0m"
+}
+
+echo_error() {
+  echo -e "\033[31m${1}\033[0m"
+}
 
 # test if version number has format: `x.x.x` or `x.x.x.x`
 if [[ $build_version =~ ^[0-9]+(\.[0-9]+){2,3}$ ]]; then
@@ -21,17 +29,24 @@ npx expo prebuild --clean --no-install --platform $platform
 
 pnpm install
 
-if [[ $platform == "ios" ]]; then
-  pnpm install-ios-deps
-fi
-
-# build the app
-npx react-native "run-$platform" --mode=$build_mode
+# 禁止 fastlane 检查更新
+export FASTLANE_SKIP_UPDATE_CHECK=1
 
 if [[ $platform == "android" ]]; then
-  echo "Finished building Android APK"
-fi
+  bundle install
+  bundle exec fastlane "android${build_mode}"
+  echo_success "Finished building ~"
+elif [[ $platform == "ios" ]]; then
+  pnpm install-ios-deps
 
-if [[ $platform == "ios" ]]; then
-  echo "Finished building iOS IPA"
+  if [[ $build_env == "staging" ]]; then
+    bundle exec fastlane "ios${build_mode}Test"
+  else
+    bundle exec fastlane "ios${build_mode}"
+  fi
+
+  echo_success "Finished building ~"
+else
+  echo_error "[Error] platform is not valid: $platform"
+  exit 1
 fi
