@@ -34,7 +34,7 @@ pnpm buildIconFont # 重新生成图标组件
 # [Java's keytool doesn't prompt for key password](https://stackoverflow.com/questions/66492058/javas-keytool-doesnt-prompt-for-key-password)
 sudo keytool -genkey -v -keystore z.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-# 打包时 fastlane 目录下的相关配置
+# 修改打包时 fastlane 目录下的相关配置
 fastlane/BuildAndroid
 fastlane/BuildIOS
 ```
@@ -135,6 +135,8 @@ pnpm buildIconFont
 
 - 每次安装涉及原生代码的新依赖后，都需要重新构建开发版，否则应用会有报错并且无法正常打开
 - 尽量不要手动修改原生代码，可尝试通过 expo 的 SDK 或编写 expo 插件实现
+  - 比如使用自定义字体 (https://docs.expo.dev/versions/latest/sdk/font/)
+  - 比如使用线性渐变 (https://docs.expo.dev/versions/latest/sdk/linear-gradient/)
 - 本脚手架不提交 android 和 ios 目录至远程仓库，因为这两个目录由 expo prebuild 时自动生成，即原生代码由 expo 控制生成。
 - 如果因为某些特殊需求，必须要手动修改原生代码，则 android 和 ios 目录需要提交至远程仓库，且需要去掉构建时 `expo prebuild` 命令的 `--clean` 参数
 - 之所以为`expo prebuild` 命令加 `--clean` 参数，是因为修改 expo 配置文件后，缓存可能会导致 build 的应用还是用的旧的 expo 配置（玄学 🫣）
@@ -234,9 +236,18 @@ https://reactnative.directory/
 # swipe left and right through pages of data
 https://github.com/callstack/react-native-pager-view
 
+# React Native ECharts Library
 https://github.com/wuba/react-native-echarts
 
+# A performant interactive bottom sheet with fully configurable options
 https://github.com/gorhom/react-native-bottom-sheet
+
+# Snapshot a React Native view and save it to an image
+https://github.com/gre/react-native-view-shot
+
+# 分析 react-native bundle size
+# 踩坑: 该工具暂不支持 path alias (https://github.com/IjzerenHein/react-native-bundle-visualizer/issues/122)
+https://github.com/IjzerenHein/react-native-bundle-visualizer
 ```
 
 ### 屏幕适配
@@ -316,12 +327,44 @@ https://github.com/jpudysz/react-native-unistyles
 
 ## 乱七八糟的资料
 
-```bash
-# ios上架
-https://www.v2ex.com/t/344112
-[iOS 使用fastlane实现自动化打包](https://juejin.cn/post/7009172244253540383)
-[详解iOS打包、发布与证书体系（推荐）](https://insights.thoughtworks.cn/ios-package-release/)
+### 踩坑
 
+```bash
+[没 2 年 React Native 开发经验，你都遇不到这些坑](https://supercodepower.com/react-native-tweet)
+```
+
+### 性能优化
+
+```bash
+[React Native 启动速度优化——Native 篇（内含源码分析）](https://supercodepower.com/react-native-performance-native)
+[React Native 启动速度优化——JS 篇](https://supercodepower.com/react-native-performance-js)
+[React Native 性能优化指南——渲染篇](https://supercodepower.com/react_native_performance_optimization_guides)
+```
+
+### 构建、打包、上架
+
+```bash
+# ios 上架
+https://www.v2ex.com/t/344112
+[iOS 使用 fastlane 实现自动化打包](https://juejin.cn/post/7009172244253540383)
+[详解 iOS 打包、发布与证书体系（推荐）](https://insights.thoughtworks.cn/ios-package-release/)
+
+[版本管理工具及 Ruby 工具链环境](https://www.desgard.com/2020/06/11/cocoapods-story-1.html)
+
+# 拆包?
+[Metro 拆包工作原理与实战](https://segmentfault.com/a/1190000041944570)
+[React Native 拆包原理和实践](https://cloud.tencent.com/developer/article/1782216)
+
+[Gradle 多渠道打包(动态设定 App 名称，应用图标，替换常量，更改包名，变更渠道)](https://www.jianshu.com/p/533240d222d3)
+
+[使用 Fastlane 上传 App 到蒲公英](https://www.pgyer.com/doc/view/fastlane)
+
+[React Native 应用部署/热更新-CodePush 最新集成总结](https://github.com/crazycodeboy/RNStudyNotes/tree/master/React%20Native%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E3%80%81%E7%83%AD%E6%9B%B4%E6%96%B0-CodePush%E6%9C%80%E6%96%B0%E9%9B%86%E6%88%90%E6%80%BB%E7%BB%93)
+```
+
+### 原生客户端知识
+
+```bash
 # Android系统文件目录结构
 https://www.jianshu.com/p/05c0691f4d73
 https://www.cnblogs.com/pixy/p/4744501.html
@@ -333,28 +376,6 @@ https://kanchuan.com/blog/127-ios-filesystem
 # CocoaPods
 CocoaPods的本地缓存目录是 ~/Library/Caches/CocoaPods/
 
-# Putting the Expo vs React Native debate to rest
-https://retool.com/blog/expo-cli-vs-react-native-cli/
-
-# 没 2 年 React Native 开发经验，你都遇不到这些坑
-https://supercodepower.com/react-native-tweet
-https://supercodepower.com/docs/react-native-upgrade/index
-
-# React Native APIs turned into React Hooks for use in functional React components Resources
-https://github.com/react-native-community/hooks
-
-# List of Android Actions
-https://gist.github.com/zr0n/dfa1afadf7e785e25d53fc2af7c4eee2
-
-# 版本管理工具及 Ruby 工具链环境
-https://www.desgard.com/2020/06/11/cocoapods-story-1.html
-
-# 拆包?
-[Metro拆包工作原理与实战](https://segmentfault.com/a/1190000041944570)
-[React Native 拆包原理和实践](https://cloud.tencent.com/developer/article/1782216)
-
-[Gradle多渠道打包(动态设定App名称，应用图标，替换常量，更改包名，变更渠道)](https://www.jianshu.com/p/533240d222d3)
+[List of Android Actions](https://gist.github.com/zr0n/dfa1afadf7e785e25d53fc2af7c4eee2)
 [assembleRelease 和 bundleRelease 的区别](https://stackoverflow.com/questions/57072558/whats-the-difference-between-gradlewassemblerelease-gradlewinstallrelease-and)
-
-[使用 Fastlane 上传 App 到蒲公英](https://www.pgyer.com/doc/view/fastlane)
 ```

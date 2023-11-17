@@ -1,13 +1,33 @@
-import { useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect, useRef, useState } from 'react';
 import type { WebViewNavigation } from 'react-native-webview';
 import { WebView } from 'react-native-webview';
 
 import { ScreenWrapper } from '@/components';
+import type { StackNav } from '@/navigators/routes';
 
 export function DemoWebviewLoadUriScreen() {
+  const nav = useNavigation<StackNav>();
+  const [webviewNavState, setWebviewNavState] = useState<WebViewNavigation>();
+  const webviewNavStateRef = useRef(webviewNavState);
+  webviewNavStateRef.current = webviewNavState;
   const webviewRef = useRef<WebView>(null);
 
+  useEffect(() => {
+    // 如果webview的当前路由不是其路由栈中的最后一个，则不返回到上一个 screen
+    // 且返回手势或点击返回按钮会触发webview页面的返回操作
+    nav.addListener('beforeRemove', (e) => {
+      if (!webviewNavStateRef.current?.canGoBack) {
+        return nav.dispatch(e.data.action);
+      }
+      e.preventDefault();
+      webviewRef.current?.goBack();
+    });
+  }, [nav]);
+
   const onNavigationStateChange = (event: WebViewNavigation) => {
+    setWebviewNavState(event);
+
     console.log('onNavigationStateChange', event);
 
     const webview = webviewRef.current;
@@ -21,7 +41,7 @@ export function DemoWebviewLoadUriScreen() {
     }
 
     // redirect somewhere else
-    if (url.includes('google.com')) {
+    if (url.includes('html-tutorial.html')) {
       const newURL = 'https://reactnative.dev/';
       const redirectTo = 'window.location = "' + newURL + '"';
       webview.injectJavaScript(redirectTo);
