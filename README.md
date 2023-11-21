@@ -327,6 +327,10 @@ https://github.com/jpudysz/react-native-unistyles
 
 ## 乱七八糟的资料
 
+```bash
+[实现React Native与内嵌H5相互通信](https://juejin.cn/post/7297144566251454502)
+```
+
 ### 踩坑
 
 ```bash

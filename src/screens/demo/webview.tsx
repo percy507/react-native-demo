@@ -3,8 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import type { WebViewNavigation } from 'react-native-webview';
 import { WebView } from 'react-native-webview';
 
-import { ScreenWrapper } from '@/components';
+import { Button, ScreenWrapper, Text, View } from '@/components';
 import type { StackNav } from '@/navigators/routes';
+
+import html from './webview_temp.html';
 
 export function DemoWebviewLoadUriScreen() {
   const nav = useNavigation<StackNav>();
@@ -60,109 +62,39 @@ export function DemoWebviewLoadUriScreen() {
 }
 
 export function DemoWebviewLoadHtmlScreen() {
-  const html = `<!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>HTML示例代码</title>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-        }
+  const webviewRef = useRef<WebView>(null);
+  const [h5Data, setH5Data] = useState<string>('');
 
-        blockquote {
-          border-left: 3px solid #39f;
-          padding-left: 6px;
-          margin-left:10px;
-          color: red;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>HTML 示例代码</h1>
-      <p>这是一个示例代码的段落。</p>
-      <blockquote>这是一个引用块。</blockquote>
-      <ul>
-        <li>列表项1</li>
-        <li>列表项2</li>
-        <li>列表项3</li>
-      </ul>
-      <ol>
-        <li>有序列表项1</li>
-        <li>有序列表项2</li>
-        <li>有序列表项3</li>
-      </ol>
-      <h2>这是一个标题2</h2>
-      <p><strong>粗体文本</strong>和<em>斜体文本</em>示例。</p>
-      <a href="https://developer.mozilla.org/en-US/">超链接</a>
-      <img
-        src="https://live.mdnplay.dev/en-US/docs/Web/HTML/Element/img/favicon144.png"
-        alt="示例图片"
-      />
-      <table>
-        <tr>
-          <th>表头1</th>
-          <th>表头2</th>
-          <th>表头3</th>
-        </tr>
-        <tr>
-          <td>单元格1</td>
-          <td>单元格2</td>
-          <td>单元格3</td>
-        </tr>
-        <tr>
-          <td>单元格4</td>
-          <td>单元格5</td>
-          <td>单元格6</td>
-        </tr>
-      </table>
-      <form>
-        <fieldset>
-          <legend>个人信息</legend>
-          <label for="name">姓名:</label>
-          <input type="text" id="name" name="name" /><br />
-          <label for="email">邮箱:</label>
-          <input type="email" id="email" name="email" /><br />
-        </fieldset>
-        <input type="submit" value="提交" />
-      </form>
-      <iframe
-        src="https://developer.mozilla.org/en-US/"
-        width="100%"
-        height="300px"
-      ></iframe>
-
-      <hr />
-
-      <footer>
-        <p>版权所有 &copy; 2021</p>
-      </footer>
-
-      <script>
-        (function () {
-          window.ReactNativeWebView.postMessage(
-            JSON.stringify({ from: "html字符串" })
-          );
-        })();
-      </script>
-    </body>
-  </html>
-  `;
-
-  const INJECTED_JAVASCRIPT = `(function() {
-    window.ReactNativeWebView.postMessage(JSON.stringify({id:'11233', bizId: 'BZ_009898'}));
-})();`;
+  const script1 = `window.__RN_111 = "11__${Math.random().toString(16).slice(4, 9)}"`;
+  const script2 = `window.__RN_222 = "22__${Math.random().toString(16).slice(4, 9)}"`;
 
   return (
     <ScreenWrapper navbar={{ title: '渲染静态html' }}>
       <WebView
+        ref={webviewRef}
+        style={{ height: '70%' }}
         source={{ html }}
-        injectedJavaScript={INJECTED_JAVASCRIPT}
+        injectedJavaScriptBeforeContentLoaded={script1}
+        injectedJavaScript={script2}
+        cacheEnabled={false}
         onMessage={(e) => {
-          console.log('onMessage data', e.nativeEvent.data);
+          console.log('收到的h5数据', e.nativeEvent.data);
+          setH5Data(e.nativeEvent.data);
         }}
       />
+      <View
+        style={{ height: '30%', padding: 20, borderTopColor: 'red', borderTopWidth: 2 }}>
+        <Button
+          label="向h5传递数据"
+          size="small"
+          onPress={() => {
+            const str = `rn_${Math.random().toString(16).slice(4, 9)}`;
+            console.log('向h5传递数据 ==>', str);
+            webviewRef.current?.postMessage(str);
+          }}
+        />
+        <Text style={{ marginTop: 20 }}>收到的h5数据: {h5Data}</Text>
+      </View>
     </ScreenWrapper>
   );
 }

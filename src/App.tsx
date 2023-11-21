@@ -1,3 +1,4 @@
+import './global.d';
 import './global';
 import './theme';
 
