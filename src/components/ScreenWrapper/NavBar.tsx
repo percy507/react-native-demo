@@ -11,18 +11,15 @@ import IconFont from '../IconFont';
 export interface NavBarProps {
   /** @defaultValue true */
   show?: boolean;
-
   color?: string;
   bgColor?: string;
-
   title?: React.ReactNode;
   titleStyle?: ViewStyle;
-
   /** @defaultValue true */
   showBack?: boolean;
-
   leftNode?: React.ReactNode;
   rightNode?: React.ReactNode;
+  statusBarStyle?: 'dark-content' | 'light-content';
 }
 
 export function NavBar(props: NavBarProps) {
@@ -35,6 +32,7 @@ export function NavBar(props: NavBarProps) {
     titleStyle,
     leftNode,
     rightNode,
+    statusBarStyle,
   } = props;
 
   const route = useRoute();
@@ -85,7 +83,7 @@ export function NavBar(props: NavBarProps) {
       <StatusBar
         animated
         translucent={true}
-        barStyle="dark-content"
+        barStyle={statusBarStyle}
         backgroundColor="transparent"
       />
       {show && (

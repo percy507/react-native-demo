@@ -82,6 +82,8 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
 export type BottomTabNav = BottomTabNavigationProp<RouteParamList>;
 export type StackNav = StackNavigationProp<RouteParamList>;
 
+const IconSize = 24;
+
 export const BottomTabs: {
   name: keyof RouteParamList;
   component: React.ComponentType;
@@ -92,9 +94,9 @@ export const BottomTabs: {
     component: Tab1Screen,
     options: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ color, size, focused }) => {
+      tabBarIcon: ({ color, focused }) => {
         const icon = focused ? 'icon-home-smile-fill' : 'icon-home-smile-line';
-        return <IconFont name={icon} color={color} size={size} />;
+        return <IconFont name={icon} color={color} size={IconSize} />;
       },
     },
   },
@@ -103,8 +105,8 @@ export const BottomTabs: {
     component: Tab2Screen,
     options: {
       tabBarLabel: '联系人',
-      tabBarIcon: ({ color, size }) => (
-        <IconFont name="icon-contact" color={color} size={size} />
+      tabBarIcon: ({ color }) => (
+        <IconFont name="icon-contact" color={color} size={IconSize} />
       ),
     },
   },
@@ -113,8 +115,8 @@ export const BottomTabs: {
     component: Tab3Screen,
     options: {
       tabBarLabel: '我的哈哈哈哈哈哈',
-      tabBarIcon: ({ color, size }) => (
-        <IconFont name="icon-wode" color={color} size={size} />
+      tabBarIcon: ({ color }) => (
+        <IconFont name="icon-wode" color={color} size={IconSize} />
       ),
     },
   },

@@ -12,6 +12,7 @@ export function BottomTabNavigator() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
+        tabBarStyle: { height: 56 },
       }}>
       {BottomTabs.map((el) => {
         return (

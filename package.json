@@ -69,7 +69,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "^13.14.0",
     "react-native-toast-notifications": "^3.4.0",
-    "react-native-ui-lib": "^7.9.1",
+    "react-native-ui-lib": "7.21.0",
     "react-native-webview": "13.2.2"
   },
   "devDependencies": {
