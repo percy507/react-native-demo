@@ -5,7 +5,9 @@ sign_key_alias = 'my-key-alias'
 sign_key_password = 'qwe123123'
 
 desc '构建 android Debug 版本 apk'
-lane :androidDebug do
+lane :androidDebug do |options|
+  build_env = options[:build_env] || 'debug'
+
   gradle(
     # assemble 表示构建 apk
     task: 'assembleDebug',
@@ -24,11 +26,17 @@ lane :androidDebug do
   # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
 
   apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
-  echo(message: "Apk path: #{apk_path}")
+
+  date_time = Time.now.strftime('%Y%m%d%H%M')
+  new_apk_path = "./build/app_#{build_env}_#{date_time}.apk"
+  sh "mv #{apk_path} #{new_apk_path}"
+  echo(message: "Apk path: #{new_apk_path}")
 end
 
 desc '构建 android Release 版本 apk'
-lane :androidRelease do
+lane :androidRelease do |options|
+  build_env = options[:build_env] || 'release'
+
   gradle(
     # assemble 表示构建 apk
     task: 'assembleRelease',
@@ -47,5 +55,9 @@ lane :androidRelease do
   # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
 
   apk_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
-  echo(message: "Apk path: #{apk_path}")
+
+  date_time = Time.now.strftime('%Y%m%d%H%M')
+  new_apk_path = "./build/app_#{build_env}_#{date_time}.apk"
+  sh "mv #{apk_path} #{new_apk_path}"
+  echo(message: "Apk path: #{new_apk_path}")
 end

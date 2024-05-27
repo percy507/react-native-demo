@@ -34,7 +34,7 @@ export FASTLANE_SKIP_UPDATE_CHECK=1
 
 if [[ $platform == "android" ]]; then
   bundle install
-  bundle exec fastlane "android${build_mode}"
+  bundle exec fastlane "android${build_mode}" "build_env:${build_env}"
   echo_success "Finished building ~"
 elif [[ $platform == "ios" ]]; then
   pnpm install-ios-deps
