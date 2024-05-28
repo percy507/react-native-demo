@@ -41,12 +41,14 @@ export function ScreenWrapper(props: ScreenWrapperProps) {
   } = props;
   const insets = useSafeAreaInsets();
 
-  const rootPadding = {
-    paddingBottom: insets.bottom,
-    paddingLeft: insets.left,
-    paddingRight: insets.right,
-    // paddingTop: insets.top, // this is managed by navbar
-  };
+  const rootPadding = hideSafeArea
+    ? null
+    : {
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+        // paddingTop: insets.top, // this is managed by navbar
+      };
 
   const ContentView = contentIsScrollView ? ScrollView : View;
   const contentViewProps = contentIsScrollView
