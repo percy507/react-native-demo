@@ -1,11 +1,11 @@
-import { CommonActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Button, IconFont, Modal, ScreenWrapper, Text, View } from '@/components';
-import { storage } from '@/hooks';
-import type { BottomTabNav, StackNav } from '@/navigators/routes';
+import type { BottomTabNav } from '@/navigators/routes';
 import { requestLogout } from '@/services/auth';
+import { redirectToLogin } from '@/utils/request';
 
 export function Tab3Screen() {
   const nav = useNavigation<BottomTabNav>();
@@ -73,17 +73,12 @@ const styles = StyleSheet.create({
 });
 
 function LogoutButton() {
-  const nav = useNavigation<StackNav>();
   const [visible, setVisible] = useState(false);
 
   const logout = () => {
     setVisible(false);
     requestLogout();
-    storage.clearAll();
-    setTimeout(() => {
-      // 退出登录时，需要清除历史路由栈，否则在登录页，利用手势返回时，可以返回到上一页
-      nav.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'login' }] }));
-    }, 200);
+    redirectToLogin();
   };
 
   return (

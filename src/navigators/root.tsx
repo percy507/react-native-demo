@@ -4,6 +4,7 @@ import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/
 import { getAuthToken } from '@/stores/user';
 
 import { BottomTabNavigator } from './bottom-tab';
+import { navigationRef } from './helper';
 import { RootRoutes } from './routes';
 
 const RootStack = createStackNavigator<RouteParamList>();
@@ -12,7 +13,7 @@ export function RootNavigator() {
   const isLogin = getAuthToken();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator
         initialRouteName={isLogin ? 'home' : 'login'}
         screenOptions={{

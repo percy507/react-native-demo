@@ -1,7 +1,10 @@
+import { CommonActions } from '@react-navigation/native';
 import * as qs from 'qss';
 import { Toast } from 'react-native-toast-notifications';
 
 import { getConfig } from '@/config';
+import { storage } from '@/hooks';
+import { navigationRef } from '@/navigators/helper';
 // import { getAuthToken } from './storage';
 
 declare global {
@@ -11,10 +14,13 @@ declare global {
 }
 
 export function redirectToLogin() {
-  localStorage.clear();
-  window.location.href = `/login?${qs.encode({
-    from_page: encodeURIComponent(location.href),
-  })}`;
+  storage.clearAll();
+  setTimeout(() => {
+    // 退出登录时，需要清除历史路由栈，否则在登录页，利用手势返回时，可以返回到上一页
+    navigationRef.current?.dispatch(
+      CommonActions.reset({ index: 0, routes: [{ name: 'login' }] }),
+    );
+  }, 200);
 }
 
 // 标准后端响应数据格式

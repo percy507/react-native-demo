@@ -22,6 +22,7 @@ import {
   DemoWebviewLoadHtmlScreen,
   DemoWebviewLoadUriScreen,
 } from '@/screens/demo/webview';
+import { H5WebviewScreen } from '@/screens/h5';
 import { Tab1Screen } from '@/screens/home/tab1';
 import { Tab2Screen } from '@/screens/home/tab2';
 import { Tab3Screen } from '@/screens/home/tab3';
@@ -39,6 +40,8 @@ declare global {
     forget_password: undefined;
     user_protocol: undefined;
     privacy_policy: undefined;
+
+    h5_webview: { title: string; url: string };
 
     demo_test_components: undefined;
     demo_navigation: { id: string };
@@ -64,6 +67,8 @@ export const RootRoutes: [keyof RouteParamList, React.ComponentType][] = [
   ['forget_password', ForgetPasswordScreen],
   ['user_protocol', UserProtocolScreen],
   ['privacy_policy', PrivacyPolicyScreen],
+
+  ['h5_webview', H5WebviewScreen],
 
   ['demo_test_components', DemoTestComponentsScreen],
   ['demo_navigation', DemoNavigationScreen],
