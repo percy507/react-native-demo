@@ -31,6 +31,10 @@ export default (): ExpoConfig => {
     ios: {
       supportsTablet: true,
       bundleIdentifier: getIdentifier(),
+      infoPlist: {
+        NSCameraUsageDescription: '需要访问您的相机来拍照',
+        NSPhotoLibraryUsageDescription: '需要访问您的照片库来保存照片',
+      },
     },
     android: {
       package: getIdentifier(),
@@ -38,6 +42,7 @@ export default (): ExpoConfig => {
         foregroundImage: './src/assets/app_adaptive_icon.png',
         backgroundColor: '#ffffff',
       },
+      permissions: ['CAMERA', 'READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE'],
     },
     androidNavigationBar: {
       backgroundColor: splashScreenBG,
