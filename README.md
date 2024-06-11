@@ -397,3 +397,17 @@ CocoaPods的本地缓存目录是 ~/Library/Caches/CocoaPods/
 [List of Android Actions](https://gist.github.com/zr0n/dfa1afadf7e785e25d53fc2af7c4eee2)
 [assembleRelease 和 bundleRelease 的区别](https://stackoverflow.com/questions/57072558/whats-the-difference-between-gradlewassemblerelease-gradlewinstallrelease-and)
 ```
+
+### 杂
+
+```bash
+# 1. 创建app id
+https://developer.apple.com/account/resources/identifiers/list
+
+# 2. 创建证书
+https://developer.apple.com/account/resources/certificates/list
+https://www.jianshu.com/p/5ba97e2b0045
+
+iOS的shell脚本出ipa以及遇见的问题
+https://www.jianshu.com/p/4cbae2b2920a
+```

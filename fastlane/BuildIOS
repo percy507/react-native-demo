@@ -1,5 +1,6 @@
 # ios 相关配置
 scheme = 'RNdemo'
+pgyer_api_key = 'xxx'
 
 desc '构建 ios Debug 版本'
 lane :iosDebug do
@@ -31,33 +32,65 @@ lane :iosDebug do
   # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
 end
 
+# 定义一个全局变量api_key，下面都会要用到这个 api_key
+# key_id 和 issuer_id 都可以在 AppStoreConnect后台 -> 用户和访问 -> 秘钥 这里找到
+# https://appstoreconnect.apple.com/access/integrations/api
+api_key = app_store_connect_api_key(
+  key_id: "xxx",
+  issuer_id: "xxxx",
+  key_filepath: "./fastlane/xxx.p8", # 上面下载的p8文件路径
+  duration: 1200, # optional (maximum 1200)
+  in_house: false # optional but may be required if using match/sigh
+)
+output_path = './fastlane/build/ios'
+team_id = 'xxx'
+
 desc '构建 ios Release 版本, 测试用'
 lane :iosReleaseTest do
   date = Time.new.strftime('%Y%m%d-%h%M')
+  app_identifier = 'com.hzchanlian.nbwesthub.staging'
 
-  get_push_certificate(
-    website_push: true
+  # 生成签名证书和配置文件
+  cert(
+    output_path: output_path,
+    api_key: api_key
+  )
+  profile = sigh(
+    output_path: output_path,
+    force: true,
+    adhoc: true,
+    team_id: team_id,
+    api_key: api_key,
+    app_identifier: app_identifier
+  )
+
+  # 自动签名时，确保添加开发者账号到xcode `Xcode/Preferences/Accounts`
+  update_code_signing_settings(
+    use_automatic_signing: true,
+    path: "ios/#{scheme}.xcodeproj",
+    team_id: team_id,
+    bundle_identifier: app_identifier
   )
 
   build_ios_app(
     workspace: "ios/#{scheme}.xcworkspace",
-    scheme:,
+    scheme: scheme,
     configuration: 'Release',
     clean: true,
-    export_method: 'ad-hoc',
-    buildlog_path: './fastlane/build/ios',
-    output_directory: './fastlane/build/ios',
-    output_name: "#{scheme}-#{date}-ReleaseTest.ipa"
-    # 签名
-    # export_options:{
-    #   provisioningProfiles:{
-    #     "包名" => "证书"
-    #   }
-    # },
+    export_options: {
+      method: "ad-hoc",
+      compileBitcode: false,
+      provisioningProfiles: {
+        app_identifier => File.basename(profile)
+      }
+    },
+    buildlog_path: output_path,
+    output_directory: output_path,
+    output_name: "app_ReleaseTest_#{date}.ipa"
   )
 
   # 打包成功后，自动上传蒲公英
-  # pgyer(api_key: 'xxx', password: '123321', install_type: '2')
+  pgyer(api_key: pgyer_api_key, password: '123321', install_type: '2')
 end
 
 desc '构建 ios Release 版本, 正式环境, 上架 apple store'

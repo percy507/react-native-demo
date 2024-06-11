@@ -30,7 +30,7 @@ npx expo prebuild --clean --no-install --platform $platform
 pnpm install
 
 # 禁止 fastlane 检查更新
-export FASTLANE_SKIP_UPDATE_CHECK=1
+export FASTLANE_SKIP_UPDATE_CHECK=true
 
 if [[ $platform == "android" ]]; then
   bundle install
