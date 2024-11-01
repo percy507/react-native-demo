@@ -25,6 +25,10 @@ fi
 export RN_APP_BUILD_ENV=$build_env
 
 # 使用 expo prebuild 命令自动生成 android 和 ios 目录，项目依赖由用户安装
+# 如果卡在创建原生代码目录，十有八九是网络问题
+# 可以尝试给全局npm配置文件添加代理 `~/.npmrc`
+# proxy=http://127.0.0.1:1087
+# https-proxy=http://127.0.0.1:1087
 npx expo prebuild --clean --no-install --platform $platform
 
 pnpm install
